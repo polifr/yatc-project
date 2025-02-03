@@ -3,8 +3,10 @@ name: yatc-project
 services:
   ms-rest-axum:
     build: ./ms-rust-axum
-    container_name: "ms-rest-axum"
     restart: no
+    container_name: "ms-rest-axum"
+    environment:
+      ENV_FILENAME: ".env.dc"
     ports:
       - 8080:8080
     networks:
