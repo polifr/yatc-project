@@ -24,6 +24,9 @@ WORKDIR /app
 # Copia solo il binario compilato dalla fase precedente
 COPY --from=builder /app/target/release/ms-rust-axum /app/
 
+# Copia i file di configurazione
+COPY .env.* /app/
+
 # Espone la porta 8080
 EXPOSE 8080
 
