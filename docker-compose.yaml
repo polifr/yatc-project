@@ -10,6 +10,15 @@ services:
     networks:
       - yatc-network
 
+  yatc-redis:
+    image: redis:7
+    restart: no
+    container_name: "yatc-redis"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+    networks:
+      - yatc-network
+
 networks: 
   yatc-network:
     driver: bridge
