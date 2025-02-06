@@ -11,7 +11,11 @@ RUN cargo build --release
 
 # Copia i sorgenti effettivi e compila
 COPY ./src ./src
+
+# Aggiorna il timestamp del main.rs per forzare la compilazione
 RUN touch ./src/main.rs
+
+# La compilazione sfrutta il caching di Docker per non scaricare e compilare nuovamente le dipendenze
 RUN cargo build --release
 RUN strip target/release/ms-rust-axum
 
