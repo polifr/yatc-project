@@ -1,0 +1,20 @@
+# Fase 1: Compilazione
+FROM rust:bookworm AS builder
+
+# Imposta la cartella di lavoro
+WORKDIR /app
+
+# Copia i file nel container
+COPY Cargo.toml Cargo.lock ./
+COPY .env.dc .env.release ./
+COPY ./src ./src
+
+# Compila il progetto in modalità release
+RUN cargo build --release
+RUN strip target/release/ms-rust-axum
+
+# Espone la porta 8080
+EXPOSE 8080
+
+# Comando di esecuzione
+CMD ["./target/release/ms-rust-axum"]
