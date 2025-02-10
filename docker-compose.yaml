@@ -10,6 +10,20 @@ services:
     networks:
       - yatc-network
 
+  yatc-postgres:
+    image: postgres:17
+    restart: no
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pguser
+    volumes:
+      - ./yatc-postresql/init/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
+      - ./yatc-postresql/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - yatc-network
+
   yatc-redis:
     image: redis:7
     restart: no
@@ -19,6 +33,8 @@ services:
       interval: 1s
       timeout: 3s
       retries: 5
+    ports:
+      - 6379:6379
     networks:
       - yatc-network
 
