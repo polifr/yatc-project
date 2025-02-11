@@ -14,5 +14,6 @@ Yet Another Test Cluster Project - an umbrella for a number of clustered subproj
 - Add ELK stack (see https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana)
 - Add some Go ms (full integration as Rust)
 - Add some Java ms (full integration as Rust)
+- Add some Node.js ms (full integration as Rust) see https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
 - Add a Nginx server with a basic Angular (Material) frontend
 - Check how traces are propagated through ms calls (sync / async)
