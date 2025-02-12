@@ -34,5 +34,8 @@ COPY .env.dc .env.release ./
 # Espone la porta 8080
 EXPOSE 8080
 
+# Imposta la variabile di ambiente per le configurazioni di default dell'immagine
+ENV ENV_FILENAME=".env.dc"
+
 # Comando di esecuzione
 CMD ["./ms-rust-axum"]
