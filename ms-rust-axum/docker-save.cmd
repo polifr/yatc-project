@@ -1,1 +1,3 @@
-docker save ms-rust-axum > ms-rust-axum.tar
+for %%I in (.) do set CurrDirName=%%~nxI
+
+docker save %CurrDirName% > %CurrDirName%.tar
