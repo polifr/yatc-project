@@ -1,1 +1,3 @@
-docker build -t ms-node-express .
+for %%I in (.) do set CurrDirName=%%~nxI
+
+docker build -t %CurrDirName% .
