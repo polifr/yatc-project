@@ -12,7 +12,7 @@ COPY ./src ./src
 RUN ./mvnw clean install
 
 # Stage 2 - Creazione immagine finale
-FROM eclipse-temurin:21-slim AS final
+FROM eclipse-temurin:21-jre AS final
 
 WORKDIR /opt/app
 
