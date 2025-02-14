@@ -34,8 +34,8 @@ async fn main() {
     info!("Connecting to pg: {}", &config.database_url);
     info!("Connecting to cache: {}", &config.cache_url);
 
-    let app = Router::new().route("/", get(hello));
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    let app = Router::new().route("/rust-axum", get(hello));
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8081").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 
     info!("Application started.");
