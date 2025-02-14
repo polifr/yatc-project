@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  reactive:
+    session:
+      cookie:
+        http-only: true
+        name: "YATCSESSIONID"
+      timeout: 60m
+  shutdown: graceful
+
+spring.lifecycle.timeout-per-shutdown-phase: 10s
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: gw-spring-cloud

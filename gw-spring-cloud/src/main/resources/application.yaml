@@ -1,0 +1,132 @@
+server:
+  port: 8080
+  reactive:
+    session:
+      cookie:
+        hhtp-only: true
+        name: "YATCSESSIONID"
+      timeout: 60m
+  shutdown: graceful
+
+spring.lifecycle.timeout-per-shutdown-phase: 10s
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: cms-gateway-frontend
+  cloud:
+    gateway:
+      metrics:
+        enabled: true
+      filter:
+        secure-headers:
+          content-security-policy: "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; font-src 'self' https://fonts.gstatic.com; object-src 'none'; script-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; require-trusted-types-for 'script';"
+      default-filters:
+      - RemoveRequestHeader=Cookie
+      - SecureHeaders
+      - TokenRelay
+      routes:
+      - id: ms-rust-axum-route
+        uri: http://localhost:8081/
+        predicates:
+        - Path=/yatc/rust-axum/**
+  session:
+    timeout: 60m
+    redis:
+      namespace: "spring:session"
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  security:
+    oauth2:
+      client:
+        provider:
+          yatc-keycloak:
+            issuer-uri: http://yatc-keycloak:8180/realms/yatc-realm
+        registration:
+          keycloak-spring-gateway-client:
+            provider: yatc-keycloak
+            client-id: gw-spring-cloud
+            client-secret: ebf7yLlo8FRrLJpJytyTxCUgQDzXwXQh
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            scope: openid
+
+management:
+  server:
+    port: 18080
+  tracing:
+    enabled: true
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      show-details: always
+    info:
+      enabled: true
+    loggers:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints: 
+    enabled-by-default: false
+    web:
+      exposure:
+        include:
+        - health
+        - info
+        - loggers
+        - metrics
+        - prometheus
+
+---
+spring.config.activate.on-profile: docker
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: cms-gateway-frontend
+  cloud:
+    gateway:
+      metrics:
+        enabled: true
+      filter:
+        secure-headers:
+          content-security-policy: "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; font-src 'self' https://fonts.gstatic.com; object-src 'none'; script-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; require-trusted-types-for 'script';"
+      default-filters:
+      - RemoveRequestHeader=Cookie
+      - SecureHeaders
+      - TokenRelay
+      routes:
+      - id: ms-rust-axum-route
+        uri: http://ms-rust-axum:8081/
+        predicates:
+        - Path=/yatc/rust-axum/**
+  session:
+    timeout: 60m
+    redis:
+      namespace: "spring:session"
+  data:
+    redis:
+      host: yatc-redis
+      port: 6379
+  security:
+    oauth2:
+      client:
+        provider:
+          yatc-keycloak:
+            issuer-uri: http://yatc-keycloak:8180/realms/yatc-realm
+        registration:
+          keycloak-spring-gateway-client:
+            provider: yatc-keycloak
+            client-id: gw-spring-cloud
+            client-secret: ebf7yLlo8FRrLJpJytyTxCUgQDzXwXQh
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            scope: openid
