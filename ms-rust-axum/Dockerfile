@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --from=builder /app/target/release/ms-rust-axum ./
 
 # Copia i file di configurazione
-COPY .env.dc .env.release ./
+COPY .env.* ./
 
 # Espone la porta 8080
 EXPOSE 8080
