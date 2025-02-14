@@ -11,7 +11,8 @@ services:
     - yatc-network
     depends_on:
       yatc-redis:
-        condition: service_started
+        condition: service_healthy
+        restart: true
       yatc-keycloak:
         condition: service_healthy
         restart: true
@@ -27,6 +28,13 @@ services:
     - 8081:8081
     networks:
     - yatc-network
+    depends_on:
+      yatc-redis:
+        condition: service_healthy
+        restart: true
+      yatc-postgres:
+        condition: service_healthy
+        restart: true
 
   yatc-keycloak:
     image: quay.io/keycloak/keycloak:26.1
