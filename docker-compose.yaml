@@ -1,59 +1,79 @@
 name: yatc-project
 
 services:
+  gw-spring-cloud:
+    build: ./gw-spring-cloud
+    restart: no
+    container_name: "gw-spring-cloud"
+    ports:
+    - 8080:8080
+    networks:
+    - yatc-network
+    depends_on:
+      yatc-redis:
+        condition: service_started
+      yatc-keycloak:
+        condition: service_healthy
+        restart: true
+
   ms-rest-axum:
     build: ./ms-rust-axum
     restart: no
     container_name: "ms-rest-axum"
     environment:
-      - ENV_FILENAME=".env.dc"
+    - ENV_FILENAME=".env.dc"
     ports:
-      - 8080:8080
+    - 8081:8081
     networks:
-      - yatc-network
+    - yatc-network
 
   yatc-keycloak:
     image: quay.io/keycloak/keycloak:26.1
     restart: no
     container_name: "yatc-keycloak"
     environment:
-      - KC_HTTP_PORT=8180
-      - KC_HTTP_ENABLED=true
-      - KC_HEALTH_ENABLED=true
-      - KC_METRICS_ENABLED=true
-      - KC_HTTP_MANAGEMENT_PORT=9000
-      - KC_LOG_LEVEL=INFO
-      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    - KC_HTTP_PORT=8180
+    - KC_HTTP_ENABLED=true
+    - KC_HEALTH_ENABLED=true
+    - KC_METRICS_ENABLED=true
+    - KC_HTTP_MANAGEMENT_PORT=9000
+    - KC_LOG_LEVEL=INFO
+    - KEYCLOAK_ADMIN=admin
+    - KEYCLOAK_ADMIN_PASSWORD=admin
     volumes:
-      - ./yatc-keycloak/realms:/opt/keycloak/data/import
+    - ./yatc-keycloak/realms:/opt/keycloak/data/import
     ports:
-      - 8180:8180
-      - 9000:9000
-    command: ["start-dev", "--import-realm"]
-    networks:
-      - yatc-network
-
-  yatc-postgres:
-    image: postgres:17
-    restart: no
-    container_name: "yatc-postgres"
-    environment:
-      - POSTGRES_USER=pguser
-      - POSTGRES_PASSWORD=pguser
-      - POSTGRES_DB=yatc
-    volumes:
-      - ./yatc-postgresql/init/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
-      - ./yatc-postgresql/data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
+    - 8180:8180
+    - 9000:9000
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pguser -d yatc"]
+      test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_OK == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9000/health/live']
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 30
+    command: ["start-dev", "--import-realm"]
     networks:
-      - yatc-network
+    - yatc-network
+
+#  yatc-postgres:
+#    image: postgres:17
+#    restart: no
+#    container_name: "yatc-postgres"
+#    environment:
+#    - POSTGRES_USER=pguser
+#    - POSTGRES_PASSWORD=pguser
+#    - POSTGRES_DB=yatc
+#    volumes:
+#    - ./yatc-postgresql/init/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
+#    - ./yatc-postgresql/data:/var/lib/postgresql/data
+#    ports:
+#    - 5432:5432
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U pguser -d yatc"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
+#    networks:
+#    - yatc-network
 
   yatc-redis:
     image: redis:7
@@ -65,9 +85,9 @@ services:
       timeout: 3s
       retries: 5
     ports:
-      - 6379:6379
+    - 6379:6379
     networks:
-      - yatc-network
+    - yatc-network
 
 networks: 
   yatc-network:
