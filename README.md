@@ -17,3 +17,5 @@ Yet Another Test Cluster Project - an umbrella for a number of clustered subproj
 - Add some Node.js ms (full integration as Rust) see https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
 - Add a Nginx server with a basic Angular (Material) frontend
 - Check how traces are propagated through ms calls (sync / async)
+- Add TimeZone managing in `Dockerfile`s
+- Setup `yatc-realm` with clients (e.g. the API Gateways) and pre defined users for authentication
