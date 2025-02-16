@@ -3,7 +3,7 @@ server:
   reactive:
     session:
       cookie:
-        hhtp-only: true
+        http-only: true
         name: "YATCSESSIONID"
       timeout: 60m
   shutdown: graceful
@@ -28,7 +28,7 @@ spring:
       - TokenRelay
       routes:
       - id: ms-rust-axum-route
-        uri: http://localhost:8081/
+        uri: http://localhost:8080/
         predicates:
         - Path=/yatc/rust-axum/**
   session:
@@ -61,20 +61,19 @@ management:
     enabled: true
   endpoint:
     health:
-      enabled: true
+      access: read-only
       probes:
         enabled: true
       show-details: always
     info:
-      enabled: true
-    loggers:
-      enabled: true
+      access: read-only
     metrics:
-      enabled: true
+      access: read-only
     prometheus:
-      enabled: true
+      access: read-only
   endpoints: 
-    enabled-by-default: false
+    access:
+      default: none
     web:
       exposure:
         include:
@@ -105,7 +104,7 @@ spring:
       - TokenRelay
       routes:
       - id: ms-rust-axum-route
-        uri: http://ms-rust-axum:8081/
+        uri: http://ms-rust-axum:8080/
         predicates:
         - Path=/yatc/rust-axum/**
   session:
