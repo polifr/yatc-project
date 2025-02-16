@@ -18,6 +18,8 @@ WORKDIR /opt/app
 
 EXPOSE 8080
 
+ENV SPRING_JMX_ENABLED=false
+
 COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
 
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+ENTRYPOINT ["java", "-jar", "/opt/app/*.jar", "--spring.profiles.active=docker"]

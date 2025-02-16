@@ -19,9 +19,6 @@ spring:
     gateway:
       metrics:
         enabled: true
-      filter:
-        secure-headers:
-          content-security-policy: "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; font-src 'self' https://fonts.gstatic.com; object-src 'none'; script-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; require-trusted-types-for 'script';"
       default-filters:
       - RemoveRequestHeader=Cookie
       - SecureHeaders
@@ -95,9 +92,6 @@ spring:
     gateway:
       metrics:
         enabled: true
-      filter:
-        secure-headers:
-          content-security-policy: "default-src 'self'; frame-src 'self'; frame-ancestors 'self'; font-src 'self' https://fonts.gstatic.com; object-src 'none'; script-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; require-trusted-types-for 'script';"
       default-filters:
       - RemoveRequestHeader=Cookie
       - SecureHeaders
