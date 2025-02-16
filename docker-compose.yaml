@@ -7,8 +7,16 @@ services:
     container_name: "gw-spring-cloud"
     ports:
     - 8080:8080
+    - 18080:18080
     networks:
-    - yatc-network
+    - yatc-frontend
+    - yatc-backend
+    healthcheck:
+      test: "curl --fail --silent localhost:18080/actuator/health | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
     depends_on:
       yatc-redis:
         condition: service_healthy
@@ -25,9 +33,9 @@ services:
     - RUST_BACKTRACE=1
     - ENV_FILENAME=".env.dc"
     ports:
-    - 8081:8081
+    - 8080:8080
     networks:
-    - yatc-network
+    - yatc-backend
     depends_on:
       yatc-redis:
         condition: service_healthy
@@ -53,7 +61,6 @@ services:
     - ./yatc-keycloak/realms:/opt/keycloak/data/import
     ports:
     - 8180:8180
-    - 9000:9000
     healthcheck:
       test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_OK == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9000/health/live']
       interval: 5s
@@ -61,7 +68,7 @@ services:
       retries: 30
     command: ["start-dev", "--import-realm"]
     networks:
-    - yatc-network
+    - yatc-frontend
 
   yatc-postgres:
     image: postgres:17
@@ -82,7 +89,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-    - yatc-network
+    - yatc-backend
 
   yatc-redis:
     image: redis:7
@@ -96,8 +103,9 @@ services:
     ports:
     - 6379:6379
     networks:
-    - yatc-network
+    - yatc-backend
 
 networks: 
-  yatc-network:
+  yatc-frontend:
     driver: bridge
+  yatc-backend:
