@@ -55,8 +55,8 @@ services:
     - KC_METRICS_ENABLED=true
     - KC_HTTP_MANAGEMENT_PORT=9000
     - KC_LOG_LEVEL=INFO
-    - KEYCLOAK_ADMIN=admin
-    - KEYCLOAK_ADMIN_PASSWORD=admin
+    - KEYCLOAK_ADMIN=kc-admin
+    - KEYCLOAK_ADMIN_PASSWORD=kc-admin
     volumes:
     - ./yatc-keycloak/realms:/opt/keycloak/data/import
     ports:
