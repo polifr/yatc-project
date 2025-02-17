@@ -25,7 +25,7 @@ spring:
       - TokenRelay
       routes:
       - id: ms-rust-axum-route
-        uri: http://localhost:8080/
+        uri: http://localhost:8081/
         predicates:
         - Path=/yatc/rust-axum/**
   session:
@@ -98,7 +98,7 @@ spring:
       - TokenRelay
       routes:
       - id: ms-rust-axum-route
-        uri: http://ms-rust-axum:8080/
+        uri: http://ms-rust-axum:8081/
         predicates:
         - Path=/yatc/rust-axum/**
   session:

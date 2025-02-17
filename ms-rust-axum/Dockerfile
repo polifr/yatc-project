@@ -26,16 +26,16 @@ FROM debian:bookworm-slim AS release
 WORKDIR /app
 
 # Copia solo il binario compilato dalla fase precedente
-COPY --from=builder /app/target/release/ms-rust-axum ./
+COPY --from=builder /app/target/release/ms-rust-axum /app
 
 # Copia i file di configurazione
-COPY .env.* ./
+COPY .env.* /app
 
-# Espone la porta 8080
-EXPOSE 8080
+# Espone la porta 8081
+EXPOSE 8081
 
 # Imposta la variabile di ambiente per le configurazioni di default dell'immagine
 ENV ENV_FILENAME=".env.dc"
 
 # Comando di esecuzione
-CMD ["./ms-rust-axum"]
+ENTRYPOINT ["/app/ms-rust-axum"]

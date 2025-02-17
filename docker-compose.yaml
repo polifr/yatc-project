@@ -2,12 +2,12 @@ name: yatc-project
 
 services:
   gw-spring-cloud:
+    hostname: gw-spring-cloud
     build: ./gw-spring-cloud
     restart: no
     container_name: "gw-spring-cloud"
     ports:
     - 8080:8080
-    - 18080:18080
     networks:
     - yatc-frontend
     - yatc-backend
@@ -26,14 +26,15 @@ services:
         restart: true
 
   ms-rest-axum:
+    hostname: ms-rest-axum
     build: ./ms-rust-axum
     restart: no
     container_name: "ms-rest-axum"
     environment:
-    - RUST_BACKTRACE=1
-    - ENV_FILENAME=".env.dc"
+    - RUST_BACKTRACE=full
+    - ENV_FILENAME=.env.dc
     ports:
-    - 8080:8080
+    - 8081:8081
     networks:
     - yatc-backend
     depends_on:
@@ -45,6 +46,7 @@ services:
         restart: true
 
   yatc-keycloak:
+    hostname: yatc-keycloak
     image: quay.io/keycloak/keycloak:26.1
     restart: no
     container_name: "yatc-keycloak"
@@ -71,6 +73,7 @@ services:
     - yatc-frontend
 
   yatc-postgres:
+    hostname: yatc-postgres
     image: postgres:17
     restart: no
     container_name: "yatc-postgres"
@@ -92,6 +95,7 @@ services:
     - yatc-backend
 
   yatc-redis:
+    hostname: yatc-redis
     image: redis:7
     restart: no
     container_name: "yatc-redis"

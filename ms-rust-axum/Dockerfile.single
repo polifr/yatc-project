@@ -13,8 +13,8 @@ COPY ./src ./src
 RUN cargo build --release
 RUN strip target/release/ms-rust-axum
 
-# Espone la porta 8080
-EXPOSE 8080
+# Espone la porta 8081
+EXPOSE 8081
 
 # Comando di esecuzione
 CMD ["./target/release/ms-rust-axum"]
