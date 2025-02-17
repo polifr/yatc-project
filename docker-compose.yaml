@@ -25,11 +25,11 @@ services:
         condition: service_healthy
         restart: true
 
-  ms-rest-axum:
-    hostname: ms-rest-axum
+  ms-rust-axum:
+    hostname: ms-rust-axum
     build: ./ms-rust-axum
     restart: no
-    container_name: "ms-rest-axum"
+    container_name: "ms-rust-axum"
     environment:
     - RUST_BACKTRACE=full
     - ENV_FILENAME=.env.dc

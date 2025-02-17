@@ -27,7 +27,7 @@ spring:
       - id: ms-rust-axum-route
         uri: http://localhost:8081/
         predicates:
-        - Path=/yatc/rust-axum/**
+        - Path=/api/rust-axum/**
   session:
     timeout: 60m
     redis:
@@ -100,7 +100,7 @@ spring:
       - id: ms-rust-axum-route
         uri: http://ms-rust-axum:8081/
         predicates:
-        - Path=/yatc/rust-axum/**
+        - Path=/api/rust-axum/**
   session:
     timeout: 60m
     redis:
