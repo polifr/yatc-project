@@ -47,7 +47,26 @@
   "quickLoginCheckMilliSeconds": 1000,
   "maxDeltaTimeSeconds": 43200,
   "failureFactor": 30,
-  "roles": {
+  "users": [
+    {
+        "username":"test",
+        "firstName":"Test",
+        "lastName":"yatc",
+        "email":"test@yatc.poli.it",
+        "enabled":true,
+        "credentials":[
+           {
+              "type":"password",
+              "value":"test"
+           }
+        ],
+        "clientRoles":{
+           "account":[
+              "manage-account"
+           ]
+        }
+     }
+   ],  "roles": {
     "realm": [
       {
         "id": "78aff339-ed1e-4856-b8da-7109ef455bdb",
