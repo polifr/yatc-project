@@ -1,7 +1,11 @@
 # fe-angular-material
 
 Frontend basato su Angular con elementi di Material.
-See https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk
+
+See:
+- https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk
+- https://medium.com/@vishal.sharma./dockerizing-angular-app-using-docker-multi-stage-build-d9151441f2c4
+
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
 
