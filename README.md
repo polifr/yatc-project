@@ -7,6 +7,11 @@ Yet Another Test Cluster Project - an umbrella for a number of clustered subproj
 - Redis cache
 - Spring API Gateway [gw-spring-cloud](./gw-spring-cloud)
 
+## References
+
+See:
+- https://github.com/docker/awesome-compose
+
 ## TODO
 - Setup Rust ms to read environment variables, and integration (rest api, database, security, kafka, etc)
 - Add Kafka (latest without ZooKeeper)
