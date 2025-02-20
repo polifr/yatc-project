@@ -14,6 +14,9 @@ RUN ./mvnw clean install
 # Stage 2 - Creazione immagine finale
 FROM eclipse-temurin:21-jre AS final
 
+# Impostazione timezone di default
+ENV TZ="Europe/Rome"
+
 WORKDIR /opt/app
 
 EXPOSE 8080
