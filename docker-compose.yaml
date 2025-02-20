@@ -6,6 +6,8 @@ services:
     build: ./gw-spring-cloud
     restart: no
     container_name: "gw-spring-cloud"
+    environment:
+    - TZ=Europe/Rome
     ports:
     - 8080:8080
     networks:
@@ -31,6 +33,7 @@ services:
     restart: no
     container_name: "ms-rust-axum"
     environment:
+    - TZ=Europe/Rome
     - RUST_BACKTRACE=full
     - ENV_FILENAME=.env.dc
     ports:
@@ -51,6 +54,7 @@ services:
     restart: no
     container_name: "yatc-keycloak"
     environment:
+    - TZ=Europe/Rome
     - KC_HTTP_PORT=8180
     - KC_HTTP_ENABLED=true
     - KC_HEALTH_ENABLED=true
@@ -78,6 +82,7 @@ services:
     restart: no
     container_name: "yatc-postgres"
     environment:
+    - TZ=Europe/Rome
     - POSTGRES_USER=pguser
     - POSTGRES_PASSWORD=pguser
     - POSTGRES_DB=yatc
@@ -99,6 +104,8 @@ services:
     image: redis:7
     restart: no
     container_name: "yatc-redis"
+    environment:
+    - TZ=Europe/Rome
     healthcheck:
       test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
       interval: 1s
