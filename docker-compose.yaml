@@ -3,7 +3,7 @@ name: yatc-project
 services:
   gw-spring-cloud:
     hostname: gw-spring-cloud
-    build: ./gw-spring-cloud
+    image: yatc/gw-spring-cloud:latest
     restart: no
     container_name: "gw-spring-cloud"
     environment:
@@ -47,6 +47,18 @@ services:
       yatc-postgres:
         condition: service_healthy
         restart: true
+
+  fe-angular-material:
+    hostname: fe-angular-material
+    image: yatc/fe-angular-material:latest
+    restart: no
+    container_name: "fe-angular-material"
+    environment:
+    - TZ=Europe/Rome
+    ports:
+    - 5001:5001
+    networks:
+    - yatc-backend
 
   yatc-keycloak:
     hostname: yatc-keycloak
