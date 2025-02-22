@@ -10,4 +10,4 @@ RUN npm install
 
 COPY . /usr/src/app
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "5001"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "5001", "--base-href", "/angular-material/"]
