@@ -30,7 +30,7 @@ spring:
       - id: fe-angular-material-route
         uri: http://localhost:5001/
         predicates:
-        - Path=/angular-material/**
+        - Path=/angular-material,/angular-material/**
   session:
     timeout: 60m
     redis:
