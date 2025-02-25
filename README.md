@@ -28,3 +28,4 @@ See:
 - Differentiate single and multi stage `Dockerfile`s, create build scripts and set image name
 - Change `docker-compose.yaml` for rely on module's `Dockerfile`s and run builds accordingly
 - Add Camunda Zeebe (v8) workflow engine for orchestration (see https://docs.camunda.io/docs/self-managed/setup/deploy/local/docker-compose/)
+- Add K8S deployment files to be used on a minikube local instance
