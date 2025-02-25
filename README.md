@@ -15,8 +15,7 @@ See:
 ## TODO
 - Setup Rust ms to read environment variables, and integration (rest api, database, security, kafka, etc)
 - Add Kafka (latest without ZooKeeper)
-- Add Prometheus / Grafana (see https://github.com/docker/awesome-compose/tree/master/prometheus-grafana or https://medium.com/@ahmadbilalch891/how-to-set-up-grafana-loki-and-prometheus-locally-with-docker-compose-part-1-of-3-62fb25e51d92)
-- Add ELK stack (see https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana)
+- Add Prometheus / Grafana / Loki (see https://github.com/docker/awesome-compose/tree/master/prometheus-grafana or https://medium.com/@ahmadbilalch891/how-to-set-up-grafana-loki-and-prometheus-locally-with-docker-compose-part-1-of-3-62fb25e51d92)
 - Add some Go ms (full integration as Rust)
 - Add some Java (Spring / Quarkus) ms (full integration as Rust)
 - Add some Node.js ms (full integration as Rust) see https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
