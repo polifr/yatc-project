@@ -142,7 +142,7 @@ services:
     - yatc-backend
 
 #  yatc-loki:
-#    image: grafana/loki:3.4.2
+#    image: grafana/loki
 #    ports:
 #      - "3100:3100"
 #    volumes:
@@ -152,7 +152,7 @@ services:
   yatc-prometheus:
     hostname: yatc-prometheus
     container_name: yatc-prometheus
-    image: prom/prometheus:v3
+    image: prom/prometheus
     restart: no
     ports:
       - 9090:9090
@@ -165,7 +165,7 @@ services:
   yatc-grafana:
     hostname: yatc-grafana
     container_name: yatc-grafana
-    image: grafana/grafana:11
+    image: grafana/grafana
     restart: no
     ports:
       - 3000:3000
