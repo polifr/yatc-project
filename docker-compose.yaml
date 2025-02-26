@@ -92,6 +92,7 @@ services:
     - ./yatc-keycloak/realms:/opt/keycloak/data/import
     ports:
     - 8180:8180
+    - 9000:9000
     healthcheck:
       test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_OK == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9000/health/live']
       interval: 5s
@@ -100,6 +101,7 @@ services:
     command: ["start-dev", "--import-realm"]
     networks:
     - yatc-frontend
+    - yatc-backend
 
   yatc-postgres:
     hostname: yatc-postgres
@@ -154,10 +156,12 @@ services:
     container_name: yatc-prometheus
     image: prom/prometheus
     restart: no
+    environment:
+    - TZ=Europe/Rome
     ports:
-      - 9090:9090
+    - 9090:9090
     volumes:
-      - ./yatc-prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    - ./yatc-prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
     networks:
     - yatc-backend
     - yatc-frontend
@@ -167,8 +171,10 @@ services:
     container_name: yatc-grafana
     image: grafana/grafana
     restart: no
+    environment:
+    - TZ=Europe/Rome
     ports:
-      - 3000:3000
+    - 3000:3000
     networks:
     - yatc-backend
 
