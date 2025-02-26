@@ -1,3 +1,3 @@
 for %%I in (.) do set CurrDirName=%%~nxI
 
-docker save %CurrDirName% > %CurrDirName%.tar
+docker save yatc/%CurrDirName% > %CurrDirName%.tar

@@ -29,7 +29,7 @@ services:
 
   ms-rust-axum:
     hostname: ms-rust-axum
-    build: ./ms-rust-axum
+    image: yatc/ms-rust-axum:latest
     restart: no
     container_name: "ms-rust-axum"
     environment:
