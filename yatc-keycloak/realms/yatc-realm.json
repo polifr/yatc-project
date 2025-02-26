@@ -727,7 +727,7 @@
         "oidc.ciba.grant.enabled": "false",
         "client.secret.creation.time": "1739549893",
         "backchannel.logout.session.required": "true",
-        "post.logout.redirect.uris": "http://localhost:8080/##http://gw-spring-cloud:8080/##http://yatc-site:8080/",
+        "post.logout.redirect.uris": "http://localhost:8080##http://gw-spring-cloud:8080##http://yatc-site:8080",
         "frontchannel.logout.session.required": "true",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",

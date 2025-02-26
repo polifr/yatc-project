@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head></head>
     <body>
         <h1>YATC - Yet Another Test Cluster</h1>
@@ -16,6 +16,8 @@
         <ul>
             <li><a href="javascript:void(0)" onclick="document.getElementById('logout-form').submit()">Logout</a></li>
         </ul>
-        <form action="/logout" id="logout-form" method="post"></form>
+        <form th:action="@{/logout}" id="logout-form" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
     </body>
 </html>
