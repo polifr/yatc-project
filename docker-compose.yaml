@@ -10,6 +10,7 @@ services:
     - TZ=Europe/Rome
     ports:
     - 8080:8080
+    - 18080:18080
     networks:
     - yatc-frontend
     - yatc-backend
@@ -137,6 +138,31 @@ services:
       retries: 5
     ports:
     - 6379:6379
+    networks:
+    - yatc-backend
+
+#  yatc-loki:
+#    image: grafana/loki:3.4.2
+#    ports:
+#      - "3100:3100"
+#    volumes:
+#      - ./yatc-loki/loki-config.yaml:/etc/loki/loki-config.yaml
+#    command: -config.file=/etc/loki/loki-config.yaml
+  
+  yatc-prometheus:
+    image: prom/prometheus:v3.2.1
+    ports:
+      - 9090:9090
+    volumes:
+      - ./yatc-prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    networks:
+    - yatc-backend
+    - yatc-frontend
+  
+  yatc-grafana:
+    image: grafana/grafana:11.5.2
+    ports:
+      - "3000:3000"
     networks:
     - yatc-backend
 
