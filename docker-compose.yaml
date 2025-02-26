@@ -150,7 +150,10 @@ services:
 #    command: -config.file=/etc/loki/loki-config.yaml
   
   yatc-prometheus:
-    image: prom/prometheus:v3.2.1
+    hostname: yatc-prometheus
+    container_name: yatc-prometheus
+    image: prom/prometheus:v3
+    restart: no
     ports:
       - 9090:9090
     volumes:
@@ -160,9 +163,12 @@ services:
     - yatc-frontend
   
   yatc-grafana:
-    image: grafana/grafana:11.5.2
+    hostname: yatc-grafana
+    container_name: yatc-grafana
+    image: grafana/grafana:11
+    restart: no
     ports:
-      - "3000:3000"
+      - 3000:3000
     networks:
     - yatc-backend
 
