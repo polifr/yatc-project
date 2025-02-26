@@ -10,6 +10,6 @@ public class IndexController {
 
   @GetMapping(path = {"/", "/index.htm", "/index.html"})
   public Mono<Rendering> loginTitolare() {
-    return Mono.just(Rendering.view("/index").build());
+    return Mono.just(Rendering.view("index").build());
   }
 }

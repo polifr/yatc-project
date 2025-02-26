@@ -60,6 +60,18 @@ services:
     networks:
     - yatc-backend
 
+  fe-react-mui:
+    hostname: fe-react-mui
+    image: yatc/fe-react-mui:latest
+    restart: no
+    container_name: "fe-react-mui"
+    environment:
+    - TZ=Europe/Rome
+    ports:
+    - 3001:3001
+    networks:
+    - yatc-backend
+
   yatc-keycloak:
     hostname: yatc-keycloak
     image: quay.io/keycloak/keycloak:26.1

@@ -31,6 +31,10 @@ spring:
         uri: http://localhost:5001/
         predicates:
         - Path=/angular-material/**
+      - id: fe-react-mui-route
+        uri: http://localhost:3001/
+        predicates:
+        - Path=/react-mui/**
   session:
     timeout: 60m
     redis:
@@ -107,6 +111,10 @@ spring:
         uri: http://fe-angular-material:5001/
         predicates:
         - Path=/angular-material/**
+      - id: fe-react-mui-route
+        uri: http://fe-react-mui:3001/
+        predicates:
+        - Path=/react-mui/**
   session:
     timeout: 60m
     redis:
