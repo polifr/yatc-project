@@ -156,12 +156,15 @@ services:
     container_name: yatc-prometheus
     image: prom/prometheus
     restart: no
+    command:
+    - '--config.file=/etc/prometheus/prometheus.yml'
     environment:
     - TZ=Europe/Rome
     ports:
     - 9090:9090
     volumes:
-    - ./yatc-prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    - ./yatc-prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./yatc-prometheus/data:/prometheus
     networks:
     - yatc-backend
     - yatc-frontend
@@ -173,8 +176,12 @@ services:
     restart: no
     environment:
     - TZ=Europe/Rome
+    - GF_SECURITY_ADMIN_USER=admin
+    - GF_SECURITY_ADMIN_PASSWORD=grafana
     ports:
     - 3000:3000
+    volumes:
+      - ./yatc-grafana/datasources:/etc/grafana/provisioning/datasources
     networks:
     - yatc-backend
 
