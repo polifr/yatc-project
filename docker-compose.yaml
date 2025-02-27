@@ -126,6 +126,21 @@ services:
     networks:
     - yatc-backend
 
+  yatc-postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: yatc-postgres-exporter
+    ports:
+    - 9187:9187
+    environment:
+      DATA_SOURCE_NAME: "postgres://pguser:pguser@yatc-postgres/yatc?sslmode=disable"
+    depends_on:
+      yatc-prometheus:
+        condition: service_started
+      yatc-postgres:
+        condition: service_healthy
+    networks:
+    - yatc-backend
+
   yatc-redis:
     hostname: yatc-redis
     image: redis:7
@@ -181,7 +196,9 @@ services:
     ports:
     - 3000:3000
     volumes:
-      - ./yatc-grafana/datasources:/etc/grafana/provisioning/datasources
+    - ./yatc-grafana/datasources:/etc/grafana/provisioning/datasources
+    - ./yatc-grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+    - ./yatc-grafana/dashboards:/var/lib/grafana/dashboards
     networks:
     - yatc-backend
 

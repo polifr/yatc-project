@@ -21,12 +21,16 @@ scrape_configs:
 #    static_configs:
 #      - targets: ["yatc-loki:3100"]
 
+  - job_name: "yatc-postgres-metrics"
+    static_configs:
+      - targets: ["yatc-postgres-exporter:9187"]
+
   - job_name: "yatc-keycloak-metrics"
     metrics_path: "/metrics"
     static_configs:
       - targets: ["yatc-keycloak:9000"]
 
   - job_name: "gw-spring-cloud-metrics"
-    metrics_path: "/actuator/prometheus"  # Your application metrics endpoint
+    metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ["gw-spring-cloud:18080"]  # Replace with your application's address and port
+      - targets: ["gw-spring-cloud:18080"]
