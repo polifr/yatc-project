@@ -3,7 +3,7 @@ Yet Another Test Cluster Project - an umbrella for a number of clustered subproj
 
 ## Features and modules
 - KeyCloak Oauth2 Identity Provider [yatc-keycloak](./yatc-keycloak)
-- Postgresql database [yatc-postgresql](./yatc-postgresql)
+- Postgresql database [yatc-postgres](./yatc-postgres)
 - Redis cache
 - Spring API Gateway [gw-spring-cloud](./gw-spring-cloud)
 

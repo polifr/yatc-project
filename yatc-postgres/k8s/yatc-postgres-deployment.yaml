@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-postgres
+  labels:
+    app: yatc-postgres
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-postgres
+  template:
+    metadata:
+      labels:
+        app: yatc-postgres
+    spec:
+      containers:
+      - name: yatc-postgres
+        image: postgres:17
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 5432
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        envFrom:
+        - secretRef:
+            name: yatc-postgres-secret

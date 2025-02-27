@@ -114,8 +114,8 @@ services:
     - POSTGRES_PASSWORD=pguser
     - POSTGRES_DB=yatc
     volumes:
-    - ./yatc-postgresql/init/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
-    - ./yatc-postgresql/data:/var/lib/postgresql/data
+    - ./yatc-postgres/init/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
+    - ./yatc-postgres/data:/var/lib/postgresql/data
     ports:
     - 5432:5432
     healthcheck:
