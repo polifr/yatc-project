@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-prometheus
+  labels:
+    app: yatc-prometheus
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-prometheus
+  template:
+    metadata:
+      labels:
+        app: yatc-prometheus
+    spec:
+      containers:
+      - name: yatc-prometheus
+        image: prom/prometheus
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 9090
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        volumeMounts:
+        - name: yatc-prometheus-config
+          mountPath: "/etc/prometheus/prometheus.yml"
+          subPath: "prometheus.yml"
+      volumes:
+      - name: yatc-prometheus-config
+        configMap:
+          name: yatc-prometheus-config
