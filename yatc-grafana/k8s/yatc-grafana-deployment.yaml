@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-grafana
+  labels:
+    app: yatc-grafana
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-grafana
+  template:
+    metadata:
+      labels:
+        app: yatc-grafana
+    spec:
+      containers:
+      - name: yatc-grafana
+        image: grafana/grafana
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 9090
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        - name: "GF_SECURITY_ADMIN_USER"
+          value: "admin"
+        - name: "GF_SECURITY_ADMIN_PASSWORD"
+          value: "grafana"
+        volumeMounts:
+        - name: yatc-grafana-config
+          mountPath: "/etc/grafana/provisioning/datasources/datasource.yml"
+          subPath: "datasource.yml"
+      volumes:
+      - name: yatc-grafana-config
+        configMap:
+          name: yatc-grafana-config

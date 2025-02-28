@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yatc-grafana
+  labels:
+    app: yatc-grafana
+spec:
+  type: ClusterIP
+  selector:
+    app: yatc-grafana
+  ports:
+    - name: grafana
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
