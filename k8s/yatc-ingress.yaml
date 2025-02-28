@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: yatc-ingress
+spec:
+  rules:
+  - host: yatc-prometheus
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: yatc-prometheus
+            port:
+              number: 9090
+  - host: yatc-grafana
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: yatc-grafana
+            port:
+              number: 3000
