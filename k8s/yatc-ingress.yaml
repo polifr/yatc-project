@@ -4,7 +4,7 @@ metadata:
   name: yatc-ingress
 spec:
   rules:
-  - host: yatc-prometheus
+  - host: yatc-prometheus.internal
     http:
       paths:
       - pathType: Prefix
@@ -14,7 +14,7 @@ spec:
             name: yatc-prometheus
             port:
               number: 9090
-  - host: yatc-grafana
+  - host: yatc-grafana.internal
     http:
       paths:
       - pathType: Prefix
