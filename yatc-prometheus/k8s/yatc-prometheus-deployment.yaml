@@ -39,7 +39,12 @@ spec:
         - name: yatc-prometheus-config
           mountPath: "/etc/prometheus/prometheus.yml"
           subPath: "prometheus.yml"
+#        - name: yatc-prometheus-data
+#          mountPath: "/prometheus"
       volumes:
       - name: yatc-prometheus-config
         configMap:
           name: yatc-prometheus-config
+#      - name: yatc-prometheus-data
+#        persistentVolumeClaim:
+#          claimName: yatc-prometheus-volume-claim
