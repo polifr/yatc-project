@@ -1,3 +1,17 @@
-Installare:
+# Informazioni per configurazione Kubernetes locale - Minikube
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/refs/tags/controller-v1.12.0/deploy/static/provider/cloud/deploy.yaml
+## Attivazione Minikube e strumenti
+
+TODO
+
+## Inizializzazione cluster
+
+Avviare il cluster con `minikube start`, dopodiché attivare le estensioni (visibili tramite `minikube addons list`), tramite:
+- `minikube addons enable ingress`
+- `minikube addons enable metrics-server`
+- `minikube addons enable dashboard`
+  - Eseguire `minikube dashboard` per lanciare la dashboard
+
+## Attivazione forward Ingress
+
+Eseguire `minikube tunnel`

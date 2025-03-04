@@ -24,3 +24,18 @@ spec:
             name: yatc-grafana
             port:
               number: 3000
+  - host: yatc-keycloak.internal
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: yatc-keycloak
+            port:
+              number: 8180
+  defaultBackend:
+    service:
+      name: gw-spring-cloud
+      port:
+        number: 8080

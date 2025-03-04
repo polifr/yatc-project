@@ -707,7 +707,8 @@
       "redirectUris": [
         "http://gw-spring-cloud:8080/login/oauth2/code/keycloak",
         "http://localhost:8080/login/oauth2/code/keycloak",
-        "http://yatc-site:8080/login/oauth2/code/keycloak"
+        "http://yatc-site:8080/login/oauth2/code/keycloak",
+        "http://yatc-site.internal/login/oauth2/code/keycloak"
       ],
       "webOrigins": [
         "/*"
@@ -727,7 +728,7 @@
         "oidc.ciba.grant.enabled": "false",
         "client.secret.creation.time": "1739549893",
         "backchannel.logout.session.required": "true",
-        "post.logout.redirect.uris": "http://localhost:8080##http://gw-spring-cloud:8080##http://yatc-site:8080",
+        "post.logout.redirect.uris": "http://localhost:8080##http://gw-spring-cloud:8080##http://yatc-site:8080##http://yatc-site.internal",
         "frontchannel.logout.session.required": "true",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",

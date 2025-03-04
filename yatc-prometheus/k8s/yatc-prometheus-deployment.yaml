@@ -22,7 +22,7 @@ spec:
       containers:
       - name: yatc-prometheus
         image: prom/prometheus
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: 500m

@@ -22,7 +22,7 @@ spec:
       containers:
       - name: yatc-grafana
         image: grafana/grafana
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: 500m

@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-keycloak
+  labels:
+    app: yatc-keycloak
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-keycloak
+  template:
+    metadata:
+      labels:
+        app: yatc-keycloak
+    spec:
+      containers:
+      - name: yatc-keycloak
+        image: quay.io/keycloak/keycloak:26.1
+        imagePullPolicy: IfNotPresent
+        args: ["start-dev", "--import-realm"]
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8180
+        - containerPort: 9000
+        startupProbe:
+          httpGet:
+            path: /health/started
+            port: 9000
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 60
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        - name: "KC_HTTP_PORT"
+          value: "8180"
+        - name: "KC_HTTP_ENABLED"
+          value: "true"
+        - name: "KC_HEALTH_ENABLED"
+          value: "true"
+        - name: "KC_METRICS_ENABLED"
+          value: "true"
+        - name: "KC_HTTP_MANAGEMENT_PORT"
+          value: "9000"
+        - name: "KC_LOG_LEVEL"
+          value: "INFO"
+        - name: "KEYCLOAK_ADMIN"
+          value: "kc-admin"
+        - name: "KEYCLOAK_ADMIN_PASSWORD"
+          value: "kc-admin"
+        volumeMounts:
+        - name: yatc-keycloak-config
+          mountPath: "/opt/keycloak/data/import/yatc-realm.json"
+          subPath: "yatc-realm.json"
+      volumes:
+      - name: yatc-keycloak-config
+        configMap:
+          name: yatc-keycloak-config
