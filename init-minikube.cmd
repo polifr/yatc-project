@@ -16,9 +16,7 @@ call 10-apply-pod.cmd
 cd ..\..
 
 cd yatc-keycloak\k8s
-call 99-delete-all.cmd
-call 01-create-configmap.cmd
-call 10-apply-pod.cmd
+call 00-init-k8s
 cd ..\..
 
 cd yatc-postgres\k8s
