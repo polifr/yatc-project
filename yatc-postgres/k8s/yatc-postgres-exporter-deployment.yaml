@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-postgres-exporter
+  labels:
+    app: yatc-postgres-exporter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-postgres-exporter
+  template:
+    metadata:
+      labels:
+        app: yatc-postgres-exporter
+    spec:
+      containers:
+      - name: yatc-postgres-exporter
+        image: prometheuscommunity/postgres-exporter
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 9187
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        - name: DATA_SOURCE_NAME
+          value: "postgres://pguser:pguser@yatc-postgres/yatc?sslmode=disable"
+        envFrom:
+        - secretRef:
+            name: yatc-postgres-secret
