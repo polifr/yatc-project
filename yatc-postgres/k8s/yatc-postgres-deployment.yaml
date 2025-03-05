@@ -22,7 +22,7 @@ spec:
       containers:
       - name: yatc-postgres
         image: postgres:17
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: 500m
@@ -32,9 +32,33 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 5432
+        livenessProbe:
+          exec:
+            command: ["pg_isready" ,"-U" ,"pguser", "-d" ,"yatc"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command: ["pg_isready" ,"-U" ,"pguser", "-d" ,"yatc"]
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
+          periodSeconds: 3
+          failureThreshold: 2
+          successThreshold: 1
         env:
         - name: "TZ"
           value: "Europe/Rome"
         envFrom:
         - secretRef:
             name: yatc-postgres-secret
+        volumeMounts:
+        - name: yatc-postgres-init-config
+          mountPath: "/docker-entrypoint-initdb.d/pg-init.sql"
+          subPath: "pg-init.sql"
+      volumes:
+      - name: yatc-postgres-init-config
+        configMap:
+          name: yatc-postgres-init-config
