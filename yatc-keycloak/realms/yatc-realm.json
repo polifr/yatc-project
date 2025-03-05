@@ -49,15 +49,15 @@
   "failureFactor": 30,
   "users": [
     {
-        "username":"test",
+        "username":"yatc-test",
         "firstName":"Test",
-        "lastName":"yatc",
-        "email":"test@yatc.poli.it",
+        "lastName":"Yatc",
+        "email":"yatc-test@yatc.poli.it",
         "enabled":true,
         "credentials":[
            {
               "type":"password",
-              "value":"test"
+              "value":"test123"
            }
         ],
         "clientRoles":{
