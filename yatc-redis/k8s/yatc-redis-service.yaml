@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yatc-redis
+  labels:
+    app: yatc-redis
+spec:
+  type: ClusterIP
+  selector:
+    app: yatc-redis
+  ports:
+    - name: redis
+      protocol: TCP
+      port: 6379
+      targetPort: 6379

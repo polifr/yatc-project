@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-redis-exporter
+  labels:
+    app: yatc-redis-exporter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-redis-exporter
+  template:
+    metadata:
+      labels:
+        app: yatc-redis-exporter
+    spec:
+      containers:
+      - name: yatc-redis-exporter
+        image: oliver006/redis_exporter
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 9121
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        - name: REDIS_ADDR
+          value: "redis://yatc-redis:6379"

@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-redis
+  labels:
+    app: yatc-redis
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-redis
+  template:
+    metadata:
+      labels:
+        app: yatc-redis
+    spec:
+      containers:
+      - name: yatc-redis
+        image: redis:7
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 6379
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
+          periodSeconds: 3
+          failureThreshold: 2
+          successThreshold: 1
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        volumeMounts:
+        - name: yatc-redis-config
+          mountPath: "/etc/redis/redis.conf"
+          subPath: "redis.conf"
+      volumes:
+      - name: yatc-redis-config
+        configMap:
+          name: yatc-redis-config
