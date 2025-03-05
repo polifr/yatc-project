@@ -69,9 +69,9 @@ spec:
           value: "9000"
         - name: "KC_LOG_LEVEL"
           value: "INFO"
-        - name: "KEYCLOAK_ADMIN"
+        - name: "KC_BOOTSTRAP_ADMIN_USERNAME"
           value: "kc-admin"
-        - name: "KEYCLOAK_ADMIN_PASSWORD"
+        - name: "KC_BOOTSTRAP_ADMIN_PASSWORD"
           value: "kc-admin"
         volumeMounts:
         - name: yatc-keycloak-config
