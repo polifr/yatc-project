@@ -32,7 +32,7 @@ spec:
             cpu: 100m
             memory: 100Mi
         ports:
-        - containerPort: 8180
+        - containerPort: 80
         - containerPort: 9000
         startupProbe:
           httpGet:
@@ -58,7 +58,7 @@ spec:
         - name: "TZ"
           value: "Europe/Rome"
         - name: "KC_HTTP_PORT"
-          value: "8180"
+          value: "80"
         - name: "KC_HTTP_ENABLED"
           value: "true"
         - name: "KC_HEALTH_ENABLED"

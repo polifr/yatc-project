@@ -6,9 +6,7 @@ call apply-ingress.cmd
 cd ..
 
 cd gw-spring-cloud\k8s
-call 99-delete-all.cmd
-call 09-build-image.cmd
-call 10-apply-pod.cmd
+call 00-init-k8s
 cd ..\..
 
 cd yatc-grafana\k8s

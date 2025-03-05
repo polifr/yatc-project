@@ -11,8 +11,8 @@ spec:
   ports:
     - name: keycloak
       protocol: TCP
-      port: 8180
-      targetPort: 8180
+      port: 80
+      targetPort: 80
     - name: keycloak-management
       protocol: TCP
       port: 9000

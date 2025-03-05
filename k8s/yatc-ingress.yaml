@@ -33,9 +33,14 @@ spec:
           service:
             name: yatc-keycloak
             port:
-              number: 8180
-  defaultBackend:
-    service:
-      name: gw-spring-cloud
-      port:
-        number: 8080
+              number: 80
+  - host: yatc-site
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: gw-spring-cloud
+            port:
+              number: 8080

@@ -128,7 +128,7 @@ spring:
       client:
         provider:
           yatc-keycloak:
-            issuer-uri: http://yatc-keycloak:8180/realms/yatc-realm
+            issuer-uri: http://yatc-keycloak/realms/yatc-realm
         registration:
           keycloak-spring-gateway-client:
             provider: yatc-keycloak
