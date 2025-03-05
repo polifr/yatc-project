@@ -158,14 +158,6 @@ services:
     networks:
     - yatc-backend
 
-#  yatc-loki:
-#    image: grafana/loki
-#    ports:
-#      - "3100:3100"
-#    volumes:
-#      - ./yatc-loki/loki-config.yaml:/etc/loki/loki-config.yaml
-#    command: -config.file=/etc/loki/loki-config.yaml
-  
   yatc-prometheus:
     hostname: yatc-prometheus
     container_name: yatc-prometheus
