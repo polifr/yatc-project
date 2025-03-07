@@ -4,6 +4,10 @@ metadata:
   name: yatc-grafana
   labels:
     app: yatc-grafana
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '3000'
 spec:
   type: ClusterIP
   selector:

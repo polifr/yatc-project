@@ -4,6 +4,9 @@ metadata:
   name: yatc-postgres-exporter
   labels:
     app: yatc-postgres-exporter
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9187'
 spec:
   type: ClusterIP
   selector:
