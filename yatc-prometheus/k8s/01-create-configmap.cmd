@@ -1,1 +1,1 @@
-kubectl create configmap yatc-prometheus-config --from-file ../prometheus.yml
+kubectl apply -f yatc-prometheus-config.yaml
