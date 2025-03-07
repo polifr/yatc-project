@@ -1,1 +1,1 @@
-kubectl create configmap yatc-grafana-config --from-file ../datasources/datasource.yml
+kubectl apply -f yatc-grafana-config.yaml

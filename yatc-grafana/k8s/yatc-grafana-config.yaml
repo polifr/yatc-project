@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yatc-grafana-config
+  labels:
+    name: yatc-grafana-config
+data:
+  datasource.yml: |-
+    apiVersion: 1
+    
+    datasources:
+    - name: DS_PROMETHEUS
+      type: prometheus
+      url: http://yatc-prometheus:9090 
+      isDefault: true
+      access: proxy
+      editable: true
+    - name: Loki
+      type: loki
+      url: http://yatc-loki:3100
+      isDefault: false
+      access: proxy
+      editable: false
