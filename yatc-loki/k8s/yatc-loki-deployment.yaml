@@ -35,3 +35,11 @@ spec:
         env:
         - name: "TZ"
           value: "Europe/Rome"
+        volumeMounts:
+        - name: yatc-loki-config
+          mountPath: "/etc/loki/local-config.yaml"
+          subPath: "local-config.yaml"
+      volumes:
+      - name: yatc-loki-config
+        configMap:
+          name: yatc-loki-config
