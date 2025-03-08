@@ -32,6 +32,7 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 3100
+        - containerPort: 9095
         env:
         - name: "TZ"
           value: "Europe/Rome"

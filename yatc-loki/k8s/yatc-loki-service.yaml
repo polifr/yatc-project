@@ -17,3 +17,7 @@ spec:
       protocol: TCP
       port: 3100
       targetPort: 3100
+    - name: loki-grpc
+      protocol: TCP
+      port: 9095
+      targetPort: 9095
