@@ -1,7 +1,6 @@
 @echo off
 
 cd k8s
-call delete-ingress.cmd
 call apply-ingress.cmd
 cd ..
 
@@ -26,5 +25,9 @@ call 00-init-k8s
 cd ..\..
 
 cd yatc-redis\k8s
+call 00-init-k8s
+cd ..\..
+
+cd yatc-kafka
 call 00-init-k8s
 cd ..\..

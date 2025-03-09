@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yatc-kafka
+  labels:
+    app: yatc-kafka
+spec:
+  type: ClusterIP
+  selector:
+    app: yatc-kafka
+  ports:
+    - name: kafka-plaintext
+      protocol: TCP
+      port: 9092
+      targetPort: 9092
+    - name: kafka-controller
+      protocol: TCP
+      port: 9093
+      targetPort: 9093

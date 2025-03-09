@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-kafka
+  labels:
+    app: yatc-kafka
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-kafka
+  template:
+    metadata:
+      labels:
+        app: yatc-kafka
+    spec:
+      containers:
+      - name: yatc-kafka
+        image: bitnami/kafka:3.9.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 9092
+        - containerPort: 9093
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          tcpSocket:
+            port: 9092
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 9092
+          timeoutSeconds: 5
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        - name: "KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE"
+          value: "true"
+        - name: "KAFKA_CFG_NODE_ID"
+          value: "0"
+        - name: "KAFKA_CFG_PROCESS_ROLES"
+          value: "controller,broker"
+        - name: "KAFKA_CFG_LISTENERS"
+          value: "PLAINTEXT://:9092,CONTROLLER://:9093"
+        - name: "KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP"
+          value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+        - name: "KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+          value: "0@yatc-kafka:9093"
+        - name: "KAFKA_CFG_CONTROLLER_LISTENER_NAMES"
+          value: "CONTROLLER"
