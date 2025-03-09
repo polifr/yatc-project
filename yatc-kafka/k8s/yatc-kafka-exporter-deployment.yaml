@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-kafka-exporter
+  labels:
+    app: yatc-kafka-exporter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-kafka-exporter
+  template:
+    metadata:
+      labels:
+        app: yatc-kafka-exporter
+    spec:
+      containers:
+      - name: yatc-kafka-exporter
+        image: bitnami/jmx-exporter:1.1.0
+        imagePullPolicy: IfNotPresent
+        args: ["5556", "/opt/bitnami/jmx-exporter-config.yml"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 5556
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        volumeMounts:
+        - name: yatc-kafka-exporter-config
+          mountPath: "/opt/bitnami/jmx-exporter-config.yml"
+          subPath: "jmx-exporter-config.yml"
+      volumes:
+      - name: yatc-kafka-exporter-config
+        configMap:
+          name: yatc-kafka-exporter-config
