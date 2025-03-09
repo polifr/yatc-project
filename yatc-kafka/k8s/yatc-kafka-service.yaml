@@ -17,3 +17,7 @@ spec:
       protocol: TCP
       port: 9093
       targetPort: 9093
+    - name: kafka-jmx
+      protocol: TCP
+      port: 5555
+      targetPort: 5555
