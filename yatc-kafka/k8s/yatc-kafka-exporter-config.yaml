@@ -6,7 +6,7 @@ metadata:
     name: yatc-kafka-exporter-config
 data:
   jmx-exporter-config.yml: |-
-    jmxUrl: service:jmx:rmi:///jndi/rmi://yatc-kafka:5555/jmxrmi	
+    hostPort: yatc-kafka:5555
     lowercaseOutputName: true	
     lowercaseOutputLabelNames: true	
     ssl: false	
