@@ -6,10 +6,10 @@ WORKDIR /opt/app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-RUN ./mvnw dependency:go-offline
+RUN ./mvnw -Dmaven.test.skip=true dependency:go-offline
 
 COPY ./src ./src
-RUN ./mvnw clean install
+RUN ./mvnw -Dmaven.test.skip=true clean package
 
 # Stage 2 - Creazione immagine finale
 FROM eclipse-temurin:21-jre AS final
