@@ -13,7 +13,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://yatc-keycloak:8180/realms/yatc-realm
+          issuer-uri: http://yatc-keycloak/realms/yatc-realm
 
 management:
   tracing:
