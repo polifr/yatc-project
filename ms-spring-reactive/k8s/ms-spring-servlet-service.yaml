@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-spring-reactive
+  labels:
+    app: ms-spring-reactive
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/actuator/prometheus'
+    prometheus.io/port: '8080'
+spec:
+  type: ClusterIP
+  selector:
+    app: ms-spring-reactive
+  ports:
+    - name: ms-spring-reactive
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

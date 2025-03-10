@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-spring-servlet
+  labels:
+    app: ms-spring-servlet
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: ms-spring-servlet
+  template:
+    metadata:
+      labels:
+        app: ms-spring-servlet
+    spec:
+      containers:
+      - name: ms-spring-servlet
+        image: yatc/ms-spring-servlet
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"

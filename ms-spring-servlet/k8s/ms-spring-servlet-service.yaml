@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-spring-servlet
+  labels:
+    app: ms-spring-servlet
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/actuator/prometheus'
+    prometheus.io/port: '8080'
+spec:
+  type: ClusterIP
+  selector:
+    app: ms-spring-servlet
+  ports:
+    - name: ms-spring-servlet
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
