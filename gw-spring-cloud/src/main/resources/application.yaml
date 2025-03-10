@@ -107,6 +107,14 @@ spring:
         uri: http://ms-rust-axum:8081/
         predicates:
         - Path=/api/rust-axum/**
+      - id: ms-spring-reactive-route
+        uri: http://ms-spring-reactive:8080/
+        predicates:
+        - Path=/api/spring-reactive/**
+      - id: ms-spring-servlet-route
+        uri: http://ms-spring-servlet:8080/
+        predicates:
+        - Path=/api/spring-servlet/**
       - id: fe-angular-material-route
         uri: http://fe-angular-material:5001/
         predicates:
