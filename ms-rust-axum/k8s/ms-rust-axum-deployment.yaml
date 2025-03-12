@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-rust-axum
+  labels:
+    app: ms-rust-axum
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: ms-rust-axum
+  template:
+    metadata:
+      labels:
+        app: ms-rust-axum
+    spec:
+      containers:
+      - name: ms-rust-axum
+        image: yatc/ms-rust-axum
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"

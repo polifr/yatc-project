@@ -35,7 +35,7 @@ async fn main() {
     info!("Connecting to cache: {}", &config.cache_url);
 
     let app = Router::new().route("/api/rust-axum/test/v1", get(hello));
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8081").await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 
     info!("Application started.");
