@@ -1,7 +1,9 @@
 @echo off
 
 cd k8s
-call apply-ingress.cmd
+call 02-enable-addons
+call 05-enable-addons
+call 10-apply-ingress
 cd ..
 
 cd gw-spring-cloud\k8s
