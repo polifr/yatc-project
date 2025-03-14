@@ -103,7 +103,7 @@ spring:
       - TokenRelay
       routes:
       - id: ms-rust-axum-route
-        uri: http://ms-rust-axum:8081/
+        uri: http://ms-rust-axum:8080/
         predicates:
         - Path=/api/rust-axum/**
       - id: ms-spring-reactive-route
