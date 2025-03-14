@@ -1,0 +1,16 @@
+# Stage 2 - Creazione immagine finale
+FROM eclipse-temurin:21-jre AS final
+
+# Impostazione timezone di default
+ENV TZ="Europe/Rome"
+
+WORKDIR /opt/app
+
+EXPOSE 8080
+EXPOSE 18080
+
+ENV SPRING_JMX_ENABLED=false
+
+COPY ./target/*.jar /opt/app/*.jar
+
+ENTRYPOINT ["java", "-jar", "/opt/app/*.jar", "--spring.profiles.active=docker"]
