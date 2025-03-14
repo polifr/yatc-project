@@ -1,1 +1,3 @@
+@echo off
+
 kubectl create configmap yatc-keycloak-config --from-file ../realms/yatc-realm.json
