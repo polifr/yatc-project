@@ -32,6 +32,22 @@ spec:
             memory: 20Mi
         ports:
         - containerPort: 9121
+        livenessProbe:
+          tcpSocket:
+            port: 9121
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          tcpSocket:
+            port: 9121
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
         env:
         - name: "TZ"
           value: "Europe/Rome"

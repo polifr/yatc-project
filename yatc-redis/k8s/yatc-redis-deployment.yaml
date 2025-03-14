@@ -37,7 +37,7 @@ spec:
             command:
             - redis-cli
             - ping
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           timeoutSeconds: 5
           periodSeconds: 5
           failureThreshold: 5
@@ -47,10 +47,10 @@ spec:
             command:
             - redis-cli
             - ping
-          initialDelaySeconds: 20
+          initialDelaySeconds: 10
           timeoutSeconds: 5
           periodSeconds: 3
-          failureThreshold: 2
+          failureThreshold: 3
           successThreshold: 1
         env:
         - name: "TZ"
