@@ -33,7 +33,8 @@ spec:
         ports:
         - containerPort: 9121
         livenessProbe:
-          tcpSocket:
+          httpGet:
+            path: /metrics
             port: 9121
           initialDelaySeconds: 10
           timeoutSeconds: 5
@@ -41,7 +42,8 @@ spec:
           failureThreshold: 5
           successThreshold: 1
         readinessProbe:
-          tcpSocket:
+          httpGet:
+            path: /metrics
             port: 9121
           initialDelaySeconds: 10
           timeoutSeconds: 5
