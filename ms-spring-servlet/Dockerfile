@@ -20,7 +20,6 @@ ENV TZ="Europe/Rome"
 WORKDIR /opt/app
 
 EXPOSE 8080
-EXPOSE 18080
 
 ENV SPRING_JMX_ENABLED=false
 
