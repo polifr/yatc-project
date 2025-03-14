@@ -33,6 +33,24 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 5556
+#        livenessProbe:
+#          httpGet:
+#            path: /metrics
+#            port: 5556
+#          initialDelaySeconds: 10
+#          timeoutSeconds: 5
+#          periodSeconds: 5
+#          failureThreshold: 5
+#          successThreshold: 1
+#        readinessProbe:
+#          httpGet:
+#            path: /metrics
+#            port: 5556
+#          initialDelaySeconds: 10
+#          timeoutSeconds: 5
+#          periodSeconds: 3
+#          failureThreshold: 3
+#          successThreshold: 1
         env:
         - name: "TZ"
           value: "Europe/Rome"
