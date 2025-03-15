@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fe-angular-material
+  name: fe-angular-material-exporter
   labels:
-    app: fe-angular-material
+    app: fe-angular-material-exporter
 spec:
   replicas: 1
   strategy:
@@ -13,16 +13,18 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: fe-angular-material
+      app: fe-angular-material-exporter
   template:
     metadata:
       labels:
-        app: fe-angular-material
+        app: fe-angular-material-exporter
     spec:
       containers:
-      - name: fe-angular-material
-        image: yatc/fe-angular-material
-        imagePullPolicy: Never
+      - name: fe-angular-material-exporter
+        image: nginx/nginx-prometheus-exporter
+        imagePullPolicy: IfNotPresent
+        args:
+        - "--nginx.scrape-uri=http://fe-angular-material:8080/nginx_status"
         resources:
           limits:
             cpu: 500m
@@ -31,21 +33,11 @@ spec:
             cpu: 100m
             memory: 100Mi
         ports:
-        - containerPort: 5001
-        - containerPort: 8080
-        startupProbe:
-          httpGet:
-            path: /nginx_status
-            port: 8080
-          initialDelaySeconds: 10
-          timeoutSeconds: 5
-          periodSeconds: 5
-          failureThreshold: 50
-          successThreshold: 1
+        - containerPort: 9113
         livenessProbe:
           httpGet:
-            path: /nginx_status
-            port: 8080
+            path: /metrics
+            port: 9113
           initialDelaySeconds: 10
           timeoutSeconds: 5
           periodSeconds: 5
@@ -53,8 +45,8 @@ spec:
           successThreshold: 1
         readinessProbe:
           httpGet:
-            path: /nginx_status
-            port: 8080
+            path: /metrics
+            port: 9113
           initialDelaySeconds: 10
           timeoutSeconds: 5
           periodSeconds: 3
