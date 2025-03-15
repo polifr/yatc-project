@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-angular-material
+  labels:
+    app: fe-angular-material
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: fe-angular-material
+  template:
+    metadata:
+      labels:
+        app: fe-angular-material
+    spec:
+      containers:
+      - name: fe-angular-material
+        image: yatc/fe-angular-material
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+        - containerPort: 18080
+#        startupProbe:
+#          httpGet:
+#            path: /actuator/health/liveness
+#            port: 18080
+#          initialDelaySeconds: 10
+#          timeoutSeconds: 5
+#          periodSeconds: 5
+#          failureThreshold: 50
+#          successThreshold: 1
+#        livenessProbe:
+#          httpGet:
+#            path: /actuator/health/liveness
+#            port: 18080
+#          initialDelaySeconds: 10
+#          timeoutSeconds: 5
+#          periodSeconds: 5
+#          failureThreshold: 5
+#          successThreshold: 1
+#        readinessProbe:
+#          httpGet:
+#            path: /actuator/health/readiness
+#            port: 18080
+#          initialDelaySeconds: 10
+#          timeoutSeconds: 5
+#          periodSeconds: 3
+#          failureThreshold: 3
+#          successThreshold: 1
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
