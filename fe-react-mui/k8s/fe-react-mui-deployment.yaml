@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-react-mui
+  labels:
+    app: fe-react-mui
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: fe-react-mui
+  template:
+    metadata:
+      labels:
+        app: fe-react-mui
+    spec:
+      containers:
+      - name: fe-react-mui
+        image: yatc/fe-react-mui
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+        ports:
+        - containerPort: 3001
+        - containerPort: 8080
+        startupProbe:
+          httpGet:
+            path: /nginx_status
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 50
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /nginx_status
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /nginx_status
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"

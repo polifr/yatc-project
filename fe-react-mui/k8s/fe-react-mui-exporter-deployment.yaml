@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-react-mui-exporter
+  labels:
+    app: fe-react-mui-exporter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: fe-react-mui-exporter
+  template:
+    metadata:
+      labels:
+        app: fe-react-mui-exporter
+    spec:
+      containers:
+      - name: fe-react-mui-exporter
+        image: nginx/nginx-prometheus-exporter
+        imagePullPolicy: IfNotPresent
+        args:
+        - "--nginx.scrape-uri=http://fe-react-mui:8080/nginx_status"
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+        ports:
+        - containerPort: 9113
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 9113
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 9113
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"

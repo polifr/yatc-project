@@ -1,0 +1,7 @@
+# Production Stage
+FROM nginx:stable-alpine AS production
+COPY ./nginx/nginx-custom.conf /etc/nginx/conf.d/default.conf
+
+COPY ./build /usr/share/nginx/html/react-mui
+
+EXPOSE 3001
