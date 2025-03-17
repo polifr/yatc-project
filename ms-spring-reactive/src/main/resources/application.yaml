@@ -41,7 +41,6 @@ management:
         - metrics
         - prometheus
 
-
 ---
 spring.config.activate.on-profile: docker
 
@@ -50,3 +49,26 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-reactive
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: yatc-kafka:9092
+          auto-create-topics: true
+          enable-observation: true
+          transaction:
+            transaction-id-prefix: yatc-kafka-tx-
+          consumer-properties:
+            auto:
+              offset:
+                reset: earliest
+            spring:
+              json:
+                trusted:
+                  packages: "*"
+            key:
+              deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value:
+              deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+          configuration:
+            acks: all
