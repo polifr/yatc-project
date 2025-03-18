@@ -66,6 +66,10 @@ spring:
           transaction:
             transaction-id-prefix: yatc-kafka-tx-
           consumer-properties:
+            allow:
+              auto:
+                create:
+                  topics: true
             auto:
               offset:
                 reset: earliest
@@ -77,5 +81,14 @@ spring:
               deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value:
               deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+          producer-properties:
+            allow:
+              auto:
+                create:
+                  topics: true
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+            value:
+              serializer: org.springframework.kafka.support.serializer.JsonSerializer
           configuration:
             acks: all
