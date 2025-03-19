@@ -12,6 +12,6 @@ public class TestConsumerConfiguration {
 
   @Bean
   Consumer<TestEvent> testEventConsumer() {
-    return c -> log.info("Message received: {}", c.getMessage());
+    return c -> log.info("Event received: {}", c);
   }
 }
