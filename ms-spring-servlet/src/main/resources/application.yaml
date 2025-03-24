@@ -44,6 +44,8 @@ management:
 logging:
   level:
     org:
+      apache:
+        kafka: TRACE
       springframework:
         kafka: TRACE
         cloud:
