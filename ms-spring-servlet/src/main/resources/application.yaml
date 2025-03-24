@@ -63,7 +63,8 @@ spring:
           content-type: application/json
           producer:
             poller:
-              fixed-delay: 10s
+              fixed-delay: 5000
+              initial-delay: 1000
       kafka:
         binder:
           brokers: yatc-kafka:9092
