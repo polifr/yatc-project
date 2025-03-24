@@ -45,9 +45,9 @@ logging:
   level:
     org:
       springframework:
-        kafka: DEBUG
+        kafka: TRACE
         cloud:
-          stream: DEBUG
+          stream: TRACE
 
 ---
 spring.config.activate.on-profile: docker
