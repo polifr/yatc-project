@@ -41,6 +41,14 @@ management:
         - metrics
         - prometheus
 
+logging:
+  level:
+    org:
+      springframework:
+        kafka: DEBUG
+        cloud:
+          stream: DEBUG
+
 ---
 spring.config.activate.on-profile: docker
 
