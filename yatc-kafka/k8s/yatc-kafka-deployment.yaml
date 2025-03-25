@@ -34,22 +34,22 @@ spec:
         - containerPort: 9092
         - containerPort: 9093
         - containerPort: 5555
-#        livenessProbe:
-#          failureThreshold: 6
-#          initialDelaySeconds: 60
-#          periodSeconds: 60
-#          successThreshold: 1
-#          tcpSocket:
-#            port: 5555
-#          timeoutSeconds: 5
-#        readinessProbe:
-#          failureThreshold: 6
-#          initialDelaySeconds: 120
-#          periodSeconds: 10
-#          successThreshold: 1
-#          tcpSocket:
-#            port: 5555
-#          timeoutSeconds: 5
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          tcpSocket:
+            port: 9092
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 9092
+          timeoutSeconds: 5
         env:
         - name: "TZ"
           value: "Europe/Rome"
