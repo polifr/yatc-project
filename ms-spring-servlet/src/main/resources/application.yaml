@@ -45,11 +45,11 @@ logging:
   level:
     org:
       apache:
-        kafka: TRACE
+        kafka: DEBUG
       springframework:
-        kafka: TRACE
+        kafka: DEBUG
         cloud:
-          stream: TRACE
+          stream: DEBUG
 
 ---
 spring.config.activate.on-profile: docker
