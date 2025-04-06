@@ -19,6 +19,10 @@ spec:
       labels:
         app: yatc-kafka
     spec:
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - yatc-kafka
       containers:
       - name: yatc-kafka
         image: apache/kafka:3.8.1
