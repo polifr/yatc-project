@@ -57,6 +57,8 @@ spec:
         env:
         - name: "TZ"
           value: "Europe/Rome"
+        - name: "CLUSTER_ID"
+          value: "yatc-kafka-cluster"
         - name: "KAFKA_AUTO_CREATE_TOPICS_ENABLE"
           value: "true"
         - name: "KAFKA_NODE_ID"
