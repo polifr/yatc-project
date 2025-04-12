@@ -43,13 +43,15 @@ management:
 
 logging:
   level:
+    it:
+      poli: DEBUG
     org:
       apache:
-        kafka: DEBUG
+        kafka: INFO
       springframework:
-        kafka: DEBUG
+        kafka: INFO
         cloud:
-          stream: DEBUG
+          stream: INFO
 
 ---
 spring.config.activate.on-profile: docker
@@ -90,6 +92,9 @@ spring:
             auto:
               offset:
                 reset: earliest
+            enable:
+              metrics:
+                push: false
             spring:
               json:
                 trusted:
@@ -103,6 +108,9 @@ spring:
               auto:
                 create:
                   topics: true
+            enable:
+              metrics:
+                push: false
             key:
               serializer: org.apache.kafka.common.serialization.StringSerializer
             value:
