@@ -8,7 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-form-page',
-  imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatButtonModule, MatInputModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatInputModule
+  ],
   templateUrl: './form-page.component.html',
   styleUrl: './form-page.component.scss'
 })
@@ -25,8 +31,6 @@ export class FormPageComponent {
   submitForm() {
     const message = this.form.value.textInput;
     const requestBody = { messageBody: message };
-
-    console.log('SUbmit del messaggio ' + message);
 
     this.http.post<any>('/api/spring-servlet/message/v1', requestBody)
       .subscribe({
