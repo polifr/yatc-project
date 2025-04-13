@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Inserisci qualcosa</mat-label>
+        <input matInput formControlName="textInput">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Invia</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="responseData">
+  <h3>Risposta JSON</h3>
+  <pre>{{ responseData | json }}</pre>
+</mat-card>
