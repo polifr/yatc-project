@@ -62,16 +62,30 @@ spring:
   application:
     name: ms-spring-reactive
   cloud:
+    function:
+      definition: testEventReactiveConsumer
     stream:
+      bindings:
+        testEventReactiveConsumer-in-0:
+          destination: yatc-test-topic
+          content-type: application/json
+          group: ${spring.application.name}
       kafka:
         binder:
           brokers: yatc-kafka:9092
           auto-create-topics: true
           enable-observation: true
           consumer-properties:
+            allow:
+              auto:
+                create:
+                  topics: true
             auto:
               offset:
                 reset: earliest
+            enable:
+              metrics:
+                push: false
             spring:
               json:
                 trusted:
@@ -80,5 +94,17 @@ spring:
               deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value:
               deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+          producer-properties:
+            allow:
+              auto:
+                create:
+                  topics: true
+            enable:
+              metrics:
+                push: false
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+            value:
+              serializer: org.springframework.kafka.support.serializer.JsonSerializer
           configuration:
             acks: all

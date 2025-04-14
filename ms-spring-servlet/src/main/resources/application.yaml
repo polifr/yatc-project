@@ -70,13 +70,6 @@ spring:
           destination: yatc-test-topic
           content-type: application/json
           group: ${spring.application.name}
-        testEventProducer-out-0:
-          destination: yatc-test-topic
-          content-type: application/json
-          producer:
-            poller:
-              fixed-delay: 5000
-              initial-delay: 1000
       kafka:
         binder:
           brokers: yatc-kafka:9092
