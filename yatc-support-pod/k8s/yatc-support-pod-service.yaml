@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yatc-support-pod
+  labels:
+    app: yatc-support-pod
+spec:
+  type: ClusterIP
+  selector:
+    app: yatc-support-pod
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
