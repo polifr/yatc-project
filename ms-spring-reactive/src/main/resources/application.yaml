@@ -56,8 +56,6 @@ spring:
           brokers: yatc-kafka:9092
           auto-create-topics: true
           enable-observation: true
-          transaction:
-            transaction-id-prefix: yatc-kafka-tx-
           consumer-properties:
             auto:
               offset:

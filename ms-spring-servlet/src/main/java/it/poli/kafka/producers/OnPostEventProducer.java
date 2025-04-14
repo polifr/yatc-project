@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -14,7 +13,6 @@ public class OnPostEventProducer {
 
   private final StreamBridge streamBridge;
 
-  @Transactional
   public boolean publishTestEvent(TestEvent testEvent) {
     return streamBridge.send("yatc-test-topic", testEvent);
   }
