@@ -22,7 +22,7 @@ spec:
       hostname: yatc-kafka
       containers:
       - name: yatc-kafka
-        image: apache/kafka:3.8.1
+        image: apache/kafka:3.9.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:
