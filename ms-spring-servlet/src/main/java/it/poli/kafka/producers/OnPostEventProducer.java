@@ -15,7 +15,7 @@ public class OnPostEventProducer {
 
   public boolean publishTestEvent(TestEvent testEvent) {
     log.debug("Invio evento {} in corso...", testEvent);
-    boolean ret = streamBridge.send("yatc-test-topic", testEvent);
+    boolean ret = streamBridge.send("testEventCommonProducer-out-0", testEvent);
     log.debug("Esito invio evento {}", ret);
     return ret;
   }
