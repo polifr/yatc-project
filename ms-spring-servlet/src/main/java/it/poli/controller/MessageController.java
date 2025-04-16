@@ -25,6 +25,7 @@ public class MessageController {
     boolean ret =
         onPostEventProducer.publishTestEvent(
             TestEvent.builder().message(message.getMessageBody()).build());
+    log.debug("Esito di invio del messaggio >{}<", ret);
     return ret ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
   }
 }
