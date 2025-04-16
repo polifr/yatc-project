@@ -17,6 +17,7 @@
 
   <properties>
     <java.version>21</java.version>
+    <kafka.version>3.9.0</kafka.version>
     <spring-cloud.version>2024.0.1</spring-cloud.version>
   </properties>
 
