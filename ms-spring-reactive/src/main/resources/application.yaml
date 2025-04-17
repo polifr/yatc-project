@@ -47,11 +47,11 @@ logging:
       poli: DEBUG
     org:
       apache:
-        kafka: DEBUG
+        kafka: INFO
       springframework:
-        kafka: DEBUG
+        kafka: INFO
         cloud:
-          stream: DEBUG
+          stream: INFO
 
 ---
 spring.config.activate.on-profile: docker
