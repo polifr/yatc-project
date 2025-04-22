@@ -1,7 +1,15 @@
-use rdkafka::{config::RDKafkaLogLevel, consumer::{Consumer, CommitMode, StreamConsumer}, util::get_rdkafka_version, ClientConfig, Message, message::Headers};
+use rdkafka::config::{ClientConfig, RDKafkaLogLevel};
+use rdkafka::consumer::stream_consumer::StreamConsumer;
+use rdkafka::consumer::{CommitMode, Consumer};
+use rdkafka::message::{Headers, Message};
+use rdkafka::util::get_rdkafka_version;
+
 use tracing::{debug, info, warn};
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
+
+use tokio::join;
+
 use crate::config::Config;
 
 use axum::{Router, routing::get};
@@ -80,18 +88,23 @@ async fn main() {
     info!("Connecting to pg: {}", &config.database_url);
     info!("Connecting to cache: {}", &config.cache_url);
 
-    let app = Router::new().route("/api/rust-axum/test/v1", get(hello));
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
-
+    info!("Configurazione sottosistema kafka...");
     let (version_n, version_s) = get_rdkafka_version();
     info!("rd_kafka_version: 0x{:08x}, {}", version_n, version_s);
     
-    consume_and_print(
+    let consumer = consume_and_print(
         "yatc-kafka:9092",
         "ms-rust-axum", 
         &["yatc-test-topic"]
-    ).await;
+    );
+    info!("Sottosistema kafka configurato.");
 
+    info!("Configurazione server Axum...");
+    let app = Router::new().route("/api/rust-axum/test/v1", get(hello));
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    let server = axum::serve(listener, app);
+    info!("Server Axum configurato.");
+
+    let _ = join!(consumer, server);
     info!("Application started.");
 }
