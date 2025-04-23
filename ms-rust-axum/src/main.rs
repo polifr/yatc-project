@@ -9,12 +9,21 @@ use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
 use tokio::join;
+use tokio_stream::StreamExt;
 
 use crate::config::Config;
 
 use axum::{Router, routing::get};
 
+use serde::Deserialize;
+
 mod config;
+
+#[derive(Debug, Deserialize)]
+struct TestEvent {
+    message: String,
+    creation_time: String,
+}
 
 async fn hello() -> &'static str {
     "Hello, Rust! This is a microservice!"
@@ -27,9 +36,10 @@ fn create_consumer(bootstrap_servers: &str, group_id: &str) -> StreamConsumer {
         .set("enable.partition.eof", "false")
         .set("session.timeout.ms", "6000")
         .set("enable.auto.commit", "true")
+        .set("auto.offset.reset", "earliest")
         .set_log_level(RDKafkaLogLevel::Debug)
         .create()
-        .expect("Errore in fase di creazione del client Kafka.")
+        .expect("Errore in fase di creazione del consumer Kafka.")
 }
 
 async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: &[&str]) {
@@ -40,8 +50,11 @@ async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: &[&s
         .subscribe(&topics.to_vec())
         .expect("Errore in fase di sottoscrizione ai topic.");
 
-    loop {
-        match consumer.recv().await {
+    let mut message_stream = consumer.stream();
+    info!("Kafka consumer started...");
+
+    while let Some(message_result) = message_stream.next().await {
+        match message_result {
             Err(e) => warn!("Kafka error: {}", e),
             Ok(m) => {
                 let payload = match m.payload_view::<str>() {
