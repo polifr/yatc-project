@@ -57,6 +57,9 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
+  threads:
+    virtual:
+      enabled: true
 
 management:
   server:
@@ -144,3 +147,6 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
+  threads:
+    virtual:
+      enabled: true
