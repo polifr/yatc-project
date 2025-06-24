@@ -1,7 +1,6 @@
 package it.poli.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.health.HealthEndpoint;
@@ -14,12 +13,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    PathPatternRequestMatcher.Builder mvc = PathPatternRequestMatcher.withDefaults();
 
     return http.formLogin(AbstractHttpConfigurer::disable)
         .httpBasic(AbstractHttpConfigurer::disable)
@@ -39,9 +40,9 @@ public class SecurityConfig {
             authorize ->
                 authorize
                     .requestMatchers(
-                        antMatcher("/v3/api-docs/**"),
-                        antMatcher("/swagger-ui.html"),
-                        antMatcher("/swagger-ui/**"))
+                        mvc.matcher("/v3/api-docs/**"),
+                        mvc.matcher("/swagger-ui.html"),
+                        mvc.matcher("/swagger-ui/**"))
                     .permitAll())
         .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated()) // Default
         .oauth2ResourceServer(rs -> rs.jwt(withDefaults()))
