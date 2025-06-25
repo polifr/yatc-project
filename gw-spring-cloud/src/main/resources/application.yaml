@@ -17,25 +17,26 @@ spring:
     name: cms-gateway-frontend
   cloud:
     gateway:
-      metrics:
-        enabled: true
-      default-filters:
-      - RemoveRequestHeader=Cookie
-      - SaveSession
-      - TokenRelay
-      routes:
-      - id: ms-rust-axum-route
-        uri: http://localhost:8081/
-        predicates:
-        - Path=/api/rust-axum/**
-      - id: fe-angular-material-route
-        uri: http://localhost:5001/
-        predicates:
-        - Path=/angular-material/**
-      - id: fe-react-mui-route
-        uri: http://localhost:3001/
-        predicates:
-        - Path=/react-mui/**
+      server:
+        webflux:
+          metrics:
+            enabled: true
+          default-filters:
+          - RemoveRequestHeader=Cookie
+          - TokenRelay
+          routes:
+          - id: ms-rust-axum-route
+            uri: http://localhost:8081/
+            predicates:
+            - Path=/api/rust-axum/**
+          - id: fe-angular-material-route
+            uri: http://localhost:5001/
+            predicates:
+            - Path=/angular-material/**
+          - id: fe-react-mui-route
+            uri: http://localhost:3001/
+            predicates:
+            - Path=/react-mui/**
   session:
     timeout: 60m
     redis:
@@ -100,33 +101,34 @@ spring:
     name: cms-gateway-frontend
   cloud:
     gateway:
-      metrics:
-        enabled: true
-      default-filters:
-      - RemoveRequestHeader=Cookie
-      - SaveSession
-      - TokenRelay
-      routes:
-      - id: ms-rust-axum-route
-        uri: http://ms-rust-axum:8080/
-        predicates:
-        - Path=/api/rust-axum/**
-      - id: ms-spring-reactive-route
-        uri: http://ms-spring-reactive:8080/
-        predicates:
-        - Path=/api/spring-reactive/**
-      - id: ms-spring-servlet-route
-        uri: http://ms-spring-servlet:8080/
-        predicates:
-        - Path=/api/spring-servlet/**
-      - id: fe-angular-material-route
-        uri: http://fe-angular-material:5001/
-        predicates:
-        - Path=/angular-material/**
-      - id: fe-react-mui-route
-        uri: http://fe-react-mui:3001/
-        predicates:
-        - Path=/react-mui/**
+      server:
+        webflux:
+          metrics:
+            enabled: true
+          default-filters:
+          - RemoveRequestHeader=Cookie
+          - TokenRelay
+          routes:
+          - id: ms-rust-axum-route
+            uri: http://ms-rust-axum:8080/
+            predicates:
+            - Path=/api/rust-axum/**
+          - id: ms-spring-reactive-route
+            uri: http://ms-spring-reactive:8080/
+            predicates:
+            - Path=/api/spring-reactive/**
+          - id: ms-spring-servlet-route
+            uri: http://ms-spring-servlet:8080/
+            predicates:
+            - Path=/api/spring-servlet/**
+          - id: fe-angular-material-route
+            uri: http://fe-angular-material:5001/
+            predicates:
+            - Path=/angular-material/**
+          - id: fe-react-mui-route
+            uri: http://fe-react-mui:3001/
+            predicates:
+            - Path=/react-mui/**
   session:
     timeout: 60m
     redis:
