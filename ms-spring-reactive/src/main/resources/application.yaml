@@ -68,6 +68,7 @@ spring:
     function:
       definition: testEventReactiveConsumer
     stream:
+      default-binder: kafka
       bindings:
         testEventReactiveConsumer-in-0:
           destination: yatc-test-topic
