@@ -66,7 +66,7 @@ spring:
     name: ms-spring-servlet
   cloud:
     function:
-      definition: testEventConsumer
+      definition: testEventConsumer;testPollingEventProducer
     stream:
       default-binder: kafka
       bindings:
@@ -74,8 +74,12 @@ spring:
           destination: yatc-test-topic
           content-type: application/json
           group: ${spring.application.name}
-        testEventCommonProducer-out-0:
+        testPollingEventProducer-out-0:
           destination: yatc-test-topic
+          producer:
+            poller:
+              fixed-delay: 10000
+              initial-delay: 5000
       kafka:
         binder:
           brokers: yatc-kafka:9092

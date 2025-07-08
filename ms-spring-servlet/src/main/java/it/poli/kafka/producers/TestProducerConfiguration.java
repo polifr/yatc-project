@@ -5,7 +5,7 @@ import java.util.UUID;
 import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.function.context.PollableBean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class TestProducerConfiguration {
 
-  @Bean
-  Supplier<TestEvent> testEventProducer() {
-    log.info("Creazione bean testEventProducer");
+  @PollableBean
+  Supplier<TestEvent> testPollingEventProducer() {
+    log.info("Creazione bean testPollingEventProducer");
     return () -> {
       TestEvent event = TestEvent.builder().message(UUID.randomUUID().toString()).build();
       log.info("Sending event {}", event);
