@@ -66,7 +66,7 @@ spring:
     name: ms-spring-reactive
   cloud:
     function:
-      definition: testEventReactiveConsumer
+      definition: testEventReactiveConsumer;testPollingEventReactiveProducer
     stream:
       default-binder: kafka
       bindings:
@@ -74,6 +74,12 @@ spring:
           destination: yatc-test-topic
           content-type: application/json
           group: ${spring.application.name}
+        testPollingEventReactiveProducer-out-0:
+          destination: yatc-test-topic
+          producer:
+            poller:
+              fixed-delay: 10000
+              initial-delay: 5000
       kafka:
         binder:
           brokers: yatc-kafka:9092
