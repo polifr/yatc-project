@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import reactor.core.publisher.Flux;
 
 @Configuration
 @RequiredArgsConstructor
@@ -14,10 +13,8 @@ import reactor.core.publisher.Flux;
 public class TestReactiveConsumerConfiguration {
 
   @Bean
-  Consumer<Flux<TestEvent>> testEventReactiveConsumer() {
+  Consumer<TestEvent> testEventReactiveConsumer() {
     log.info("Creazione bean testEventReactiveConsumer");
-    return fluxEvent -> {
-      fluxEvent.doOnNext(testEvent -> log.info("Event received: {}", testEvent)).subscribe();
-    };
+    return testEvent -> log.info("Event received: {}", testEvent);
   }
 }
