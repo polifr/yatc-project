@@ -56,7 +56,7 @@
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-stream-binder-kafka-reactive</artifactId>
+      <artifactId>spring-cloud-starter-stream-kafka</artifactId>
     </dependency>
 
     <dependency>
@@ -166,6 +166,7 @@
               <java>
                 <importOrder></importOrder>
                 <removeUnusedImports></removeUnusedImports>
+                <formatAnnotations></formatAnnotations>
                 <googleJavaFormat></googleJavaFormat>
                 <endWithNewline></endWithNewline>
               </java>
