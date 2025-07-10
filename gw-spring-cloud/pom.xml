@@ -190,6 +190,7 @@
               <java>
                 <importOrder></importOrder>
                 <removeUnusedImports></removeUnusedImports>
+                <formatAnnotations></formatAnnotations>
                 <googleJavaFormat></googleJavaFormat>
                 <endWithNewline></endWithNewline>
               </java>
