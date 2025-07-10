@@ -1,5 +1,0 @@
-Aggiungere una classe sender centralizzata a cui fanno riferimento i diversi producers (potrà essere riutilizzata anche sulla parte reactive).
-Esporre un endpoint che consenta di inviare messaggi in formato CloudEvents.
-
-Fare riferimento alle modalità utilizzate in
-https://stackoverflow.com/questions/75071780/streambridge-is-overriding-headers-set-for-kafka-using-cloudeventmessagebuilder
