@@ -13,15 +13,15 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 @SpringBootTest
 class GwSpringCloudApplicationTest {
 
-	  @MockitoBean private ReactiveClientRegistrationRepository clientRegistrationRepository;
+  @MockitoBean private ReactiveClientRegistrationRepository clientRegistrationRepository;
 
-	  @MockitoBean private ReactiveJwtDecoder jwtDecoder;
+  @MockitoBean private ReactiveJwtDecoder jwtDecoder;
 
-	  @Autowired(required = false)
-	  private ApplicationContext applicationContext;
+  @Autowired(required = false)
+  private ApplicationContext applicationContext;
 
-	  @Test
-	  void contextLoads() {
-	    assertNotNull(applicationContext, "applicationContext null");
-	  }
+  @Test
+  void contextLoads() {
+    assertNotNull(applicationContext, "applicationContext null");
+  }
 }
