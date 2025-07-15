@@ -59,7 +59,6 @@ logging:
     format:
       console: logstash
 
-
 ---
 spring.config.activate.on-profile: docker
 
