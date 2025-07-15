@@ -81,7 +81,7 @@ spring:
           destination: yatc-test-topic
           producer:
             poller:
-              fixed-delay: 10000
+              fixed-delay: 60000
               initial-delay: 5000
       kafka:
         binder:
