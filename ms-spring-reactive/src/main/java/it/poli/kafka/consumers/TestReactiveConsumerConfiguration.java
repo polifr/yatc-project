@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
-
 import reactor.core.publisher.Flux;
 
 @Configuration
@@ -19,7 +18,9 @@ public class TestReactiveConsumerConfiguration {
   Consumer<Flux<Message<TestEvent>>> testEventReactiveConsumer() {
     log.info("Creazione bean testEventReactiveConsumer");
     return fluxEvent -> {
-      fluxEvent.doOnNext(testEvent -> log.info("Event received: {}", testEvent.getPayload())).subscribe();
+      fluxEvent
+          .doOnNext(testEvent -> log.info("Event received: {}", testEvent.getPayload()))
+          .subscribe();
     };
   }
 }
