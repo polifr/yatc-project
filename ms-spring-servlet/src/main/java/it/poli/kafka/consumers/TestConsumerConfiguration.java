@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.Message;
 
 @Configuration
 @RequiredArgsConstructor
@@ -13,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 public class TestConsumerConfiguration {
 
   @Bean
-  Consumer<TestEvent> testEventConsumer() {
+  Consumer<Message<TestEvent>> testEventConsumer() {
     log.info("Creazione bean testEventConsumer");
-    return testEvent -> log.info("Event received: {}", testEvent);
+    return message -> log.info("Event received: {}", message.getPayload());
   }
 }
