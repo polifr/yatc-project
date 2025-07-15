@@ -91,6 +91,11 @@ management:
         - metrics
         - prometheus
 
+logging:
+  structured:
+    format:
+      console: logstash
+
 ---
 spring.config.activate.on-profile: docker
 

@@ -55,6 +55,10 @@ logging:
         kafka: INFO
         cloud:
           stream: INFO
+  structured:
+    format:
+      console: logstash
+
 
 ---
 spring.config.activate.on-profile: docker
