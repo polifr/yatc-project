@@ -16,7 +16,7 @@ public class BridgeController {
 
   private final MsSpringReactiveClient msSpringReactiveClient;
 
-  @GetMapping("/reactive/test/v1")
+  @GetMapping("/spring-reactive/test/v1")
   public ResponseEntity<String> testV1() {
     log.debug("Ricevuta richiesta test su endpoint bridge su reactive.");
     String reactiveResponse = msSpringReactiveClient.getTestV1();
