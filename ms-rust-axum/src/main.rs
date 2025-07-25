@@ -1,7 +1,9 @@
+use base64::{engine::general_purpose, Engine as _};
 use rdkafka::config::{ClientConfig, RDKafkaLogLevel};
 use rdkafka::consumer::stream_consumer::StreamConsumer;
 use rdkafka::consumer::{CommitMode, Consumer};
-use rdkafka::message::{Headers, Message};
+use rdkafka::message::{BorrowedMessage, Headers, Message};
+use rdkafka::producer::BaseProducer;
 use rdkafka::util::get_rdkafka_version;
 
 use tracing::{debug, info, warn};
@@ -15,11 +17,11 @@ use crate::config::Config;
 
 use axum::{Router, routing::get};
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 mod config;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct TestEvent {
     message: String,
     creation_time: String,
@@ -61,7 +63,7 @@ async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: &[&s
                     None => "",
                     Some(Ok(s)) => s,
                     Some(Err(e)) => {
-                        warn!("Error while deserializing message payload: {:?}", e);
+                        warn!("Error while deserializing message payload: {e:?}");
                         ""
                     }
                 };
@@ -76,6 +78,31 @@ async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: &[&s
             }
         };
     }
+}
+
+/*/
+fn decode_event(msg: &BorrowedMessage) -> Result<TestEvent, Box<dyn std::error::Error>> {
+    let b64_str = msg.payload_view::<str>()
+        .ok_or("Nessun payload")??;
+
+    let decoded_bytes = base64::engine::general_purpose::STANDARD.decode(b64_str)?;
+    let json_str = std::str::from_utf8(&decoded_bytes)?;
+    let event = serde_json::from_str::<TestEvent>(json_str)?;
+
+    Ok(event)
+}
+*/
+
+fn create_producer(bootstrap_servers: &str) -> BaseProducer {
+    ClientConfig::new()
+        .set("bootstrap.servers", bootstrap_servers)
+        .set("enable.partition.eof", "false")
+        .set("session.timeout.ms", "6000")
+        .set("enable.auto.commit", "true")
+        .set("auto.offset.reset", "earliest")
+        .set_log_level(RDKafkaLogLevel::Debug)
+        .create()
+        .expect("Errore in fase di creazione del producer Kafka.")
 }
 
 #[tokio::main]
