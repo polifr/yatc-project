@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-postgres
-        image: postgres:17
+        image: postgres:17-alpine
         imagePullPolicy: IfNotPresent
         resources:
           limits:
