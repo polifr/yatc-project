@@ -5,24 +5,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 @Service
-public class GwSpringCloudClient {
+public class MsRustAxumClient {
 
   private final RestClient restClient;
 
-  public GwSpringCloudClient(
+  public MsRustAxumClient(
       RestClient.Builder restClientBuilder, BearerTokenInterceptor bearerTokenInterceptor) {
     restClient =
         restClientBuilder
-            .baseUrl("http://gw-spring-cloud:8080")
+            .baseUrl("http://ms-rust-axum:8080")
             .requestInterceptor(bearerTokenInterceptor)
             .build();
   }
 
-  public String callSpringReactiveGetTestV1() {
-    return restClient.get().uri("/api/spring-reactive/test/v1").retrieve().body(String.class);
-  }
-
-  public String callRustAxumGetTestV1() {
+  public String getTestV1() {
     return restClient.get().uri("/api/rust-axum/test/v1").retrieve().body(String.class);
   }
 }
