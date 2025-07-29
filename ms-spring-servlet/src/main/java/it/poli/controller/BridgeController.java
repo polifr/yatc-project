@@ -19,18 +19,16 @@ public class BridgeController {
   private final MsRustAxumClient msRustAxumClient;
 
   @GetMapping("/spring-reactive/test/v1")
-  public ResponseEntity<String> directSpringReactivetestV1() {
+  public ResponseEntity<String> springReactivetestV1() {
     log.debug("Ricevuta richiesta test su endpoint bridge su reactive.");
-    String reactiveResponse = msSpringReactiveClient.getTestV1();
-    return ResponseEntity.ok(
-        "This is a Spring Servlet microservice calling Reactive: " + reactiveResponse);
+    String response = msSpringReactiveClient.getTestV1();
+    return ResponseEntity.ok("This is a Spring Servlet microservice calling Reactive: " + response);
   }
 
   @GetMapping("/rust-axum/test/v1")
-  public ResponseEntity<String> directRustAxumtestV1() {
+  public ResponseEntity<String> rustAxumtestV1() {
     log.debug("Ricevuta richiesta test su endpoint bridge su reactive.");
-    String reactiveResponse = msRustAxumClient.getTestV1();
-    return ResponseEntity.ok(
-        "This is a Spring Servlet microservice calling Reactive: " + reactiveResponse);
+    String response = msRustAxumClient.getTestV1();
+    return ResponseEntity.ok("This is a Spring Servlet microservice calling Rust: " + response);
   }
 }
