@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
 import reactor.core.publisher.Flux;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 @Slf4j
 public class TestReactiveConsumerConfiguration {
