@@ -59,6 +59,9 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
+      resourceserver:
+        jwt:
+          issuer-uri: http://yatc-keycloak:8180/realms/yatc-realm
   threads:
     virtual:
       enabled: true
@@ -156,6 +159,9 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
+      resourceserver:
+        jwt:
+          issuer-uri: http://yatc-keycloak/realms/yatc-realm
   threads:
     virtual:
       enabled: true
