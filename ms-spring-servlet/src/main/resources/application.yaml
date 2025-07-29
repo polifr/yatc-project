@@ -55,6 +55,7 @@ logging:
         kafka: INFO
         cloud:
           stream: INFO
+        security: DEBUG
   structured:
     format:
       console: logstash
