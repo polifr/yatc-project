@@ -46,7 +46,7 @@ async fn main() {
     );
     info!("Sottosistema kafka configurato.");
 
-    let server = controller::test::create_controller();
+    let server = controller::test::create_controller().await;
     info!("Server Axum configurato.");
 
     let _ = join!(consumer, server);
