@@ -6,21 +6,21 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-public class GwSpringCloudClient {
+public class MsSpringServletClient {
 
   private final WebClient webClient;
 
-  public GwSpringCloudClient(
+  public MsSpringServletClient(
       WebClient.Builder webClientBuilder,
       ServletBearerExchangeFilterFunction servletBearerExchangeFilterFunction) {
     this.webClient =
         webClientBuilder
-            .baseUrl("http://gw-spring-cloud:8080")
+            .baseUrl("http://ms-spring-servlet:8080")
             .filter(servletBearerExchangeFilterFunction)
             .build();
   }
 
-  public Mono<String> callSpringServletGetTestV1() {
-    return webClient.get().uri("/api/spring-reactive/test/v1").retrieve().bodyToMono(String.class);
+  public Mono<String> getTestV1() {
+    return webClient.get().uri("/api/spring-servlet/test/v1").retrieve().bodyToMono(String.class);
   }
 }
