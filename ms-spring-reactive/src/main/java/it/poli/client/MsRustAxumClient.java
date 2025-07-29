@@ -1,7 +1,9 @@
 package it.poli.client;
 
-import org.springframework.security.oauth2.server.resource.web.reactive.function.client.ServletBearerExchangeFilterFunction;
+import java.util.List;
+import java.util.function.Consumer;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -12,11 +14,11 @@ public class MsRustAxumClient {
 
   public MsRustAxumClient(
       WebClient.Builder webClientBuilder,
-      ServletBearerExchangeFilterFunction servletBearerExchangeFilterFunction) {
+      Consumer<List<ExchangeFilterFunction>> exchangeFilterFunctionList) {
     this.webClient =
         webClientBuilder
             .baseUrl("http://ms-rust-axum:8080")
-            .filter(servletBearerExchangeFilterFunction)
+            .filters(exchangeFilterFunctionList)
             .build();
   }
 
