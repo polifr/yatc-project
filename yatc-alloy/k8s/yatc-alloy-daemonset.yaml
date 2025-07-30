@@ -1,21 +1,23 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: alloy
-  namespace: default
+  name: yatc-alloy
+  labels:
+    yatc-alloy
 spec:
   selector:
     matchLabels:
-      app: alloy
+      app: yatc-alloy
   template:
     metadata:
       labels:
-        app: alloy
+        app: yatc-alloy
     spec:
       serviceAccountName: default
       containers:
-        - name: alloy
+        - name: yatc-alloy
           image: grafana/alloy:latest
+          imagePullPolicy: Never
           args:
             - --config.file=/etc/alloy/alloy-config.yaml
           resources:
