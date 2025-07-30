@@ -22,7 +22,7 @@ spec:
       serviceAccountName: yatc-prometheus
       containers:
       - name: yatc-prometheus
-        image: prom/prometheus
+        image: prom/prometheus:v3.5.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:
