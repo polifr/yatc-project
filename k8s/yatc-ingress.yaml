@@ -4,6 +4,16 @@ metadata:
   name: yatc-ingress
 spec:
   rules:
+  - host: yatc-alloy
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: yatc-alloy
+            port:
+              number: 12345
   - host: yatc-prometheus
     http:
       paths:
