@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-loki
-        image: grafana/loki
+        image: grafana/loki:3.5.3
         imagePullPolicy: IfNotPresent
         resources:
           limits:
