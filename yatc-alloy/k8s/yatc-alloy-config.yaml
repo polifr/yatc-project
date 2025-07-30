@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alloy-config
+  namespace: default
+data:
+  alloy-config.yaml: |
+    server:
+      log_level: info
+
+    logs:
+      receivers:
+        container_logs:
+          type: file
+          include:
+            - /var/log/containers/*.log
+          encoding: json
+          operators:
+            - type: json_parser
+              parse_from: message
+              timestamp:
+                parse_from: timestamp
+                layout: RFC3339
+            - type: move
+              from: log
+              to: body
+
+      processors:
+        k8s_metadata:
+          type: k8s_attributes
+
+      exporters:
+        loki:
+          endpoint: http://loki.default.svc.cluster.local:3100/loki/api/v1/push
+
+      service:
+        pipelines:
+          - receivers: [container_logs]
+            processors: [k8s_metadata]
+            exporters: [loki]
