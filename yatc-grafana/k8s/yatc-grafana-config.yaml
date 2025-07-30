@@ -14,7 +14,7 @@ data:
       url: http://yatc-prometheus:9090 
       isDefault: true
       access: proxy
-      editable: true
+      editable: false
     - name: Loki
       type: loki
       url: http://yatc-loki:3100
