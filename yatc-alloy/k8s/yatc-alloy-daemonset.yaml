@@ -16,7 +16,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: yatc-alloy
-          image: grafana/alloy:latest
+          image: grafana/alloy:v1.10.0
           imagePullPolicy: Never
           args:
             - --config.file=/etc/alloy/alloy-config.yaml
