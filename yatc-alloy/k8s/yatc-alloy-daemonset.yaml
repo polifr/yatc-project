@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             - run
-            - /etc/alloy/alloy-config.yaml
+            - /etc/alloy/yatc-alloy-config.alloy
           resources:
             requests:
               cpu: 100m
