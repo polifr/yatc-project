@@ -3,7 +3,7 @@ kind: DaemonSet
 metadata:
   name: yatc-alloy
   labels:
-    yatc-alloy
+    app: yatc-alloy
 spec:
   selector:
     matchLabels:
@@ -17,9 +17,10 @@ spec:
       containers:
         - name: yatc-alloy
           image: grafana/alloy:v1.10.0
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           args:
-            - --config.file=/etc/alloy/alloy-config.yaml
+            - run
+            - /etc/alloy/alloy-config.yaml
           resources:
             requests:
               cpu: 100m
@@ -38,7 +39,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: alloy-config
+            name: yatc-alloy-config
         - name: varlog
           hostPath:
             path: /var/log
