@@ -5,7 +5,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.5.4</version>
-    <relativePath></relativePath>
+    <relativePath/>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -157,7 +157,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <pom>
-                <sortPom></sortPom>
+                <sortPom/>
               </pom>
             </configuration>
           </execution>
@@ -169,11 +169,11 @@
             <phase>process-sources</phase>
             <configuration>
               <java>
-                <importOrder></importOrder>
-                <removeUnusedImports></removeUnusedImports>
-                <formatAnnotations></formatAnnotations>
-                <googleJavaFormat></googleJavaFormat>
-                <endWithNewline></endWithNewline>
+                <importOrder/>
+                <removeUnusedImports/>
+                <formatAnnotations/>
+                <googleJavaFormat/>
+                <endWithNewline/>
               </java>
             </configuration>
           </execution>
