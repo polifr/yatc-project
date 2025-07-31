@@ -33,7 +33,7 @@ spec:
           - containerPort: 12345
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /-/ready
               port: 12345
             initialDelaySeconds: 10
             timeoutSeconds: 5
@@ -42,7 +42,7 @@ spec:
             successThreshold: 1
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /-/ready
               port: 12345
             initialDelaySeconds: 10
             timeoutSeconds: 5
