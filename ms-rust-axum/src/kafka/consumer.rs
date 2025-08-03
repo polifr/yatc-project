@@ -1,10 +1,14 @@
 use rdkafka::config::{ClientConfig, RDKafkaLogLevel};
 use rdkafka::consumer::stream_consumer::StreamConsumer;
 use rdkafka::consumer::{CommitMode, Consumer};
-use rdkafka::message::{Headers, Message};
-use tracing::{info, warn};
+use rdkafka::message::{BorrowedMessage, Headers, Message};
+use tracing::{debug, info, warn};
+
+use base64::Engine;
 
 use tokio_stream::StreamExt;
+
+use crate::kafka::event::TestEvent;
 
 
 fn create_consumer(bootstrap_servers: &str, group_id: &str) -> StreamConsumer {
@@ -35,6 +39,8 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
         match message_result {
             Err(e) => warn!("Kafka error: {}", e),
             Ok(m) => {
+                let mut json = String::new();
+                /*
                 let payload = match m.payload_view::<str>() {
                     None => "",
                     Some(Ok(s)) => s,
@@ -43,6 +49,16 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
                         ""
                     }
                 };
+                */
+                match decode_event(&m, &mut json) {
+                    Ok(s) => {
+                        info!("Messaggio deserializzato: {s:?}");
+                    },
+                    Err(e) => {
+                        warn!("Error while deserializing message payload: {e:?}");
+                    }
+                }
+                let payload = &json[..];
                 info!("key: '{:?}', payload: '{}', topic: {}, partition: {}, offset: {}, timestamp: {:?}",
                       m.key(), payload, m.topic(), m.partition(), m.offset(), m.timestamp());
                 if let Some(headers) = m.headers() {
@@ -54,6 +70,20 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
             }
         };
     }
+}
+
+fn decode_event(msg: &BorrowedMessage, json: &mut String) -> Result<String, Box<dyn std::error::Error>> {
+    let b64_str = msg.payload_view::<str>()
+        .ok_or("Nessun payload")??;
+    let b64_str_filtered = b64_str.replace(&['\"','\\','\''][..], "");
+
+    debug!("Decoding base64 string {b64_str_filtered:?}");
+    let decoded_bytes = base64::engine::general_purpose::STANDARD.decode(b64_str_filtered)?;
+    let json_str = String::from_utf8(decoded_bytes)?;
+
+    json.push_str(&json_str);
+
+    Ok(json_str)
 }
 
 /*
