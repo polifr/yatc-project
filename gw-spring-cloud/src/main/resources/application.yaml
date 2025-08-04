@@ -23,7 +23,9 @@ spring:
             enabled: true
           default-filters:
           - RemoveRequestHeader=Cookie
+          - SecureHeaders
           - TokenRelay
+          - TraceIdResponseHeader=X-B3-TraceId
           routes:
           - id: ms-rust-axum-route
             uri: http://localhost:8081/
@@ -112,7 +114,9 @@ spring:
             enabled: true
           default-filters:
           - RemoveRequestHeader=Cookie
+          - SecureHeaders
           - TokenRelay
+          - TraceIdResponseHeader=X-B3-TraceId
           routes:
           - id: ms-rust-axum-route
             uri: http://ms-rust-axum:8080/
