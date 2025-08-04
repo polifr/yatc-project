@@ -23,7 +23,6 @@ spring:
             enabled: true
           default-filters:
           - RemoveRequestHeader=Cookie
-          - SecureHeaders
           - TokenRelay
           - TraceIdResponseHeader=X-B3-TraceId
           routes:
@@ -114,7 +113,6 @@ spring:
             enabled: true
           default-filters:
           - RemoveRequestHeader=Cookie
-          - SecureHeaders
           - TokenRelay
           - TraceIdResponseHeader=X-B3-TraceId
           routes:
