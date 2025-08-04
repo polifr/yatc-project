@@ -84,7 +84,7 @@ spring:
             poller:
               fixed-delay: 60000
               initial-delay: 5000
-        onPostEventProducer-out-0:
+        onPostTestEventProducer-out-0:
           destination: yatc-test-topic
           producer:
             use-native-encoding: false
