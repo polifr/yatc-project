@@ -19,7 +19,8 @@ public class OnPostEventProducer {
   public boolean publishTestEvent(TestEvent testEvent) {
     log.debug("Invio evento {} in corso...", testEvent);
     boolean ret =
-        streamBridge.send("onPostEventProducer-out-0", CloudEventMessageBuilder.withData(testEvent).build());
+        streamBridge.send(
+            "onPostEventProducer-out-0", CloudEventMessageBuilder.withData(testEvent).build());
     log.debug("Esito invio evento {}", ret);
     return ret;
   }
