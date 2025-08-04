@@ -75,6 +75,9 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
 fn decode_event(msg: &BorrowedMessage, json: &mut String) -> Result<String, Box<dyn std::error::Error>> {
     let b64_str = msg.payload_view::<str>()
         .ok_or("Nessun payload")??;
+
+    debug!("Raw payload received: {b64_str:?}");
+    // Si rimuovono eventuali virgolette dal messaggio - da verificare il motivo della presenza
     let b64_str_filtered = b64_str.replace(&['\"','\\','\''][..], "");
 
     debug!("Decoding base64 string {b64_str_filtered:?}");
