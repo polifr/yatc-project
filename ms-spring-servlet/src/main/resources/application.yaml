@@ -81,11 +81,14 @@ spring:
         testPollingEventProducer-out-0:
           destination: yatc-test-topic
           producer:
+            useNativeEncoding: false
             poller:
               fixed-delay: 60000
               initial-delay: 5000
         onPostEventProducer-out-0:
           destination: yatc-test-topic
+          producer:
+            useNativeEncoding: false
       kafka:
         binder:
           brokers: yatc-kafka:9092
