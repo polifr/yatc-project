@@ -14,6 +14,8 @@ public class OnPostEventProducer {
 
   private final StreamBridge streamBridge;
 
+  // Verificare impostazione destinatario fornita da
+  // https://www.vincenzoracca.com/blog/framework/spring/cloud-stream/
   public boolean publishTestEvent(TestEvent testEvent) {
     log.debug("Invio evento {} in corso...", testEvent);
     boolean ret =
