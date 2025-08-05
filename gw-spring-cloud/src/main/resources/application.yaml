@@ -24,7 +24,7 @@ spring:
           default-filters:
           - RemoveRequestHeader=Cookie
           - TokenRelay
-          - TraceIdResponseHeader=X-B3-TraceId
+          - TraceIdResponseHeader=X-Trace-Id
           routes:
           - id: ms-rust-axum-route
             uri: http://localhost:8081/
@@ -114,7 +114,7 @@ spring:
           default-filters:
           - RemoveRequestHeader=Cookie
           - TokenRelay
-          - TraceIdResponseHeader=X-B3-TraceId
+          - TraceIdResponseHeader=X-Trace-Id
           routes:
           - id: ms-rust-axum-route
             uri: http://ms-rust-axum:8080/
