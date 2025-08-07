@@ -1,7 +1,7 @@
 use rdkafka::config::{ClientConfig, RDKafkaLogLevel};
 use rdkafka::consumer::stream_consumer::StreamConsumer;
 use rdkafka::consumer::{CommitMode, Consumer};
-use rdkafka::message::{BorrowedMessage, Headers, Message};
+use rdkafka::message::{BorrowedHeaders, BorrowedMessage, Headers, Message};
 use tracing::{debug, info, warn};
 
 use base64::Engine;
@@ -38,6 +38,10 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
         match message_result {
             Err(e) => warn!("Kafka error: {}", e),
             Ok(m) => {
+                let traceparent_value = get_traceparent_header_value(m.headers());
+                info!("Header traceparent value: {}", traceparent_value.unwrap_or_default());
+                // TODO Attivare lo span del tracing con il traceparent estratto qui
+
                 let mut json = String::new();
                 match decode_event(&m) {
                     Ok(s) => {
@@ -80,4 +84,17 @@ fn decode_event(msg: &BorrowedMessage) -> Result<String, Box<dyn std::error::Err
     debug!("Event decoded: {}", event.to_string());
 
     Ok(json)
+}
+
+fn get_traceparent_header_value(message_headers: Option<&BorrowedHeaders>) -> Option<String> {
+    // TODO Ottimizzare la routine di estrazione
+    if let Some(headers) = message_headers {
+        for header in headers.iter() {
+            if header.key == "traceparent" {
+                header.value.map(|h| String::from_utf8(h.to_vec()).unwrap_or_default());
+            }
+        }
+    }
+
+    None
 }

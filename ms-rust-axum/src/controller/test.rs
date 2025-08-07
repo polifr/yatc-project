@@ -34,8 +34,7 @@ async fn tracing_middleware(
     req: extract::Request,
     next: axum::middleware::Next,
 ) -> impl IntoResponse {
-    let new_req = req;
-    let headers = new_req.headers();
+    let headers = req.headers();
 
     let (trace_id, parent_span_id) = headers
         .get("traceparent")
@@ -62,13 +61,14 @@ async fn tracing_middleware(
 
     let response = span.in_scope(|| async {
         info!("span created for incoming request with trace {trace_id:?}");
-        next.run(new_req).await
+        next.run(req).await
     })
     .await;
 
     response
 }
 
+// TODO Centralizzare la routine di estrazione per farla usare anche da altri controller e dal consumer
 /// Parsing W3C traceparent header: version-traceid-spanid-flags
 fn parse_traceparent(header: &str) -> Option<(String, String)> {
     let parts: Vec<&str> = header.split('-').collect();
