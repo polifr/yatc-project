@@ -1,7 +1,6 @@
 use axum::{
     extract,
     extract::State,
-    http::{Request, HeaderMap},
     middleware,
     response::IntoResponse,
     routing::get, 
@@ -9,7 +8,7 @@ use axum::{
     Router,
 };
 use tower_http::trace::TraceLayer;
-use tracing::{info, span, Level, Span};
+use tracing::{info, span, Level};
 use uuid::Uuid;
 
 #[derive(Clone)]
