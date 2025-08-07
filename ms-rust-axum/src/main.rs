@@ -1,6 +1,6 @@
 use rdkafka::util::get_rdkafka_version;
 
-use tracing::{debug, info, warn};
+use tracing::{debug, info};
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
