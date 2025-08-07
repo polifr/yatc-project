@@ -10,7 +10,6 @@ use tokio_stream::StreamExt;
 
 use crate::kafka::event::TestEvent;
 
-
 fn create_consumer(bootstrap_servers: &str, group_id: &str) -> StreamConsumer {
     ClientConfig::new()
         .set("bootstrap.servers", bootstrap_servers)
@@ -40,30 +39,22 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
             Err(e) => warn!("Kafka error: {}", e),
             Ok(m) => {
                 let mut json = String::new();
-                /*
-                let payload = match m.payload_view::<str>() {
-                    None => "",
-                    Some(Ok(s)) => s,
-                    Some(Err(e)) => {
-                        warn!("Error while deserializing message payload: {e:?}");
-                        ""
-                    }
-                };
-                */
-                match decode_event(&m, &mut json) {
+                match decode_event(&m) {
                     Ok(s) => {
-                        info!("Messaggio deserializzato: {s:?}");
+                        info!("Messaggio deserializzato: {}", s);
+                        json = s;
                     },
                     Err(e) => {
-                        warn!("Error while deserializing message payload: {e:?}");
-                    }
+                        warn!("Error while deserializing message payload: {}", e);
+                    },
                 }
                 let payload = &json[..];
                 info!("key: '{:?}', payload: '{}', topic: {}, partition: {}, offset: {}, timestamp: {:?}",
                       m.key(), payload, m.topic(), m.partition(), m.offset(), m.timestamp());
                 if let Some(headers) = m.headers() {
                     for header in headers.iter() {
-                        info!("  Header {:#?}: {:?}", header.key, header.value);
+                        info!("  Header {:#?}: {:?}", header.key, 
+                                header.value.map(|h| String::from_utf8(h.to_vec()).unwrap_or_default()).unwrap_or_default());
                     }
                 }
                 consumer.commit_message(&m, CommitMode::Async).unwrap();
@@ -72,32 +63,21 @@ pub async fn consume_and_print(bootstrap_servers: &str, group_id: &str, topics: 
     }
 }
 
-fn decode_event(msg: &BorrowedMessage, json: &mut String) -> Result<String, Box<dyn std::error::Error>> {
+fn decode_event(msg: &BorrowedMessage) -> Result<String, Box<dyn std::error::Error>> {
     let b64_str = msg.payload_view::<str>()
         .ok_or("Nessun payload")??;
 
-    debug!("Raw payload received: {b64_str:?}");
+    debug!("Raw payload received: {}", b64_str);
     // Si rimuovono eventuali virgolette dal messaggio - da verificare il motivo della presenza
     let b64_str_filtered = b64_str.replace(&['\"','\\','\''][..], "");
 
-    debug!("Decoding base64 string {b64_str_filtered:?}");
+    debug!("Decoding base64 string {}", b64_str_filtered);
     let decoded_bytes = base64::engine::general_purpose::STANDARD.decode(b64_str_filtered)?;
-    let json_str = String::from_utf8(decoded_bytes)?;
+    let json = String::from_utf8(decoded_bytes)?;
 
-    json.push_str(&json_str);
+    debug!("Deserializing json event {}", json);
+    let event = serde_json::from_str::<TestEvent>(&json)?;
+    debug!("Event decoded: {}", event.to_string());
 
-    Ok(json_str)
+    Ok(json)
 }
-
-/*
-fn decode_event(msg: &BorrowedMessage) -> Result<TestEvent, Box<dyn std::error::Error>> {
-    let b64_str = msg.payload_view::<str>()
-        .ok_or("Nessun payload")??;
-
-    let decoded_bytes = base64::engine::general_purpose::STANDARD.decode(b64_str)?;
-    let json_str = std::str::from_utf8(&decoded_bytes)?;
-    let event = serde_json::from_str::<TestEvent>(json_str)?;
-
-    Ok(event)
-}
-*/
