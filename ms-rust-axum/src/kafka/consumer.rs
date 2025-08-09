@@ -80,11 +80,10 @@ fn decode_event(msg: &BorrowedMessage) -> Result<String, Box<dyn std::error::Err
 }
 
 fn get_traceparent_header_value(message_headers: Option<&BorrowedHeaders>) -> Option<String> {
-    // TODO Ottimizzare la routine di estrazione
     if let Some(headers) = message_headers {
         for header in headers.iter() {
-            if header.key == "traceparent" {
-                header.value.map(|h| String::from_utf8(h.to_vec()).unwrap_or_default());
+            if header.key.eq_ignore_ascii_case("traceparent") {
+                return header.value.and_then(|h| String::from_utf8(h.to_vec()).ok());
             }
         }
     }
