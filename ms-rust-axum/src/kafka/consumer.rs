@@ -1,4 +1,3 @@
-use rdkafka::config::{ClientConfig, RDKafkaLogLevel};
 use rdkafka::consumer::stream_consumer::StreamConsumer;
 use rdkafka::consumer::{CommitMode, Consumer};
 use rdkafka::message::{BorrowedHeaders, BorrowedMessage, Headers, Message};
@@ -8,17 +7,11 @@ use base64::Engine;
 
 use tokio_stream::StreamExt;
 
-use crate::kafka::event::TestEvent;
+use crate::kafka::{common_configuration::create_common_configuration, event::TestEvent};
 
 fn create_consumer(bootstrap_servers: &str, group_id: &str) -> StreamConsumer {
-    ClientConfig::new()
-        .set("bootstrap.servers", bootstrap_servers)
+    create_common_configuration(bootstrap_servers)
         .set("group.id", group_id)
-        .set("enable.partition.eof", "false")
-        .set("session.timeout.ms", "6000")
-        .set("enable.auto.commit", "true")
-        .set("auto.offset.reset", "earliest")
-        .set_log_level(RDKafkaLogLevel::Debug)
         .create()
         .expect("Errore in fase di creazione del consumer Kafka.")
 }

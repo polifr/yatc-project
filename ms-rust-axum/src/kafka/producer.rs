@@ -1,15 +1,11 @@
 use rdkafka::{config::RDKafkaLogLevel, producer::BaseProducer, ClientConfig};
+use rdkafka::util::get_rdkafka_version;
+use tracing::{info};
 
-use crate::kafka::event::TestEvent;
+use crate::kafka::{common_configuration::create_common_configuration, event::TestEvent};
 
 fn create_producer(bootstrap_servers: &str) -> BaseProducer {
-    ClientConfig::new()
-        .set("bootstrap.servers", bootstrap_servers)
-        .set("enable.partition.eof", "false")
-        .set("session.timeout.ms", "6000")
-        .set("enable.auto.commit", "true")
-        .set("auto.offset.reset", "earliest")
-        .set_log_level(RDKafkaLogLevel::Debug)
+    create_common_configuration(bootstrap_servers)
         .create()
         .expect("Errore in fase di creazione del producer Kafka.")
 }
