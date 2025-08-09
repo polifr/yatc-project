@@ -1210,6 +1210,7 @@ dependencies = [
  "once_cell",
  "opentelemetry",
  "opentelemetry-otlp",
+ "opentelemetry_sdk",
  "rdkafka",
  "redis",
  "serde",

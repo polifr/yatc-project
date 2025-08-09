@@ -1,6 +1,4 @@
-use rdkafka::{config::RDKafkaLogLevel, producer::BaseProducer, ClientConfig};
-use rdkafka::util::get_rdkafka_version;
-use tracing::{info};
+use rdkafka::producer::BaseProducer;
 
 use crate::kafka::{common_configuration::create_common_configuration, event::TestEvent};
 

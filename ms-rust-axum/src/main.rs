@@ -1,4 +1,7 @@
+use opentelemetry::trace::TracerProvider;
+use opentelemetry_sdk::trace::SdkTracerProvider;
 use tracing::{debug, info};
+use tracing_opentelemetry::OpenTelemetryLayer;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
@@ -12,10 +15,8 @@ mod controller;
 mod kafka;
 
 fn init_tracing() {
-    // let tracer = opentelemetry::trace::TracerProvider::default()
-    //     .tracer("example-tracer");
-
-    // let otel_layer = OpenTelemetryLayer::new(tracer);
+    let tracer = SdkTracerProvider::builder().build().tracer("ms-tracer");
+    let otel_layer = OpenTelemetryLayer::new(tracer);
 
     tracing_subscriber::registry()
         .with(
@@ -31,7 +32,7 @@ fn init_tracing() {
             .with_thread_ids(false)
             .with_thread_names(false)
             .with_filter(EnvFilter::from("debug")))
-        // .with(otel_layer) // Aggiunge il livello OpenTelemetry
+            .with(otel_layer) // Aggiunge il livello OpenTelemetry
         .init();
 }
 
