@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM golang:bookworm AS builder
+FROM golang:trixie AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN go build -o myapp .
 
 # Fase 2: Creazione dell'immagine finale
-FROM debian:bookworm-slim AS release
+FROM debian:trixie-slim AS release
 
 # Imposta la cartella di lavoro
 WORKDIR /app

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-support-pod
-        image: nginx:bookworm
+        image: nginx:trixie
         imagePullPolicy: IfNotPresent
         resources:
           limits:

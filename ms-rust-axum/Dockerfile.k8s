@@ -1,5 +1,5 @@
 # Fase 2: Creazione dell'immagine finale
-FROM debian:bookworm-slim AS release
+FROM debian:trixie-slim AS release
 
 # Imposta la cartella di lavoro
 WORKDIR /app

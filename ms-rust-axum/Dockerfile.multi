@@ -1,5 +1,5 @@
 # Fase 1: Compilazione
-FROM rust:bookworm AS builder
+FROM rust:trixie AS builder
 
 # Imposta la cartella di lavoro
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN cargo build --release
 RUN strip target/release/ms-rust-axum
 
 # Fase 2: Creazione dell'immagine finale
-FROM debian:bookworm-slim AS release
+FROM debian:trixie-slim AS release
 
 # Imposta la cartella di lavoro
 WORKDIR /app
