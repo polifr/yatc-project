@@ -9,6 +9,7 @@ use tracing_subscriber::util::SubscriberInitExt;
 use tokio::join;
 use tracing_subscriber::{EnvFilter, Layer};
 
+use std::sync::Arc;
 
 use crate::config::Config;
 
@@ -38,7 +39,7 @@ fn init_tracing() {
         .init();
 }
 
-async fn init_connection_pool(url: &str) -> Result<Pool<Postgres>, sqlx::error::Error> {
+async fn init_connection_pool(url: &str) -> Pool<Postgres> {
     info!("Connecting to pg: {}", url);
 
     // Creazione del pool
@@ -46,13 +47,13 @@ async fn init_connection_pool(url: &str) -> Result<Pool<Postgres>, sqlx::error::
     let pool: Pool<Postgres> = PgPoolOptions::new()
             .max_connections(5)
             .connect(url)
-            .await?.into();
+            .await.expect("Failed to connect to DB");
 
-    // Verifica della connessione
-    let check: i32 = sqlx::query("SELECT 1").fetch_one(&pool).await?.get(0);
-    debug!("Test della connessione: {}", check);
+    // TODO Verifica della connessione
+    // let check: i32 = sqlx::query("SELECT 1").fetch_one(&pool).await?.get(0);
+    // debug!("Test della connessione: {}", check);
 
-    Ok(pool)
+    pool.to_owned();
 }
 
 #[tokio::main]
@@ -71,7 +72,8 @@ async fn main() {
 
     info!("Connecting to cache: {}", &config.cache_url);
 
-    let connection_pool = init_connection_pool(&config.database_url);
+    let pool = init_connection_pool(&config.database_url).await;
+    let shared_pool = Arc::new(pool);
 
     let consumer = kafka::consumer::consume_and_print(
         "yatc-kafka:9092",
@@ -83,6 +85,6 @@ async fn main() {
     let server = controller::test::create_controller().await;
     info!("Server Axum configurato.");
 
-    let _ = join!(connection_pool, consumer, server);
+    let _ = join!(consumer, server);
     info!("Application started.");
 }
