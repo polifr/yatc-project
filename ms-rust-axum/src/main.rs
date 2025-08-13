@@ -1,6 +1,6 @@
 use opentelemetry::trace::TracerProvider;
 use opentelemetry_sdk::trace::SdkTracerProvider;
-use sqlx::{postgres::PgPoolOptions, Pool, Postgres, Row};
+use sqlx::{pool::PoolOptions, Pool, Postgres, Row};
 use tracing::{debug, info};
 use tracing_opentelemetry::OpenTelemetryLayer;
 use tracing_subscriber::layer::SubscriberExt;
@@ -9,13 +9,13 @@ use tracing_subscriber::util::SubscriberInitExt;
 use tokio::join;
 use tracing_subscriber::{EnvFilter, Layer};
 
-use std::sync::Arc;
-
 use crate::config::Config;
 
 mod config;
 mod controller;
+mod domain;
 mod kafka;
+mod service;
 
 fn init_tracing() {
     let tracer = SdkTracerProvider::builder().build().tracer("ms-tracer");
@@ -39,13 +39,13 @@ fn init_tracing() {
         .init();
 }
 
-async fn init_connection_pool(url: &str) -> Pool<Postgres> {
-    info!("Connecting to pg: {}", url);
+async fn init_connection_pool(db_url: &str) -> Pool<Postgres> {
+    info!("Connecting to database: {}", db_url);
 
     // Creazione del pool
-    let pool: Pool<Postgres> = PgPoolOptions::new()
+    let pool: Pool<Postgres> = PoolOptions::<Postgres>::new()
             .max_connections(5)
-            .connect(url)
+            .connect(db_url)
             .await.expect("Failed to connect to DB");
 
     // Verifica della connessione
@@ -76,7 +76,6 @@ async fn main() {
     info!("Connecting to cache: {}", &config.cache_url);
 
     let pool = init_connection_pool(&config.database_url).await;
-    let shared_pool = Arc::new(pool);
 
     let consumer = kafka::consumer::consume_and_print(
         "yatc-kafka:9092",
