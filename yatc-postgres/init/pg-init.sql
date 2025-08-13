@@ -1,4 +1,8 @@
-CREATE TABLE public.t_user (
+CREATE SCHEMA yatc_schema;
+
+GRANT USAGE ON SCHEMA yatc_schema TO pguser;
+
+CREATE TABLE yatc_schema.t_user (
     id integer NOT NULL,
     username varchar(20) not null,
     email varchar(100) not null,
@@ -9,4 +13,4 @@ CREATE TABLE public.t_user (
     ts_update timestamp
 );
 
-ALTER TABLE public.t_user OWNER TO pguser;
+ALTER TABLE yatc_schema.t_user OWNER TO pguser;
