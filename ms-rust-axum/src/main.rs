@@ -43,17 +43,20 @@ async fn init_connection_pool(url: &str) -> Pool<Postgres> {
     info!("Connecting to pg: {}", url);
 
     // Creazione del pool
-    // let pool = Pool::<Postgres>::connect(url).await?;
     let pool: Pool<Postgres> = PgPoolOptions::new()
             .max_connections(5)
             .connect(url)
             .await.expect("Failed to connect to DB");
 
-    // TODO Verifica della connessione
-    // let check: i32 = sqlx::query("SELECT 1").fetch_one(&pool).await?.get(0);
-    // debug!("Test della connessione: {}", check);
+    // Verifica della connessione
+    let check: i32 = sqlx::query("SELECT 1")
+            .fetch_one(&pool)
+            .await
+            .expect("Error checking for connection")
+            .get(0);
+    debug!("Test della connessione: {}", check);
 
-    pool.to_owned();
+    pool.to_owned()
 }
 
 #[tokio::main]
