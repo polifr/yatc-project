@@ -1,11 +1,20 @@
-use sqlx::{Database, Pool};
+use sqlx::{Pool, Postgres};
 
-pub struct EventRepository<DB: Database> {
-    pool: Pool<DB>,
+use crate::domain::model::event::Event;
+
+pub struct EventRepository {
+    pool: Pool<Postgres>,
 }
 
-impl<DB: Database> EventRepository<DB> {
-    pub fn new(pool: Pool<DB>) -> Self {
+impl EventRepository {
+    pub fn new(pool: Pool<Postgres>) -> Self {
         Self { pool }
+    }
+
+    pub async fn find_all(&self) -> Result<Vec<Event>, sqlx::Error> {
+        let events = sqlx::query_as::<_, Event>("SELECT id, message FROM t_event")
+                .fetch_all(&self.pool)
+                .await?;
+        Ok(events)
     }
 }
