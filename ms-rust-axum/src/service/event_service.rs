@@ -1,5 +1,3 @@
-use sqlx::Database;
-
 use crate::domain::repository::event_repository::EventRepository;
 
 pub struct EventService {

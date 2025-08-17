@@ -9,7 +9,7 @@ use tracing_subscriber::util::SubscriberInitExt;
 use tokio::join;
 use tracing_subscriber::{EnvFilter, Layer};
 
-use crate::config::Config;
+use crate::{config::Config, domain::repository::event_repository::{self, EventRepository}, service::event_service::{self, EventService}};
 
 mod config;
 mod controller;
@@ -76,6 +76,8 @@ async fn main() {
     info!("Connecting to cache: {}", &config.cache_url);
 
     let pool = init_connection_pool(&config.database_url).await;
+    let event_repository = EventRepository::new(pool.clone());
+    let event_service = EventService::new(event_repository.clone().to_owned());
 
     let consumer = kafka::consumer::consume_and_print(
         "yatc-kafka:9092",

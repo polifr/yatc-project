@@ -2,6 +2,7 @@ use sqlx::{Pool, Postgres};
 
 use crate::domain::model::event::Event;
 
+#[derive(Clone)]
 pub struct EventRepository {
     pool: Pool<Postgres>,
 }
