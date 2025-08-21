@@ -1,8 +1,7 @@
 {
-    "name": "nodejs-image-demo",
+    "name": "ms-node-express",
     "version": "1.0.0",
-    "description": "nodejs image demo",
-    "author": "Sammy the Shark <sammy@example.com>",
+    "description": "nodejs express microservice",
     "license": "MIT",
     "main": "app.js",
     "keywords": [
