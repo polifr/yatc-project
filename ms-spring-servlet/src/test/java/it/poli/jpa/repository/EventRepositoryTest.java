@@ -1,17 +1,17 @@
 package it.poli.jpa.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import it.poli.jpa.model.Event;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import it.poli.jpa.model.Event;
 
 @DataJpaTest
 class EventRepositoryTest {
 
-  @Autowired
-  EventRepository eventRepository;
+  @Autowired EventRepository eventRepository;
 
   @Test
   void testInjiection() {
@@ -35,5 +35,4 @@ class EventRepositoryTest {
     assertEquals(1, items.size(), "wrong items size");
     assertEquals("TEST MESSAGE", items.getFirst().getMessage(), "wrong item message");
   }
-
 }
