@@ -1,0 +1,21 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: ms-spring-servlet
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://yatc-keycloak/realms/yatc-realm
+  threads:
+    virtual:
+      enabled: true
+  sql:
+    init:
+      platform: hsqldb
+  jpa:
+    open-in-view: false
+    properties:
+      '[show_sql]': true
+      '[format_sql]': true

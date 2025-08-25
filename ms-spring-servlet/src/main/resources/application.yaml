@@ -9,6 +9,16 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-servlet
+  datasource:
+    url: ${YATC_DATASOURCE_JDBC_URL:jdbc:postgresql://localhost:5432/yatc}
+    username: ${YATC_DATASOURCE_USERNAME:pguser}
+    password: ${YATC_DATASOURCE_PASSWORD:pguser}
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        '[show_sql]': true
+        '[format_sql]': true
   security:
     oauth2:
       resourceserver:
@@ -68,6 +78,10 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-servlet
+  datasource:
+    url: jdbc:postgresql://yatc-postgres:5432/yatc
+    username: ${YATC_DATASOURCE_USERNAME:pguser}
+    password: ${YATC_DATASOURCE_PASSWORD:pguser}
   cloud:
     function:
       definition: testEventConsumer;testPollingEventProducer
