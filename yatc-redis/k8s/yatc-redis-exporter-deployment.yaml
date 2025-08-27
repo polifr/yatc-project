@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-redis-exporter
-        image: oliver006/redis_exporter
+        image: oliver006/redis_exporter:v1.76.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:
