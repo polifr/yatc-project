@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yatc-redis
+  name: ms-node-express
   labels:
-    app: yatc-redis
+    app: ms-node-express
 spec:
   replicas: 1
   strategy:
@@ -13,16 +13,16 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: yatc-redis
+      app: ms-node-express
   template:
     metadata:
       labels:
-        app: yatc-redis
+        app: ms-node-express
     spec:
       containers:
-      - name: yatc-redis
-        image: redis:7.4.5-alpine
-        imagePullPolicy: IfNotPresent
+      - name: ms-node-express
+        image: yatc/ms-node-express
+        imagePullPolicy: Never
         resources:
           limits:
             cpu: 250m
@@ -31,22 +31,30 @@ spec:
             cpu: 10m
             memory: 20Mi
         ports:
-        - containerPort: 6379
+        - containerPort: 4001
+        - containerPort: 8080
+        startupProbe:
+          httpGet:
+            path: /metrics
+            port: 4001
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 50
+          successThreshold: 1
         livenessProbe:
-          exec:
-            command:
-            - redis-cli
-            - ping
+          httpGet:
+            path: /metrics
+            port: 4001
           initialDelaySeconds: 10
           timeoutSeconds: 5
           periodSeconds: 5
           failureThreshold: 5
           successThreshold: 1
         readinessProbe:
-          exec:
-            command:
-            - redis-cli
-            - ping
+          httpGet:
+            path: /metrics
+            port: 4001
           initialDelaySeconds: 10
           timeoutSeconds: 5
           periodSeconds: 3
@@ -55,11 +63,3 @@ spec:
         env:
         - name: "TZ"
           value: "Europe/Rome"
-        volumeMounts:
-        - name: yatc-redis-config
-          mountPath: "/etc/redis/redis.conf"
-          subPath: "redis.conf"
-      volumes:
-      - name: yatc-redis-config
-        configMap:
-          name: yatc-redis-config

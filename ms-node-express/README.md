@@ -11,3 +11,11 @@ Microservizio in Node.js basato sul framework Express.
 
 ### Multi stage Dockerfile per Node.js
 - https://sachithsiriwardana.medium.com/dockerizing-nodejs-application-with-multi-stage-build-e30477ca572
+
+### TODO
+- Configurare il deployment del servizio su k8s
+- Esporre le metriche Prometheus tramite exporter, riferimenti:
+  - https://grafana.com/docs/grafana-cloud/monitor-applications/asserts/enable-prom-metrics-collection/runtimes/nodejs/
+  - https://github.com/siimon/prom-client
+  - https://grafana.com/oss/prometheus/exporters/nodejs-exporter/
+

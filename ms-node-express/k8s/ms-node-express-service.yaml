@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-node-express
+  labels:
+    app: ms-node-express
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '4001'
+spec:
+  type: ClusterIP
+  selector:
+    app: ms-node-express
+  ports:
+    - name: ms-node-express
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: ms-node-express-monitor
+      protocol: TCP
+      port: 4001
+      targetPort: 4001

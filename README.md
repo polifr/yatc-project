@@ -24,7 +24,6 @@ See:
 - Add some Java (Quarkus) ms (full integration as Rust)
 - Add some Node.js ms (full integration as Rust) see https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
 - Add some Nginx server with a basic frontends (Angular & Material / React & MUI / Vue & ?)
-- Add TimeZone managing in `Dockerfile`s and in k8d deployment files
 - Manage `USER` directive in `Dockerfile`s to avoid run as `root`
 - Differentiate single and multi stage `Dockerfile`s, create build scripts and set image name
 - Change `docker-compose.yaml` for rely on module's `Dockerfile`s and run builds accordingly

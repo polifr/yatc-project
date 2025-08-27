@@ -14,3 +14,10 @@ CREATE TABLE yatc_schema.t_user (
 );
 
 ALTER TABLE yatc_schema.t_user OWNER TO pguser;
+
+CREATE TABLE yatc_schema.t_event (
+    id integer NOT NULL,
+    message varchar(512) NOT NULL
+)
+
+ALTER TABLE yatc_schema.t_event OWNER TO pguser;
