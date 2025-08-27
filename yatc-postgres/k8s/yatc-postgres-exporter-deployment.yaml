@@ -25,7 +25,7 @@ spec:
         imagePullPolicy: IfNotPresent
         resources:
           limits:
-            cpu: 250m
+            cpu: 200m
             memory: 128Mi
           requests:
             cpu: 10m
@@ -55,6 +55,3 @@ spec:
           value: "Europe/Rome"
         - name: DATA_SOURCE_NAME
           value: "postgres://pguser:pguser@yatc-postgres/yatc?sslmode=disable"
-        envFrom:
-        - secretRef:
-            name: yatc-postgres-secret
