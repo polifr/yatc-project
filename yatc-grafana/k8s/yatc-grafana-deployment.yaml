@@ -43,7 +43,25 @@ spec:
         - name: yatc-grafana-config
           mountPath: "/etc/grafana/provisioning/datasources/datasource.yml"
           subPath: "datasource.yml"
+        - name: yatc-grafana-dashboard-9628
+          mountPath: "/etc/grafana/provisioning/dashboards/9628_rev8.json"
+          subPath: "9628_rev8.json"
+        - name: yatc-grafana-dashboard-11506
+          mountPath: "/etc/grafana/provisioning/dashboards/11506_rev1.json"
+          subPath: "11506.json"
+        - name: yatc-grafana-dashboard-19004
+          mountPath: "/etc/grafana/provisioning/dashboards/19004_rev1.json"
+          subPath: "19004_rev1.json"
       volumes:
       - name: yatc-grafana-config
         configMap:
           name: yatc-grafana-config
+      - name: yatc-grafana-dashboard-9628
+        configMap:
+          name: yatc-grafana-dashboard-9628
+      - name: yatc-grafana-dashboard-11506
+        configMap:
+          name: yatc-grafana-dashboard-11506
+      - name: yatc-grafana-dashboard-19004
+        configMap:
+          name: yatc-grafana-dashboard-19004
