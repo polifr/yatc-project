@@ -53,5 +53,15 @@ spec:
         env:
         - name: "TZ"
           value: "Europe/Rome"
+        - name: "MONGODB_USER"
+          valueFrom:
+            secretKeyRef:
+              name: yatc-mongo-init-secret
+              key: MONGO_INITDB_ROOT_USERNAME
+        - name: "MONGODB_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: yatc-mongo-init-secret
+              key: MONGO_INITDB_ROOT_PASSWORD
         - name: "MONGODB_URI"
-          value: "mongodb://yatc_app:yatc_app@yatc-mongo:27017/yatc"
+          value: "mongodb://yatc-mongo:27017"
