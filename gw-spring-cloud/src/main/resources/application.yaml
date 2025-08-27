@@ -116,6 +116,10 @@ spring:
           - TokenRelay
           - TraceIdResponseHeader=X-Trace-Id
           routes:
+          - id: ms-node-express-route
+            uri: http://ms-node-express:8080/
+            predicates:
+            - Path=/api/node-express/**
           - id: ms-rust-axum-route
             uri: http://ms-rust-axum:8080/
             predicates:
