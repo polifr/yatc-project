@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,10 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Event {
 
-  @Id
-  @EqualsAndHashCode.Include
-  private Long id;
+  @Id @EqualsAndHashCode.Include private Long id;
 
-  @Column(name = "message", length = 512)
   private String message;
 }
