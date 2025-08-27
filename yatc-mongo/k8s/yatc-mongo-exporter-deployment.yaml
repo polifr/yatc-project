@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-mongo-exporter
-        image: percona/mongodb_exporter:0.47.0
+        image: percona/mongodb_exporter:0.44.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:
