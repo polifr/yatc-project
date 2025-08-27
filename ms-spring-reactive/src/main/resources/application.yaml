@@ -9,6 +9,13 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-reactive
+  data:
+    mongo:
+      host: localhost
+      port: 27017
+      username: yatc_app
+      password: yatc_app
+      database: yatc
   security:
     oauth2:
       resourceserver:
@@ -68,6 +75,13 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-reactive
+  data:
+    mongo:
+      host: yatc-mongo
+      port: 27017
+      username: yatc_app
+      password: yatc_app
+      database: yatc
   cloud:
     function:
       definition: testEventReactiveConsumer;testPollingEventReactiveProducer
