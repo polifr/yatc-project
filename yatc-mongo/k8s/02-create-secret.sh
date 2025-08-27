@@ -1,3 +1,3 @@
 #!/bin/sh
 
-kubectl apply -f yatc-postgres-secret.yaml
+kubectl apply -f yatc-mongo-secret.yaml
