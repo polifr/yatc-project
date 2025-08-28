@@ -1,3 +1,3 @@
 #!/bin/sh
 
-kubectl apply -f yatc-alloy-config.yaml
+kubectl create configmap yatc-alloy-config --from-file ../config/yatc-alloy-config.alloy
