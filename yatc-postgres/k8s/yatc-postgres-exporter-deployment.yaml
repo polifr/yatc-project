@@ -51,10 +51,10 @@ spec:
           failureThreshold: 3
           successThreshold: 1
         env:
-        - name: "TZ"
+        - name: TZ
           value: "Europe/Rome"
         - name: DATA_SOURCE_NAME
           valueFrom:
             secretKeyRef:
               name: yatc-postgres-secret
-              key: POSTGRES_STD_FULL_URL
+              key: POSTGRES_YATC_STD_FULL_URL

@@ -35,11 +35,9 @@ spec:
         livenessProbe:
           exec:
             command:
-            - pg_isready
-            - -U 
-            - ${POSTGRES_USER}
-            - -d
-            - ${POSTGRES_DB}
+            - /bin/sh
+            - -c
+            - 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_USER}'
           initialDelaySeconds: 30
           timeoutSeconds: 5
           periodSeconds: 5
@@ -48,22 +46,27 @@ spec:
         readinessProbe:
           exec:
             command:
-            - pg_isready
-            - -U 
-            - ${POSTGRES_USER}
-            - -d
-            - ${POSTGRES_DB}
+            - /bin/sh
+            - -c
+            - 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_USER}'
           initialDelaySeconds: 20
           timeoutSeconds: 5
           periodSeconds: 3
           failureThreshold: 2
           successThreshold: 1
         env:
-        - name: "TZ"
+        - name: TZ
           value: "Europe/Rome"
-        envFrom:
-        - secretRef:
-            name: yatc-postgres-secret
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: yatc-postgres-secret
+              key: POSTGRES_ADMIN_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: yatc-postgres-secret
+              key: POSTGRES_ADMIN_PASSWORD
         volumeMounts:
         - name: yatc-postgres-init-config
           mountPath: "/docker-entrypoint-initdb.d/pg-init.sql"

@@ -60,20 +60,20 @@ spec:
           failureThreshold: 3
           successThreshold: 1
         env:
-        - name: "TZ"
+        - name: TZ
           value: "Europe/Rome"
-        - name: "YATC_DATASOURCE_JDBC_URL"
+        - name: YATC_DATASOURCE_JDBC_URL
           valueFrom:
             secretKeyRef:
               name: yatc-postgres-secret
-              key: POSTGRES_JDBC_URL
-        - name: "YATC_DATASOURCE_USERNAME"
+              key: POSTGRES_YATC_JDBC_URL
+        - name: YATC_DATASOURCE_USERNAME
           valueFrom:
             secretKeyRef:
               name: yatc-postgres-secret
-              key: POSTGRES_USER
-        - name: "YATC_DATASOURCE_PASSWORD"
+              key: POSTGRES_YATC_USER
+        - name: YATC_DATASOURCE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: yatc-postgres-secret
-              key: POSTGRES_PASSWORD
+              key: POSTGRES_YATC_PASSWORD
