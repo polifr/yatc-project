@@ -57,3 +57,6 @@ spec:
         env:
         - name: "TZ"
           value: "Europe/Rome"
+        envFrom:
+        - secretRef:
+            name: yatc-mongo-init-secret
