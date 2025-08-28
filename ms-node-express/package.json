@@ -7,7 +7,8 @@
     "keywords": [
       "nodejs",
       "bootstrap",
-      "express"
+      "express",
+      "prom-client"
     ],
     "devDependencies": {
       "eslint": "^9.34.0"
