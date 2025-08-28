@@ -110,8 +110,8 @@ services:
     container_name: "yatc-postgres"
     environment:
     - TZ=Europe/Rome
-    - POSTGRES_USER=pguser
-    - POSTGRES_PASSWORD=pguser
+    - POSTGRES_USER=yatc_app
+    - POSTGRES_PASSWORD=yatc_app
     - POSTGRES_DB=yatc
     volumes:
     - ./yatc-postgres/init/pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
@@ -119,7 +119,7 @@ services:
     ports:
     - 5432:5432
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pguser -d yatc"]
+      test: ["CMD-SHELL", "pg_isready -U yatc_app -d yatc"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -132,7 +132,7 @@ services:
     ports:
     - 9187:9187
     environment:
-      DATA_SOURCE_NAME: "postgres://pguser:pguser@yatc-postgres/yatc?sslmode=disable"
+      DATA_SOURCE_NAME: "postgres://yatc_app:yatc_app@yatc-postgres/yatc?sslmode=disable"
     depends_on:
       yatc-prometheus:
         condition: service_started

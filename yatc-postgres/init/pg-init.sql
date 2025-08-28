@@ -1,6 +1,6 @@
 CREATE SCHEMA yatc_schema;
 
-GRANT USAGE ON SCHEMA yatc_schema TO pguser;
+GRANT USAGE ON SCHEMA yatc_schema TO yatc_app;
 
 CREATE TABLE yatc_schema.t_user (
     id integer NOT NULL,
@@ -13,11 +13,11 @@ CREATE TABLE yatc_schema.t_user (
     ts_update timestamp
 );
 
-ALTER TABLE yatc_schema.t_user OWNER TO pguser;
+ALTER TABLE yatc_schema.t_user OWNER TO yatc_app;
 
 CREATE TABLE yatc_schema.t_event (
     id integer NOT NULL,
     message varchar(512) NOT NULL
 )
 
-ALTER TABLE yatc_schema.t_event OWNER TO pguser;
+ALTER TABLE yatc_schema.t_event OWNER TO yatc_app;

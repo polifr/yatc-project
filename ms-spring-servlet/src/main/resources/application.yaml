@@ -11,8 +11,8 @@ spring:
     name: ms-spring-servlet
   datasource:
     url: ${YATC_DATASOURCE_JDBC_URL:jdbc:postgresql://localhost:5432/yatc}
-    username: ${YATC_DATASOURCE_USERNAME:pguser}
-    password: ${YATC_DATASOURCE_PASSWORD:pguser}
+    username: ${YATC_DATASOURCE_USERNAME:yatc_app}
+    password: ${YATC_DATASOURCE_PASSWORD:yatc_app}
   jpa:
     open-in-view: false
     properties:
@@ -80,8 +80,8 @@ spring:
     name: ms-spring-servlet
   datasource:
     url: jdbc:postgresql://yatc-postgres:5432/yatc
-    username: ${YATC_DATASOURCE_USERNAME:pguser}
-    password: ${YATC_DATASOURCE_PASSWORD:pguser}
+    username: ${YATC_DATASOURCE_USERNAME:yatc_app}
+    password: ${YATC_DATASOURCE_PASSWORD:yatc_app}
   cloud:
     function:
       definition: testEventConsumer;testPollingEventProducer

@@ -54,4 +54,4 @@ spec:
         - name: "TZ"
           value: "Europe/Rome"
         - name: DATA_SOURCE_NAME
-          value: "postgres://pguser:pguser@yatc-postgres/yatc?sslmode=disable"
+          value: "postgres://yatc_app:yatc_app@yatc-postgres/yatc?sslmode=disable"
