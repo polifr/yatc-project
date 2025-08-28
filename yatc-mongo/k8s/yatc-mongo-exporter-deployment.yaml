@@ -32,36 +32,36 @@ spec:
             memory: 20Mi
         ports:
         - containerPort: 9216
-#        livenessProbe:
-#          httpGet:
-#            path: /metrics
-#            port: 9216
-#          initialDelaySeconds: 10
-#          timeoutSeconds: 5
-#          periodSeconds: 5
-#          failureThreshold: 5
-#          successThreshold: 1
-#        readinessProbe:
-#          httpGet:
-#            path: /metrics
-#            port: 9216
-#          initialDelaySeconds: 10
-#          timeoutSeconds: 5
-#          periodSeconds: 3
-#          failureThreshold: 3
-#          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 9216
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 5
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 9216
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          periodSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
         env:
-        - name: "TZ"
+        - name: TZ
           value: "Europe/Rome"
-        - name: "MONGODB_USER"
+        - name: MONGODB_USER
           valueFrom:
             secretKeyRef:
               name: yatc-mongo-init-secret
               key: MONGO_INITDB_ROOT_USERNAME
-        - name: "MONGODB_PASSWORD"
+        - name: MONGODB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: yatc-mongo-init-secret
               key: MONGO_INITDB_ROOT_PASSWORD
-        - name: "MONGODB_URI"
+        - name: MONGODB_URI
           value: "mongodb://yatc-mongo:27017"
