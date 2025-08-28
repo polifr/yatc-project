@@ -1,3 +1,3 @@
 #!/bin/sh
 
-kubectl apply -f yatc-loki-config.yaml
+kubectl create configmap yatc-loki-config --from-file ../config/local-config.yaml
