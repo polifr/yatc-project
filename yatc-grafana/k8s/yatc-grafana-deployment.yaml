@@ -48,7 +48,7 @@ spec:
           subPath: "9628_rev8.json"
         - name: yatc-grafana-dashboard-11506
           mountPath: "/etc/grafana/provisioning/dashboards/11506_rev1.json"
-          subPath: "11506.json"
+          subPath: "11506_rev1.json"
         - name: yatc-grafana-dashboard-19004
           mountPath: "/etc/grafana/provisioning/dashboards/19004_rev1.json"
           subPath: "19004_rev1.json"
