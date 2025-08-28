@@ -13,4 +13,5 @@ kubectl create configmap yatc-grafana-dashboard-19004 --from-file ../dashboards/
 # nginx per fe-* https://grafana.com/grafana/dashboards/14900-nginx/
 # keycloak https://grafana.com/grafana/dashboards/14390-keycloak-metrics/
 # mongo https://grafana.com/grafana/dashboards/14997-mongodb/
-# kafka?
+# kafka https://grafana.com/grafana/dashboards/18276-kafka-dashboard/
+# nodejs https://grafana.com/grafana/dashboards/11956-nodejs-metrics/ https://grafana.com/grafana/dashboards/19062-nodejs-applications-dashboard/ https://grafana.com/grafana/dashboards/23019-ryzen/
