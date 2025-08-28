@@ -54,4 +54,7 @@ spec:
         - name: "TZ"
           value: "Europe/Rome"
         - name: DATA_SOURCE_NAME
-          value: "postgres://yatc_app:yatc_app@yatc-postgres/yatc?sslmode=disable"
+          valueFrom:
+            secretKeyRef:
+              name: yatc-postgres-secret
+              key: POSTGRES_STD_FULL_URL
