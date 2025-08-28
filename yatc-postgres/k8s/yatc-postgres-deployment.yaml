@@ -34,7 +34,12 @@ spec:
         - containerPort: 5432
         livenessProbe:
           exec:
-            command: ["pg_isready" ,"-U" ,"yatc_app", "-d" ,"yatc"]
+            command:
+            - pg_isready
+            - -U 
+            - ${POSTGRES_USER}
+            - -d
+            - ${POSTGRES_DB}
           initialDelaySeconds: 30
           timeoutSeconds: 5
           periodSeconds: 5
@@ -42,7 +47,12 @@ spec:
           successThreshold: 1
         readinessProbe:
           exec:
-            command: ["pg_isready" ,"-U" ,"yatc_app", "-d" ,"yatc"]
+            command:
+            - pg_isready
+            - -U 
+            - ${POSTGRES_USER}
+            - -d
+            - ${POSTGRES_DB}
           initialDelaySeconds: 20
           timeoutSeconds: 5
           periodSeconds: 3
