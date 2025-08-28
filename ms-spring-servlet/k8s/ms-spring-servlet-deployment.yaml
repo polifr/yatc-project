@@ -62,3 +62,18 @@ spec:
         env:
         - name: "TZ"
           value: "Europe/Rome"
+        - name: "YATC_DATASOURCE_JDBC_URL"
+          valueFrom:
+            secretKeyRef:
+              name: yatc-postgres-secret
+              key: POSTGRES_JDBC_URL
+        - name: "YATC_DATASOURCE_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: yatc-postgres-secret
+              key: POSTGRES_USER
+        - name: "YATC_DATASOURCE_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: yatc-postgres-secret
+              key: POSTGRES_PASSWORD
