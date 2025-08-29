@@ -13,9 +13,9 @@ spring:
     mongo:
       host: localhost
       port: 27017
-      username: yatc_app
-      password: yatc_app
-      database: yatc
+      username: ${YATC_NOSQL_USERNAME:yatc_app}
+      password: ${YATC_NOSQL_PASSWORD:yatc_app}
+      database: ${YATC_NOSQL_DATABASE:yatc}
   security:
     oauth2:
       resourceserver:
@@ -79,9 +79,9 @@ spring:
     mongo:
       host: yatc-mongo
       port: 27017
-      username: yatc_app
-      password: yatc_app
-      database: yatc
+      username: ${YATC_NOSQL_USERNAME:yatc_app}
+      password: ${YATC_NOSQL_PASSWORD:yatc_app}
+      database: ${YATC_NOSQL_DATABASE:yatc}
   cloud:
     function:
       definition: testEventReactiveConsumer;testPollingEventReactiveProducer
