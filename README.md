@@ -30,6 +30,7 @@ See:
 - Add some Nginx server with a basic frontends (Angular & Material / React & MUI / Vue & ?) -> [fe-angular-material](./fe-angular-material) and [fe-react-mui](./fe-react-mui)
 - Manage `USER` directive in `Dockerfile`s to avoid run as `root`
 - Change `docker-compose.yaml` for rely on module's `Dockerfile`s and run builds accordingly
+- Add a SonarQube (https://hub.docker.com/_/sonarqube) and / or a bundled OWASP Dependency Tracker (https://hub.docker.com/r/dependencytrack/bundled) for project scanning
 
 ## Not here, not now:
 - Include a Dockerfile.k8s.graalvm for java based microservices: tested, but not good to be tested on this infrastructure, because huge image building times and bad dependency compatibility in Spring Session.
