@@ -49,9 +49,24 @@ spec:
         - name: yatc-grafana-dashboard-11506
           mountPath: "/etc/grafana/provisioning/dashboards/11506_rev1.json"
           subPath: "11506_rev1.json"
+        - name: yatc-grafana-dashboard-14390
+          mountPath: "/etc/grafana/provisioning/dashboards/14390_rev7.json"
+          subPath: "14390_rev7.json"
+        - name: yatc-grafana-dashboard-14900
+          mountPath: "/etc/grafana/provisioning/dashboards/14900_rev2.json"
+          subPath: "14900_rev2.json"
+        - name: yatc-grafana-dashboard-14997
+          mountPath: "/etc/grafana/provisioning/dashboards/14997_rev3.json"
+          subPath: "14997_rev3.json"
+        - name: yatc-grafana-dashboard-18276
+          mountPath: "/etc/grafana/provisioning/dashboards/18276_rev1.json"
+          subPath: "18276_rev1.json"
         - name: yatc-grafana-dashboard-19004
           mountPath: "/etc/grafana/provisioning/dashboards/19004_rev1.json"
           subPath: "19004_rev1.json"
+        - name: yatc-grafana-dashboard-23019
+          mountPath: "/etc/grafana/provisioning/dashboards/23019_rev1.json"
+          subPath: "23019_rev1.json"
       volumes:
       - name: yatc-grafana-config
         configMap:
@@ -62,6 +77,21 @@ spec:
       - name: yatc-grafana-dashboard-11506
         configMap:
           name: yatc-grafana-dashboard-11506
+      - name: yatc-grafana-dashboard-14390
+        configMap:
+          name: yatc-grafana-dashboard-14390
+      - name: yatc-grafana-dashboard-14900
+        configMap:
+          name: yatc-grafana-dashboard-14900
+      - name: yatc-grafana-dashboard-14997
+        configMap:
+          name: yatc-grafana-dashboard-14997
+      - name: yatc-grafana-dashboard-18276
+        configMap:
+          name: yatc-grafana-dashboard-18276
       - name: yatc-grafana-dashboard-19004
         configMap:
           name: yatc-grafana-dashboard-19004
+      - name: yatc-grafana-dashboard-23019
+        configMap:
+          name: yatc-grafana-dashboard-23019
