@@ -17,7 +17,12 @@ monitoring.listen(4001, '0.0.0.0');
 
 // Esposizione endpoint di test 
 const app = express();
-app.get('/api/node-express/test/v1', function (req, res) {
+const port = 8080;
+
+app.get('/api/node-express/test/v1', (req, res) => {
   res.send('Hello World! This is a Node.js endpoint!')
 });
-app.listen(8080)
+
+app.listen(port, () => {
+  return console.log(`Express is listening at http://localhost:${port}`);
+});
