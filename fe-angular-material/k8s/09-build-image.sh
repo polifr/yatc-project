@@ -2,7 +2,7 @@
 
 rm -rf $PWD/../dist
 
-docker run -it --rm -v $PWD/..:/opt/node-src -w /opt/node-src node:22-alpine sh -c "npm install -g @angular/cli && npm install && ng build --configuration production --base-href /angular-material/"
+docker run -it --rm -v $PWD/..:/opt/node-src -w /opt/node-src node:24-alpine sh -c "npm install -g @angular/cli && npm install && ng build --configuration production --base-href /angular-material/"
 
 eval $(minikube -p minikube docker-env)
 
