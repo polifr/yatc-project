@@ -4,6 +4,10 @@ metadata:
   name: yatc-kafka
   labels:
     app: yatc-kafka
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '5556'
 spec:
   type: ClusterIP
   selector:
@@ -17,7 +21,7 @@ spec:
       protocol: TCP
       port: 9093
       targetPort: 9093
-    - name: kafka-jmx
+    - name: kafka-jmx-exporter
       protocol: TCP
-      port: 5555
-      targetPort: 5555
+      port: 5556
+      targetPort: 5556
