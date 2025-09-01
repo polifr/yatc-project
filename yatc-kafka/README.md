@@ -1,3 +1,6 @@
 # yatc-kafka
 
-Impostazioni per inserire nel cluster un message broker Kafka.
+Message broker Kafka.
+
+# TODO
+- Rimuovere l'attuale jmx exporter di Bitnami con una versione vanilla
