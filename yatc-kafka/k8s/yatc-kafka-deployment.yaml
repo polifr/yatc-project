@@ -22,8 +22,8 @@ spec:
       hostname: yatc-kafka
       containers:
       - name: yatc-kafka
-        image: apache/kafka:3.9.1
-        imagePullPolicy: IfNotPresent
+        image: yatc/yatc-kafka
+        imagePullPolicy: Never
         resources:
           limits:
             cpu: 500m
@@ -34,7 +34,7 @@ spec:
         ports:
         - containerPort: 9092
         - containerPort: 9093
-        - containerPort: 5555
+        - containerPort: 5556
         livenessProbe:
           failureThreshold: 6
           initialDelaySeconds: 60
@@ -70,8 +70,6 @@ spec:
           value: "0@yatc-kafka:9093"
         - name: "KAFKA_CONTROLLER_LISTENER_NAMES"
           value: "CONTROLLER"
-        - name: "JMX_PORT"
-          value: "5555"
         - name: "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR"
           value: "1"
         - name: "KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS"

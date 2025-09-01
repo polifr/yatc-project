@@ -1,0 +1,10 @@
+FROM apache/kafka:3.9.1
+
+USER root
+RUN mkdir -p /jmx && chown -R kafka:kafka /jmx
+USER kafka
+
+COPY ./exporter/jmx_prometheus_javaagent*.jar /jmx/jmx_prometheus_javaagent.jar
+COPY ./exporter/jmx-exporter-config.yml /jmx/jmx-exporter-config.yml
+
+ENV KAFKA_OPTS="${KAFKA_OPTS} -javaagent:/jmx/jmx_prometheus_javaagent.jar=5556:/jmx/jmx-exporter-config.yml"
