@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yatc-dependencytrack
+  labels:
+    app: yatc-dependencytrack
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: yatc-dependencytrack
+  template:
+    metadata:
+      labels:
+        app: yatc-dependencytrack
+    spec:
+      containers:
+      - name: yatc-dependencytrack
+        image: dependencytrack/bundled:4.13.4
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: "TZ"
+          value: "Europe/Rome"
+        - name: "SYSTEM_REQUIREMENT_CHECK_ENABLED"
+          value: false
+        - name: "ALPINE_DATABASE_MODE"
+          value: "external"
+        - name: "ALPINE_DATABASE_URL"
+          value: "jdbc:postgresql://yatc-postgres:5432/dtrack"
+        - name: "ALPINE_DATABASE_DRIVER"
+          value: "org.postgresql.Driver"
+        - name: "ALPINE_DATABASE_USERNAME"
+          value: "dtrack"
+        - name: "ALPINE_DATABASE_PASSWORD"
+          value: "dtrackpass"
+        - name: "ALPINE_METRICS_ENABLED"
+          value: "true"

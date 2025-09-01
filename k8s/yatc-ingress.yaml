@@ -44,6 +44,16 @@ spec:
             name: yatc-keycloak
             port:
               number: 80
+  - host: yatc-dependencytrack
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: yatc-dependencytrack
+            port:
+              number: 8080
   - host: yatc-site
     http:
       paths:
