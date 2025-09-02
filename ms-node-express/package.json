@@ -5,9 +5,10 @@
   "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node dist/app.js",
     "lint": "eslint ./src --ext .ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sbom": "npx @cyclonedx/cyclonedx-npm -o ${npm_package_name}.cdx.json",
+    "start": "tsc && node dist/app.js"
   },
   "keywords": [],
   "author": "",
