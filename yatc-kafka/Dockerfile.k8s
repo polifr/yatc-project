@@ -9,5 +9,4 @@ COPY ./exporter/jmx-exporter-config.yml /opt/jmx/jmx-exporter-config.yml
 RUN chown -R appuser:appuser /opt/jmx 
 USER appuser
 
-ENV JMX_PORT=5555
 ENV KAFKA_OPTS="-javaagent:/opt/jmx/jmx_prometheus_javaagent.jar=5556:/opt/jmx/jmx-exporter-config.yml"
