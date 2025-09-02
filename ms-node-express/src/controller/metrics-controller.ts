@@ -1,7 +1,7 @@
 import express from 'express';
 import { collectDefaultMetrics, register } from 'prom-client';
 
-var createMetricsController = function() {
+const createMetricsController = function() {
 
     collectDefaultMetrics();
 
