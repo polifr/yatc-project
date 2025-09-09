@@ -16,6 +16,7 @@ Yet Another Test Cluster Project - an umbrella for a number of clustered subproj
 - RUST Axum microservice [ms-rust-axum](./ms-rust-axum)
 - NodeJS Express microservice [ms-node-express](./ms-node-express)
 - Propagation of traces (`trace_id`) using W3C standards (i.e. `traceparent` header) in http and kafka communications
+- Add OpenAPI online documentation (i.e. using Swagger or Scalar - see [here](https://www.linkedin.com/pulse/scalar-now-officially-supported-spring-boot-shane-o-connor-9ni3e/?trackingId=SiSAPNi1wZNdsNBqwmjZ6g%3D%3D))
 
 ## References
 
