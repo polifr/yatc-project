@@ -14,7 +14,7 @@ Yet Another Test Cluster Project - an umbrella for a number of clustered subproj
 - Spring API Gateway [gw-spring-cloud](./gw-spring-cloud), based on reactive stack, integrated with KeyCLoak for authentication and Redis for session caching
 - Spring servlet [ms-spring-servlet](./ms-spring-servlet) and reactive [ms-spring-reactive](./ms-spring-reactive) based microservices
 - RUST Axum microservice [ms-rust-axum](./ms-rust-axum)
-- NodeJS Express microservice [ms-node-express](./ms-node-express)
+- NodeJS Express microservice [ms-node-express](./ms-node-express) - Work in Progress
 - Propagation of traces (`trace_id`) using W3C standards (i.e. `traceparent` header) in http and kafka communications
 
 ## References
@@ -26,8 +26,11 @@ See:
 - Setup Rust ms to read environment variables, and integration (rest api, database, security, kafka, etc)
 - Add some Go ms (full integration as Rust) -> [ms-go-fiber](./ms-go-fiber) and [ms-go-gin](./ms-go-gin)
 - Add some Java (Quarkus) ms (full integration as Rust) -> [ms-quarkus-jee](./ms-quarkus-jee) and [ms-quarkus-munity](./ms-quarkus-munity)
-- Add some Node.js ms (full integration as Rust) see https://nodejs.org/en/learn/getting-started/introduction-to-nodejs -> [ms-node-express](./ms-node-express)
+- Add some Python ms
+- Add some Scala ms
 - Add some Nginx server with a basic frontends (Angular & Material / React & MUI / Vue & ?) -> [fe-angular-material](./fe-angular-material) and [fe-react-mui](./fe-react-mui)
+- Activate OpenAPI / Swagger / Scalar API browsing through a backend gateway / ingress
+- Create and persist Grafana dashboards
 - Manage `USER` directive in `Dockerfile`s to avoid run as `root`
 - Change `docker-compose.yaml` for rely on module's `Dockerfile`s and run builds accordingly
 - Add a SonarQube (https://hub.docker.com/_/sonarqube) and / or a bundled OWASP Dependency Tracker (https://hub.docker.com/r/dependencytrack/bundled) for project scanning
