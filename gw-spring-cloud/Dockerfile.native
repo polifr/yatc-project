@@ -1,7 +1,7 @@
 # Fase 1 - Compilazione tramite GraalVM
 # Ref -> https://github.com/orgs/graalvm/packages
 # Ref -> https://dev.to/binoy_59380e698d318/build-native-image-from-spring-boot-application-with-graalvm-builder-3b7l
-FROM ghcr.io/graalvm/native-image-community:21-muslib AS builder
+FROM ghcr.io/graalvm/native-image-community:25-muslib AS builder
 
 # Install Maven
 ARG USER_HOME_DIR="/root"

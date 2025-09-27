@@ -1,5 +1,5 @@
 # Stage 2 - Creazione immagine finale
-FROM eclipse-temurin:21-jre AS final
+FROM eclipse-temurin:25-jre AS final
 
 # Impostazione timezone di default
 ENV TZ="Europe/Rome"

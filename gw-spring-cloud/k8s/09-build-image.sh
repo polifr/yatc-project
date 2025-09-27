@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker run -it --rm -v $PWD/..:/opt/maven -v $HOME/.m2:/opt/maven-repo/.m2 -w /opt/maven maven:3-eclipse-temurin-21 mvn -Duser.home=/opt/maven-repo -Dmaven.test.skip=true clean package
+docker run -it --rm -v $PWD/..:/opt/maven -v $HOME/.m2:/opt/maven-repo/.m2 -w /opt/maven maven:3-eclipse-temurin-25 mvn -Duser.home=/opt/maven-repo -Dmaven.test.skip=true clean package
 
 eval $(minikube -p minikube docker-env)
 
