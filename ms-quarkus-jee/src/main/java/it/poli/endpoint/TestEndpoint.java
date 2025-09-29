@@ -1,4 +1,4 @@
-package it.poli.controller;
+package it.poli.endpoint;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
