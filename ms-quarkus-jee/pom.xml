@@ -148,7 +148,9 @@
                 <importOrder/>
                 <removeUnusedImports/>
                 <formatAnnotations/>
-                <googleJavaFormat/>
+                <googleJavaFormat>
+                  <version>1.28.0</version>
+                </googleJavaFormat>
                 <endWithNewline/>
               </java>
             </configuration>
