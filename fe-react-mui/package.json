@@ -18,6 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "owasp": "owasp-dependency-check --project ${npm_package_name} -f HTML -f JSON",
     "sbom": "npx @cyclonedx/cyclonedx-npm -o ${npm_package_name}.cdx.json"
   },
   "eslintConfig": {
@@ -39,6 +40,7 @@
     ]
   },
   "devDependencies": {
-    "@cyclonedx/cyclonedx-npm": "^4.0.0"
+    "@cyclonedx/cyclonedx-npm": "^4.0.0",
+    "owasp-dependency-check": "^1.0.0"
   }
 }

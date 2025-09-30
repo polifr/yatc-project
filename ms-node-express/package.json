@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./src --ext .ts",
+    "owasp": "owasp-dependency-check --project ${npm_package_name} -f HTML -f JSON",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sbom": "npx @cyclonedx/cyclonedx-npm -o ${npm_package_name}.cdx.json",
     "start": "tsc && node dist/app.js"
@@ -20,6 +21,7 @@
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.3.0",
+    "owasp-dependency-check": "^1.0.0",
     "prettier": "3.6.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0"
