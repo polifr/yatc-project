@@ -18,4 +18,4 @@ Microservizio in Node.js basato sul framework Express.
   - https://grafana.com/docs/grafana-cloud/monitor-applications/asserts/enable-prom-metrics-collection/runtimes/nodejs/
   - https://github.com/siimon/prom-client
   - https://grafana.com/oss/prometheus/exporters/nodejs-exporter/
-
+- Includere l'esecuzione di owasp-dependency-check: https://www.npmjs.com/package/owasp-dependency-check
