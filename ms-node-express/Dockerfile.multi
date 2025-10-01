@@ -40,4 +40,7 @@ COPY --from=builder /usr/src/app/dist ./
 
 EXPOSE 3000
 
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr
+
 ENTRYPOINT ["node","./app.js"]

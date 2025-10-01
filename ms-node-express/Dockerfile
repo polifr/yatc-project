@@ -15,4 +15,7 @@ COPY --chown=node:node . .
 
 EXPOSE 8080
 
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr
+
 CMD [ "node", "app.js" ]

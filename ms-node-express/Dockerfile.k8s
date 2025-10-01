@@ -9,4 +9,7 @@ COPY ./dist ./
 EXPOSE 4001
 EXPOSE 8080
 
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr
+
 ENTRYPOINT ["node","./app.js"]
