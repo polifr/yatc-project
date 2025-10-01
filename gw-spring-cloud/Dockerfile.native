@@ -49,4 +49,8 @@ COPY --from=builder /opt/app/target/gw-spring-cloud /opt/app
 
 WORKDIR /opt/app
 
+RUN groupadd -g 2222 -r yatcusr
+RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
+USER 2222:2222
+
 ENTRYPOINT ["/opt/app/gw-spring-cloud", "--spring.profiles.active=docker"]

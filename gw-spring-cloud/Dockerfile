@@ -26,4 +26,8 @@ ENV SPRING_JMX_ENABLED=false
 
 COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
 
+RUN groupadd -g 2222 -r yatcusr
+RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
+USER 2222:2222
+
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar", "--spring.profiles.active=docker"]
