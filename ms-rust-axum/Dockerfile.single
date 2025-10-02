@@ -16,5 +16,9 @@ RUN strip target/release/ms-rust-axum
 # Espone la porta 8081
 EXPOSE 8081
 
+RUN groupadd -g 2222 -r yatcusr
+RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
+USER 2222:2222
+
 # Comando di esecuzione
 CMD ["./target/release/ms-rust-axum"]

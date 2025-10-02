@@ -23,5 +23,9 @@ WORKDIR /app
 # Copy the binary from the build stage
 COPY --from=builder /app/myapp .
 
+RUN groupadd -g 2222 -r yatcusr
+RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
+USER 2222:2222
+
 # Set the entrypoint command
 ENTRYPOINT ["/app/myapp"]

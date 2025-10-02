@@ -5,3 +5,6 @@ COPY ./nginx/nginx-custom.conf /etc/nginx/conf.d/default.conf
 COPY ./build /usr/share/nginx/html/react-mui
 
 EXPOSE 3001
+
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr

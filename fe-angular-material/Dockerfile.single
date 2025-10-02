@@ -10,4 +10,7 @@ RUN npm install
 
 COPY . /usr/src/app
 
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr
+
 CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "5001", "--base-href", "/angular-material/"]

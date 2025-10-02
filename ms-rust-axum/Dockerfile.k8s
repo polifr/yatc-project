@@ -16,5 +16,9 @@ EXPOSE 8080
 # Imposta la variabile di ambiente per le configurazioni di default dell'immagine
 ENV ENV_FILENAME=".env.dc"
 
+RUN groupadd -g 2222 -r yatcusr
+RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
+USER 2222:2222
+
 # Comando di esecuzione
 ENTRYPOINT ["/app/ms-rust-axum"]
