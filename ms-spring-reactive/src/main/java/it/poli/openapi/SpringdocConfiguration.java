@@ -1,0 +1,37 @@
+package it.poli.openapi;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+@Configuration
+public class SpringdocConfiguration {
+
+  @Bean
+  @Primary
+  GroupedOpenApi yatcGroupedOpenApi(@Value("${spring.application.name}") String applicationName) {
+    return GroupedOpenApi.builder()
+        .group(applicationName)
+        .packagesToScan("it.poli.controller")
+        .build();
+  }
+
+  @Bean
+  @Primary
+  OpenAPI yatcOpenApi(@Value("${spring.application.name}") String applicationName) {
+    return new OpenAPI()
+        .components(new Components())
+        .info(
+            new Info()
+                .title(applicationName)
+                .description(applicationName)
+                .version("1.0.0")
+                .license(new License().name("YATC Project - No License")));
+  }
+}
