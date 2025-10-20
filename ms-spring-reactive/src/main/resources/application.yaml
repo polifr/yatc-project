@@ -10,7 +10,7 @@ spring:
   application:
     name: ms-spring-reactive
   data:
-    mongo:
+    mongodb:
       host: localhost
       port: 27017
       username: ${YATC_NOSQL_USERNAME:yatc_app}
@@ -76,7 +76,7 @@ spring:
   application:
     name: ms-spring-reactive
   data:
-    mongo:
+    mongodb:
       host: yatc-mongo
       port: 27017
       username: ${YATC_NOSQL_USERNAME:yatc_app}
