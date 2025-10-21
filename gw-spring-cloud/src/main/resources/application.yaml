@@ -10,6 +10,13 @@ server:
 
 spring.lifecycle.timeout-per-shutdown-phase: 10s
 
+springdoc:
+  swagger-ui:
+    enabled: true
+
+scalar:
+  enabled: true
+
 spring:
   main:
     banner-mode: off
@@ -93,6 +100,9 @@ management:
         - prometheus
 
 logging:
+  level:
+    it:
+      poli: DEBUG
   structured:
     format:
       console: logstash
@@ -140,6 +150,15 @@ spring:
             uri: http://fe-react-mui:3001/
             predicates:
             - Path=/react-mui/**
+          # OpenApi Routes
+          - id: ms-spring-reactive-openapi
+            uri: http://ms-spring-reactive:8080/
+            predicates:
+            - Path=/v3/api-docs/ms-spring-reactive
+          - id: ms-spring-servlet-openapi
+            uri: http://ms-spring-servlet:8080/
+            predicates:
+            - Path=/v3/api-docs/ms-spring-servlet
   session:
     timeout: 60m
     redis:
