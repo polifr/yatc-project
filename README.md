@@ -29,12 +29,11 @@ See:
 - Add some Python ms
 - Add some Scala ms
 - Add some Nginx server with a basic frontends (Angular & Material / React & MUI / Vue & ?) -> [fe-angular-material](./fe-angular-material) and [fe-react-mui](./fe-react-mui)
-- Activate OpenAPI / Swagger / Scalar API browsing through a backend gateway / ingress
+- Activate OpenAPI / Swagger / Scalar API browsing through a backend gateway / ingress (i.e. using Swagger or Scalar - see [here](https://www.linkedin.com/pulse/scalar-now-officially-supported-spring-boot-shane-o-connor-9ni3e/?trackingId=SiSAPNi1wZNdsNBqwmjZ6g%3D%3D)); transform the openapi gateway routes using wildcards and expressions
 - Create and persist Grafana dashboards
 - Manage `USER` directive in `Dockerfile`s to avoid run as `root`
 - Change `docker-compose.yaml` for rely on module's `Dockerfile`s and run builds accordingly
 - Add a SonarQube (https://hub.docker.com/_/sonarqube) and / or a bundled OWASP Dependency Tracker (https://hub.docker.com/r/dependencytrack/bundled) for project scanning
-- Add OpenAPI online documentation (i.e. using Swagger or Scalar - see [here](https://www.linkedin.com/pulse/scalar-now-officially-supported-spring-boot-shane-o-connor-9ni3e/?trackingId=SiSAPNi1wZNdsNBqwmjZ6g%3D%3D)) and propagate it through gateway on dedicated host.
 
 ## Not here, not now:
 - Include a Dockerfile.k8s.graalvm for java based microservices: tested, but not good to be tested on this infrastructure, because huge image building times and bad dependency compatibility in Spring Session.
