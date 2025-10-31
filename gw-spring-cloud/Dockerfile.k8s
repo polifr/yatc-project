@@ -1,8 +1,10 @@
 # Stage 2 - Creazione immagine finale
-FROM eclipse-temurin:25-jre AS final
+FROM eclipse-temurin:25-jre-alpine AS final
 
 # Impostazione timezone di default
+RUN apk add --no-cache tzdata
 ENV TZ="Europe/Rome"
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /opt/app
 
@@ -13,8 +15,7 @@ ENV SPRING_JMX_ENABLED=false
 
 COPY ./target/*.jar /opt/app/*.jar
 
-RUN groupadd -g 2222 -r yatcusr
-RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
-USER 2222:2222
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr
 
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar", "--spring.profiles.active=docker"]
