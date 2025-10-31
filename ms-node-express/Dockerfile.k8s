@@ -1,6 +1,10 @@
-# for production
-
 FROM node:24-alpine
+
+# Impostazione timezone di default
+RUN apk add --no-cache tzdata
+ENV TZ="Europe/Rome"
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 WORKDIR /usr/src/app
 COPY ./package*.json ./
 RUN npm install --omit=dev
