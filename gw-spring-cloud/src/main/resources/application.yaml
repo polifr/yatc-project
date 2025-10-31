@@ -130,6 +130,10 @@ spring:
             uri: http://ms-node-express:8080/
             predicates:
             - Path=/api/node-express/**
+          - id: ms-python-fastapi-route
+            uri: http://ms-python-fastapi:8000/
+            predicates:
+            - Path=/api/python-fastapi/**
           - id: ms-rust-axum-route
             uri: http://ms-rust-axum:8080/
             predicates:
@@ -151,6 +155,18 @@ spring:
             predicates:
             - Path=/react-mui/**
           # OpenApi Routes
+          - id: ms-node-express-openapi
+            uri: http://ms-node-express:8080/
+            predicates:
+            - Path=/v3/api-docs/ms-node-express
+          - id: ms-python-fastapi-openapi
+            uri: http://ms-python-fastapi:8000/
+            predicates:
+            - Path=/v3/api-docs/ms-python-fastapi
+          - id: ms-rust-axum-openapi
+            uri: http://ms-rust-axum:8080/
+            predicates:
+            - Path=/v3/api-docs/ms-rust-axum
           - id: ms-spring-reactive-openapi
             uri: http://ms-spring-reactive:8080/
             predicates:
