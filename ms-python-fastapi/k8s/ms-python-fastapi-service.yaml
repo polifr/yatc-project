@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-python-fastapi
+  labels:
+    app: ms-python-fastapi
+#  annotations:
+#    prometheus.io/scrape: 'true'
+#    prometheus.io/path: '/metrics'
+#    prometheus.io/port: '4001'
+spec:
+  type: ClusterIP
+  selector:
+    app: ms-python-fastapi
+  ports:
+    - name: ms-python-fastapi
+      protocol: TCP
+      port: 8000
+      targetPort: 8000
+#    - name: ms-python-fastapi-monitor
+#      protocol: TCP
+#      port: 4001
+#      targetPort: 4001
