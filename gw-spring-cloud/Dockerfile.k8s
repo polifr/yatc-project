@@ -1,4 +1,3 @@
-# Stage 2 - Creazione immagine finale
 FROM eclipse-temurin:25-jre-alpine AS final
 
 # Impostazione timezone di default
