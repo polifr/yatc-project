@@ -1,4 +1,9 @@
-FROM python:3-slim
+FROM python:3-alpine
+
+# Impostazione timezone di default
+RUN apk add --no-cache tzdata
+ENV TZ="Europe/Rome"
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /usr/src/app
 COPY requirements.txt .
@@ -7,5 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV PYTHONUNBUFFERED=1
+
+RUN addgroup -S yatcusr && adduser -S yatcusr -G yatcusr
+USER yatcusr
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
