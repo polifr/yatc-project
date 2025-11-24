@@ -16,7 +16,7 @@ spec:
       serviceAccountName: yatc-alloy
       containers:
         - name: yatc-alloy
-          image: grafana/alloy:v1.11.2
+          image: grafana/alloy:v1.11.3
           imagePullPolicy: IfNotPresent
           args:
             - run
