@@ -34,6 +34,7 @@ See:
 - Manage `USER` directive in `Dockerfile`s to avoid run as `root`
 - Change `docker-compose.yaml` for rely on module's `Dockerfile`s and run builds accordingly
 - Add a SonarQube (https://hub.docker.com/_/sonarqube) and / or a bundled OWASP Dependency Tracker (https://hub.docker.com/r/dependencytrack/bundled) for project scanning
+- Add a license scanning process (e.g. https://maven.apache.org/plugins/maven-project-info-reports-plugin/licenses-mojo.html for java projects)
 
 ## Not here, not now:
 - Include a Dockerfile.k8s.graalvm for java based microservices: tested, but not good to be tested on this infrastructure, because huge image building times and bad dependency compatibility in Spring Session.
