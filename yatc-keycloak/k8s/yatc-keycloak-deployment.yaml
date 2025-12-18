@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-keycloak
-        image: quay.io/keycloak/keycloak:26.4.0-0
+        image: quay.io/keycloak/keycloak:26.4.7-0
         imagePullPolicy: IfNotPresent
         args: ["start-dev", "--import-realm"]
         resources:
