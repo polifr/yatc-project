@@ -9,13 +9,12 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-reactive
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      username: ${YATC_NOSQL_USERNAME:yatc_app}
-      password: ${YATC_NOSQL_PASSWORD:yatc_app}
-      database: ${YATC_NOSQL_DATABASE:yatc}
+  mongodb:
+    host: localhost
+    port: 27017
+    username: ${YATC_NOSQL_USERNAME:yatc_app}
+    password: ${YATC_NOSQL_PASSWORD:yatc_app}
+    database: ${YATC_NOSQL_DATABASE:yatc}
   security:
     oauth2:
       resourceserver:
@@ -75,13 +74,12 @@ spring:
     banner-mode: off
   application:
     name: ms-spring-reactive
-  data:
-    mongodb:
-      host: yatc-mongo
-      port: 27017
-      username: ${YATC_NOSQL_USERNAME:yatc_app}
-      password: ${YATC_NOSQL_PASSWORD:yatc_app}
-      database: ${YATC_NOSQL_DATABASE:yatc}
+  mongodb:
+    host: yatc-mongo
+    port: 27017
+    username: ${YATC_NOSQL_USERNAME:yatc_app}
+    password: ${YATC_NOSQL_PASSWORD:yatc_app}
+    database: ${YATC_NOSQL_DATABASE:yatc}
   cloud:
     function:
       definition: testEventReactiveConsumer;testPollingEventReactiveProducer
