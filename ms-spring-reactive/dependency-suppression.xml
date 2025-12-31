@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-data-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-20925</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-data-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-2386</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-data-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2021-32036</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-data-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-2390</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-starter-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-20925</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-starter-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-2386</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-starter-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2021-32036</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-starter-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-2390</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-20925</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-2386</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2021-32036</vulnerabilityName>
+  </suppress>
+  <suppress>
+    <packageUrl regex="true">^pkg:maven/org\.springframework\.boot/spring-boot-mongodb@.*$</packageUrl>
+    <vulnerabilityName>CVE-2019-2390</vulnerabilityName>
+  </suppress>
+</suppressions>
