@@ -30,7 +30,8 @@ spring:
 
 management:
   tracing:
-    enabled: true
+    export:
+      enabled: true
   endpoint:
     health:
       access: read-only
