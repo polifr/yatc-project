@@ -47,8 +47,9 @@ spring:
             - Path=/react-mui/**
   session:
     timeout: 60m
-    redis:
-      namespace: "spring:session"
+    data:
+      redis:
+        namespace: "spring:session"
   data:
     redis:
       host: localhost
@@ -75,7 +76,8 @@ management:
   server:
     port: 18080
   tracing:
-    enabled: true
+    export:
+      enabled: true
   endpoint:
     health:
       access: read-only
@@ -177,8 +179,9 @@ spring:
             - Path=/v3/api-docs/ms-spring-servlet
   session:
     timeout: 60m
-    redis:
-      namespace: "spring:session"
+    data:
+      redis:
+        namespace: "spring:session"
   data:
     redis:
       host: yatc-redis
