@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-redis
-        image: redis:7.4.6-alpine
+        image: redis:8.4.0-alpine
         imagePullPolicy: IfNotPresent
         resources:
           limits:
