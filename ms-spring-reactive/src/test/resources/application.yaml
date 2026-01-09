@@ -1,0 +1,13 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: ms-spring-reactive
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://yatc-keycloak/realms/yatc-realm
+  threads:
+    virtual:
+      enabled: true
