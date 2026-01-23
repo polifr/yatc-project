@@ -37,7 +37,6 @@ utoipa-redoc = { version = "6.0.0", features = ["axum"] }
 utoipa-scalar = { version = "0.3.0", features = ["axum"] }
 utoipa-swagger-ui = { version = "9.0.0", features = ["axum"] }
 uuid = { version = "1.16.0", features = ["v4"] }
-cargo-edit = "0.13.8"
 
 # Ottimizzazioni da https://nnethercote.github.io/perf-book/build-configuration.html
 [profile.release]
