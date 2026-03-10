@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-dependencytrack
-        image: dependencytrack/bundled:4.13.4
+        image: dependencytrack/bundled:4.14.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:

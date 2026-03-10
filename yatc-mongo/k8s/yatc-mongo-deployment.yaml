@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: yatc-mongo
-        image: mongo:8.0.14
+        image: mongo:8.2.5
         imagePullPolicy: IfNotPresent
         resources:
           limits:
