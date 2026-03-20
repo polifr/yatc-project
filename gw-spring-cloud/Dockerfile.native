@@ -26,7 +26,7 @@ COPY mvnw pom.xml ./
 # RUN ./mvnw dependency:go-offline
 
 COPY ./src ./src
-RUN mvn clean package --no-transfer-progress -Pnative -DskipTests
+RUN mvn clean verify --no-transfer-progress -Pnative -DskipTests
 
 # Fase 2 - Creazione immagine con applicazione nativa
 # Si usa la stessa versione dell'immagine usata per la compilazione

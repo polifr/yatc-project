@@ -9,7 +9,7 @@ COPY mvnw pom.xml ./
 RUN ./mvnw -Dmaven.test.skip=true dependency:go-offline
 
 COPY ./src ./src
-RUN ./mvnw -Dmaven.test.skip=true clean package
+RUN ./mvnw -Dmaven.test.skip=true clean verify
 
 # Stage 2 - Creazione immagine finale
 FROM eclipse-temurin:25-jre AS final
