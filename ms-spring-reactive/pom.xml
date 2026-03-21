@@ -262,6 +262,7 @@
         <version>12.2.0</version>
         <configuration>
           <failBuildOnCVSS>7</failBuildOnCVSS>
+          <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
           <suppressionFile>${project.basedir}/dependency-suppression.xml</suppressionFile>
         </configuration>
         <executions>
