@@ -17,7 +17,7 @@
 
   <properties>
     <spring-cloud.version>2025.1.1</spring-cloud.version>
-    <springdoc.version>3.0.0</springdoc.version>
+    <springdoc.version>3.0.3</springdoc.version>
   </properties>
 
   <dependencyManagement>
@@ -186,7 +186,7 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.4.0</version>
         <executions>
           <execution>
             <id>apply-pom</id>
@@ -211,9 +211,7 @@
                 <importOrder/>
                 <removeUnusedImports/>
                 <formatAnnotations/>
-                <googleJavaFormat>
-                  <version>1.33.0</version>
-                </googleJavaFormat>
+                <googleJavaFormat/>
                 <endWithNewline/>
               </java>
             </configuration>
@@ -242,7 +240,7 @@
       <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
-        <version>12.2.0</version>
+        <version>12.2.1</version>
         <configuration>
           <failBuildOnCVSS>7</failBuildOnCVSS>
           <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
