@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use opentelemetry::trace::TracerProvider;
 use opentelemetry_sdk::trace::SdkTracerProvider;
 use sqlx::{pool::PoolOptions, Pool, Postgres, Row};
@@ -9,7 +11,7 @@ use tracing_subscriber::util::SubscriberInitExt;
 use tokio::join;
 use tracing_subscriber::{EnvFilter, Layer};
 
-use crate::{config::Config, domain::repository::{event_repository::{self, EventRepository}, postgres_event_repository::PostgresEventRepository}, service::event_service::{self, EventService}};
+use crate::{config::Config, controller::app_state::AppState, domain::repository::{postgres_event_repository::PostgresEventRepository}, service::event_service::{EventService}};
 
 mod config;
 mod controller;
@@ -77,7 +79,8 @@ async fn main() {
 
     let pool = init_connection_pool(&config.database_url).await;
     let event_repository = PostgresEventRepository::new(pool.clone());
-    let event_service = EventService::new(event_repository.clone().to_owned());
+    let event_service = Arc::new(EventService::new(event_repository.clone().to_owned()));
+    let app_state = AppState { event_service };
 
     let consumer = kafka::consumer::consume_and_print(
         "yatc-kafka:9092",
@@ -86,7 +89,7 @@ async fn main() {
     );
     info!("Sottosistema kafka configurato.");
 
-    let server = controller::test::create_controller().await;
+    let server = controller::api::create_controller(app_state).await;
     info!("Server Axum configurato.");
 
     let _ = join!(consumer, server);
