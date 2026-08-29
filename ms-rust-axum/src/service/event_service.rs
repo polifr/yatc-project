@@ -1,5 +1,6 @@
 use crate::domain::repository::event_repository::EventRepository;
 use crate::domain::entity::event::Event;
+use crate::service::service_error::ServiceError;
 
 pub struct EventService<R>
 where R: EventRepository {
@@ -12,7 +13,7 @@ where R: EventRepository {
         Self { event_repository }
     }
 
-    pub async fn find_all(&self) -> Result<Vec<Event>, sqlx::Error> {
-        self.event_repository.find_all().await
+    pub async fn find_all(&self) -> Result<Vec<Event>, ServiceError> {
+        Ok(self.event_repository.find_all().await?)
     }
 }
