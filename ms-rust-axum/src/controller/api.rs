@@ -15,7 +15,7 @@ pub async fn create_controller(state: AppState) -> Serve<tokio::net::TcpListener
     info!("Configurazione server Axum...");
     let app = Router::new()
             .merge(test::routes())
-            .merge(event::routes())
+            .nest("/api/rust-axum/event", event::routes())
             .with_state(state)
             .layer(TraceLayer::new_for_http())
             .layer(middleware::from_fn(tracing_middleware));

@@ -24,5 +24,6 @@ pub async fn find_all(
 }
 
 pub fn routes() -> Router<AppState> {
-    Router::new().route("/api/rust-axum/event/v1", get(find_all))
+    Router::new()
+        .route("/v1", get(find_all))
 }
