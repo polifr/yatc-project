@@ -58,7 +58,8 @@ async fn init_connection_pool(db_url: &str) -> Pool<Postgres> {
             .get(0);
     debug!("Test della connessione: {}", check);
 
-    pool.to_owned()
+    // Non serve il to_owned, il pool viene restituito per valore (Pool è già un handle condivisibile/clonabile)
+    pool
 }
 
 #[tokio::main]
@@ -78,8 +79,8 @@ async fn main() {
     info!("Connecting to cache: {}", &config.cache_url);
 
     let pool = init_connection_pool(&config.database_url).await;
-    let event_repository = PostgresEventRepository::new(pool.clone());
-    let event_service = Arc::new(EventService::new(event_repository.clone().to_owned()));
+    let event_repository = Arc::new(PostgresEventRepository::new(pool.clone()));
+    let event_service = Arc::new(EventService::new(event_repository.clone()));
     let app_state = AppState { event_service };
 
     let consumer = kafka::consumer::consume_and_print(

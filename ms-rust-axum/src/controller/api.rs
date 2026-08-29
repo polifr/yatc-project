@@ -9,13 +9,13 @@ use tower_http::trace::TraceLayer;
 use tracing::{info, span, Level};
 use uuid::Uuid;
 
-use crate::controller::{app_state::AppState, event_controller, test};
+use crate::controller::{app_state::AppState, event, test};
 
 pub async fn create_controller(state: AppState) -> Serve<tokio::net::TcpListener, Router, Router> {
     info!("Configurazione server Axum...");
     let app = Router::new()
             .merge(test::routes())
-            .merge(event_controller::routes())
+            .merge(event::routes())
             .with_state(state)
             .layer(TraceLayer::new_for_http())
             .layer(middleware::from_fn(tracing_middleware));
