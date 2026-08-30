@@ -18,4 +18,8 @@ where R: EventRepository {
     pub async fn find_all(&self) -> Result<Vec<Event>, ServiceError> {
         Ok(self.event_repository.find_all().await?)
     }
+
+    pub async fn find_by_id(&self, id: i64) -> Result<Option<Event>, ServiceError> {
+        Ok(self.event_repository.find_by_id(id).await?)
+    }
 }

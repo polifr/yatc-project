@@ -17,9 +17,15 @@ impl PostgresEventRepository {
 #[async_trait]
 impl EventRepository for PostgresEventRepository {
     async fn find_all(&self) -> Result<Vec<Event>, sqlx::Error> {
-        let events = sqlx::query_as::<_, Event>("SELECT id, message FROM t_event")
+        sqlx::query_as::<_, Event>("SELECT id, message FROM t_event")
                 .fetch_all(&self.pool)
-                .await?;
-        Ok(events)
+                .await
+    }
+
+    async fn find_by_id(&self, id: i64) -> Result<Option<Event>, sqlx::Error> {
+        sqlx::query_as::<_, Event>("SELECT id, message FROM t_event WHERE id = $1")
+                .bind(id)
+                .fetch_optional(&self.pool)
+                .await
     }
 }
