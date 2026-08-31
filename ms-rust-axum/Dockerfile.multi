@@ -7,7 +7,10 @@ WORKDIR /app
 # Copia il file Cargo e scarica le dipendenze
 COPY Cargo.toml Cargo.lock ./
 RUN mkdir src && echo "fn main() {}" > src/main.rs
-RUN cargo build --release
+RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/usr/local/cargo/git \
+    --mount=type=cache,target=/app/target \
+    cargo build --release
 
 # Copia i sorgenti effettivi e compila
 COPY ./src ./src
@@ -16,7 +19,10 @@ COPY ./src ./src
 RUN touch ./src/main.rs
 
 # La compilazione sfrutta il caching di Docker per non scaricare e compilare nuovamente le dipendenze
-RUN cargo build --release
+RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/usr/local/cargo/git \
+    --mount=type=cache,target=/app/target \
+    cargo build --release
 RUN strip target/release/ms-rust-axum
 
 # Fase 2: Creazione dell'immagine finale
