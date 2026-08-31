@@ -4,6 +4,7 @@ use crate::service::service_error::ServiceError;
 
 pub enum ApiError {
     InternalServerError,
+    NotFound,
 }
 
 impl From<ServiceError> for ApiError {
@@ -21,6 +22,8 @@ impl IntoResponse for ApiError {
         let status = match self {
             ApiError::InternalServerError =>
                 axum::http::StatusCode::INTERNAL_SERVER_ERROR,
+            ApiError::NotFound =>
+                axum::http::StatusCode::NOT_FOUND,
         };
 
         status.into_response()
