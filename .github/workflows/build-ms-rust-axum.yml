@@ -1,0 +1,23 @@
+name: Build ms-rust-axum
+
+on:
+  push:
+    paths:
+      - 'ms-rust-axum/**'
+      - '.github/workflows/build-ms-rust-axum.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            --tag ghcr.io/polifr/yatc-project/ms-rust-axum:latest \
+            -f ./ms-rust-axum/Dockerfile.multi \
+            ./ms-rust-axum

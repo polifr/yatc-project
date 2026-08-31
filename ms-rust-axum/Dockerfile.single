@@ -13,8 +13,8 @@ COPY ./src ./src
 RUN cargo build --release
 RUN strip target/release/ms-rust-axum
 
-# Espone la porta 8081
-EXPOSE 8081
+# Espone la porta 8080
+EXPOSE 8080
 
 RUN groupadd -g 2222 -r yatcusr
 RUN useradd -u 2222 -g 2222 --no-log-init -r yatcusr
