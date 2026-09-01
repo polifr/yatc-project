@@ -28,4 +28,46 @@ impl EventRepository for PostgresEventRepository {
                 .fetch_optional(&self.pool)
                 .await
     }
+
+    async fn save(&self, event: &Event) -> Result<Event, sqlx::Error> {
+        sqlx::query_as::<_, Event>(
+                r#"
+                INSERT into t_event (message)
+                VALUES ($1)
+                RETURNING
+                    id,
+                    message
+                "#)
+                .bind(&event.message)
+                .fetch_one(&self.pool)
+                .await
+    }
+
+    async fn update(&self, event: &Event) -> Result<Option<Event>, sqlx::Error> {
+        sqlx::query_as::<_, Event>(
+                r#"
+                UPDATE t_event
+                SET message = $2
+                WHERE id = $1
+                RETURNING
+                    id,
+                    message
+                "#)
+                .bind(&event.id)
+                .bind(&event.message)
+                .fetch_optional(&self.pool)
+                .await
+    }
+
+    async fn delete_by_id(&self, id: i64) -> Result<Option<i64>, sqlx::Error> {
+        sqlx::query_scalar::<_, i64>(
+                r#"
+                DELETE t_event
+                WHERE id = $1
+                RETURNING id
+                "#)
+                .bind(id)
+                .fetch_optional(&self.pool)
+                .await
+    }
 }

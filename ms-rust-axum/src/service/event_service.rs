@@ -22,4 +22,17 @@ where R: EventRepository {
     pub async fn find_by_id(&self, id: i64) -> Result<Option<Event>, ServiceError> {
         Ok(self.event_repository.find_by_id(id).await?)
     }
+
+    pub async fn save(&self, event: &Event) -> Result<Event, ServiceError> {
+        Ok(self.event_repository.save(event).await?)
+    }
+
+    pub async fn update(&self, event: &Event) -> Result<Option<Event>, ServiceError> {
+        Ok(self.event_repository.update(event).await?)
+    }
+
+    pub async fn delete_by_id(&self, id: i64) -> Result<Option<i64>, ServiceError> {
+        Ok(self.event_repository.delete_by_id(id).await?)
+    }
+
 }

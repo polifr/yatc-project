@@ -1,5 +1,5 @@
 use axum::{
-    Json, Router, extract::{Path, State}, routing::get,
+    Json, Router, extract::{Path, State}, routing::{get, delete},
 };
 
 use crate::{
@@ -36,8 +36,25 @@ pub async fn find_by_id(
     }
 }
 
+pub async fn delete_by_id(
+    State(state): State<AppState>, 
+    Path(id): Path<i64>,
+) -> Result<axum::http::StatusCode, ApiError> {
+    let result = state.event_service.delete_by_id(id).await?;
+
+    match result {
+        Some(_) => {
+            Ok(axum::http::StatusCode::OK)
+        }
+        None => {
+            Err(ApiError::NotFound)
+        }
+    }
+}
+
 pub fn routes() -> Router<AppState> {
     Router::new()
         .route("/v1", get(find_all))
         .route("/v1/{id}", get(find_by_id))
+        .route("/v1", delete(delete_by_id))
 }
