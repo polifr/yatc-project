@@ -1220,6 +1220,7 @@ dependencies = [
  "mockall",
  "once_cell",
  "opentelemetry",
+ "opentelemetry-http",
  "opentelemetry-otlp",
  "opentelemetry_sdk",
  "rdkafka",

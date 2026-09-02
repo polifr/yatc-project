@@ -19,8 +19,16 @@ mod domain;
 mod kafka;
 mod service;
 
-fn init_tracing() {
-    let tracer = SdkTracerProvider::builder().build().tracer("ms-tracer");
+fn init_tracing() -> SdkTracerProvider {
+    let exporter = opentelemetry_otlp::SpanExporter::builder()
+        .with_tonic()
+        .build()
+        .expect("Failed to create OTLP exporter");
+    let provider = SdkTracerProvider::builder()
+        .with_batch_exporter(exporter)
+        .build();
+
+    let tracer = provider.tracer("ms-tracer");
     let otel_layer = OpenTelemetryLayer::new(tracer);
 
     tracing_subscriber::registry()
@@ -36,9 +44,12 @@ fn init_tracing() {
             .with_level(true)
             .with_thread_ids(false)
             .with_thread_names(false)
-            .with_filter(EnvFilter::from("debug")))
-            .with(otel_layer) // Aggiunge il livello OpenTelemetry
+            .with_filter(EnvFilter::from("debug"))
+        )
+        .with(otel_layer) // Aggiunge il livello OpenTelemetry
         .init();
+
+    provider
 }
 
 async fn init_connection_pool(db_url: &str) -> Pool<Postgres> {
@@ -64,7 +75,7 @@ async fn init_connection_pool(db_url: &str) -> Pool<Postgres> {
 
 #[tokio::main]
 async fn main() {
-    init_tracing();
+    let tracer_provider = init_tracing();
 
     info!("Starting...");
 
@@ -95,4 +106,6 @@ async fn main() {
 
     let _ = join!(consumer, server);
     info!("Application started.");
+
+    tracer_provider.shutdown().unwrap();
 }
