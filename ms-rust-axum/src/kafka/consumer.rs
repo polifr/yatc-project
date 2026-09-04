@@ -79,6 +79,7 @@ fn decode_event(msg: &BorrowedMessage) -> Result<String, Box<dyn std::error::Err
     Ok(json)
 }
 
+// TODO Collegarlo con la tracciatura standard e opentelemetry
 fn get_traceparent_header_value(message_headers: Option<&BorrowedHeaders>) -> Option<String> {
     if let Some(headers) = message_headers {
         for header in headers.iter() {
