@@ -2,7 +2,6 @@ use std::sync::Arc;
 
 use opentelemetry::trace::TracerProvider;
 use opentelemetry_sdk::trace::SdkTracerProvider;
-use sqlx::{pool::PoolOptions, Pool, Postgres, Row};
 use tracing::{debug, info};
 use tracing_opentelemetry::OpenTelemetryLayer;
 use tracing_subscriber::layer::SubscriberExt;
@@ -11,7 +10,7 @@ use tracing_subscriber::util::SubscriberInitExt;
 use tokio::join;
 use tracing_subscriber::{EnvFilter, Layer};
 
-use crate::{config::Config, controller::app_state::AppState, domain::repository::{postgres_event_repository::PostgresEventRepository}, service::event_service::{EventService}};
+use crate::{config::Config, controller::app_state::AppState, domain::{pool::connection_pool::init_connection_pool, repository::postgres_event_repository::PostgresEventRepository}, service::event_service::EventService};
 
 mod config;
 mod controller;
@@ -50,27 +49,6 @@ fn init_tracing() -> SdkTracerProvider {
         .init();
 
     provider
-}
-
-async fn init_connection_pool(db_url: &str) -> Pool<Postgres> {
-    info!("Connecting to database: {}", db_url);
-
-    // Creazione del pool
-    let pool: Pool<Postgres> = PoolOptions::<Postgres>::new()
-            .max_connections(5)
-            .connect(db_url)
-            .await.expect("Failed to connect to DB");
-
-    // Verifica della connessione
-    let check: i32 = sqlx::query("SELECT 1")
-            .fetch_one(&pool)
-            .await
-            .expect("Error checking for connection")
-            .get(0);
-    debug!("Test della connessione: {}", check);
-
-    // Non serve il to_owned, il pool viene restituito per valore (Pool è già un handle condivisibile/clonabile)
-    pool
 }
 
 #[tokio::main]
