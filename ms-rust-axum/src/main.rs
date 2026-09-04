@@ -35,7 +35,7 @@ async fn main() {
     let app_state = AppState { event_service };
 
     let consumer = kafka::consumer::consume_and_print(
-        "yatc-kafka:9092",
+        &config.kafka_bootstrap_url,
         "ms-rust-axum", 
         &["yatc-test-topic"]
     );
