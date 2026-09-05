@@ -28,8 +28,9 @@ jobs:
       uses: actions/cache@v6
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-m2-${{ hashFiles('gw-spring-cloud/**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with Maven
+      working-directory: ./gw-spring-cloud
       run: mvn --batch-mode --update-snapshots package
