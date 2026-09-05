@@ -1,0 +1,35 @@
+name: Build gw-spring-cloud
+
+on:
+  push:
+    paths:
+      - 'gw-spring-cloud/**'
+      - '.github/workflows/build-gw-spring-cloud.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+
+    - name: Set up JDK
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: 25
+
+    - name: Check JDK version
+      run: java --version
+
+    - name: Cache Maven packages
+      uses: actions/cache@v6
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Build with Maven
+      run: mvn --batch-mode --update-snapshots package
