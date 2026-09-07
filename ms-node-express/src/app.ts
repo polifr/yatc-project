@@ -1,5 +1,5 @@
-var metricsController = require('./controller/metrics-controller');
-var testController = require('./controller/test-controller');
+import { createMetricsController } from './controller/metrics-controller';
+import { createTestController } from './controller/test-controller';
 
-metricsController.createMetricsController();
-testController.createTestController();
+createMetricsController();
+createTestController();
