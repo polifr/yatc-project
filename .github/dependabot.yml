@@ -3,6 +3,8 @@ updates:
   - package-ecosystem: "maven"
     directories:
       - gw-spring-cloud
+      - ms-spring-reactive
+      - ms-spring-servlet
     schedule:
       interval: "weekly"
   - package-ecosystem: "cargo"
