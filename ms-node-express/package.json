@@ -16,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@cyclonedx/cyclonedx-npm": "^6.0.1",
-    "@eslint/js": "^9.34.0",
+    "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.3",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
