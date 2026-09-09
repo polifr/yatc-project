@@ -32,5 +32,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with Maven
+      env:
+        NIST_API_KEY: ${{ secrets.NIST_API_KEY }}
       working-directory: ./gw-spring-cloud
       run: mvn --batch-mode --update-snapshots verify
