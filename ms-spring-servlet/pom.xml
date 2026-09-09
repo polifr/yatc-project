@@ -255,22 +255,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.owasp</groupId>
-        <artifactId>dependency-check-maven</artifactId>
-        <version>12.2.2</version>
-        <configuration>
-          <failBuildOnCVSS>7</failBuildOnCVSS>
-          <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
         <executions>
@@ -285,4 +269,35 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>dependency-check</id>
+      <activation>
+        <property>
+          <name>env.NIST_API_KEY</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>12.2.2</version>
+            <configuration>
+              <failBuildOnCVSS>7</failBuildOnCVSS>
+              <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+              <nvdApiKeyEnvironmentVariable>NIST_API_KEY</nvdApiKeyEnvironmentVariable>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
