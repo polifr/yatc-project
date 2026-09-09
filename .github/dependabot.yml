@@ -12,8 +12,3 @@ updates:
       - ms-rust-axum
     schedule:
       interval: "weekly"
-  - package-ecosystem: "npm"
-    directories:
-      - ms-node-express
-    schedule:
-      interval: "weekly"

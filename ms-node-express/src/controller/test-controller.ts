@@ -16,4 +16,4 @@ const createTestController = function() {
     });
 }
 
-module.exports = {createTestController};
+export { createTestController };

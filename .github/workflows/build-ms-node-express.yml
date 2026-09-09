@@ -1,0 +1,28 @@
+name: Build ms-node-express
+
+on:
+  push:
+    paths:
+      - 'ms-node-express/**'
+      - '.github/workflows/build-ms-node-express.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v4
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v7
+      with:
+        context: ./ms-node-express
+        file: ./ms-node-express/Dockerfile.multi
+        tags: ghcr.io/polifr/yatc-project/ms-node-express:latest
+        cache-from: type=gha,scope=polifr-yatc-project-ms-node-express
+        cache-to: type=gha,mode=max,scope=polifr-yatc-project-ms-node-express

@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
     
-RUN npm install
+RUN --mount=type=cache,target=/root/.npm npm install
 
 COPY . .
 
@@ -34,7 +34,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN --mount=type=cache,target=/root/.npm npm install --omit-dev
 
 COPY --from=builder /usr/src/app/dist ./
 

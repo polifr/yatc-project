@@ -20,4 +20,4 @@ const createMetricsController = function() {
     monitoring.listen(port, '0.0.0.0');
 }
 
-module.exports = {createMetricsController};
+export { createMetricsController };
