@@ -17,6 +17,9 @@
 
   <properties>
     <springdoc.version>3.1.1</springdoc.version>
+
+    <!-- Forzature per CVE -->
+    <kotlin.version>2.4.20</kotlin.version>
   </properties>
 
   <dependencyManagement>
