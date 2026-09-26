@@ -24,8 +24,8 @@ jobs:
     - name: Check JDK version
       run: java --version
 
-    - name: Cache Maven packages
-      uses: actions/cache@v6
+    - name: Restore Cache Maven
+      uses: actions/cache/restore@v6
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('gw-spring-cloud/**/pom.xml') }}
@@ -36,3 +36,10 @@ jobs:
         NIST_API_KEY: ${{ secrets.NIST_API_KEY }}
       working-directory: ./gw-spring-cloud
       run: mvn --batch-mode --update-snapshots verify
+
+    - name: Save Maven cache
+      if: always()
+      uses: actions/cache/save@v6
+      with:
+        path: ~/.m2
+        key: ${{ steps.maven-cache.outputs.cache-primary-key }}
