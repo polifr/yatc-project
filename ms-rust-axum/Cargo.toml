@@ -28,7 +28,7 @@ tokio-stream = "0.1.19"
 tower = { version = "0.5.3", features = ["util"] }
 tower-http = { version = "0.7.0", features = ["trace", "cors"] }
 tracing = "0.1.44"
-tracing-opentelemetry = "0.33.0"
+tracing-opentelemetry = "0.34.0"
 tracing-subscriber = { version = "0.3.23", features = ["env-filter", "fmt", "json"] }
 utoipa = { version = "5.5.0", features = ["axum_extras"] }
 utoipa-axum = { version = "0.2.0" }
