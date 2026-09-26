@@ -12,3 +12,11 @@ updates:
       - ms-rust-axum
     schedule:
       interval: "weekly"
+    groups:
+      opentelemetry:
+        applies-to: version-updates
+        patterns:
+          - "opentelemetry"
+          - "opentelemetry_sdk"
+          - "opentelemetry-*"
+          - "tracing-opentelemetry"
