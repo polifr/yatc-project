@@ -20,3 +20,8 @@ updates:
           - "opentelemetry_sdk"
           - "opentelemetry-*"
           - "tracing-opentelemetry"
+      utoipa:
+        applies-to: version-updates
+        patterns:
+          - "utoipa"
+          - "utoipa-*"
