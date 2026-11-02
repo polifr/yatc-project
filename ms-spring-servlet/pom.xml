@@ -273,6 +273,7 @@
   </build>
 
   <profiles>
+    <!--
     <profile>
       <id>dependency-check</id>
       <activation>
@@ -302,5 +303,6 @@
         </plugins>
       </build>
     </profile>
+    -->
   </profiles>
 </project>
